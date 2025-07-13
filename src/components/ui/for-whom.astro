@@ -1,3 +1,8 @@
+---
+const {for_whom, w_items = [] }= Astro.props;
+---
+
+
 <section class="py-24">
   <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
     <div
@@ -7,18 +12,17 @@
         <h2
           class="text-4xl font-bold text-gray-900 leading-[3.25rem] lg:mb-6 mx-auto max-w-max lg:max-w-md lg:mx-0"
         >
-          For Whom ...
+          {for_whom.title}
         </h2>
       </div>
       <div class="relative w-full text-center lg:text-left lg:w-2/4">
         <p class="text-lg font-normal text-gray-500 mb-5">
-          We provide all the advantages that can simplify all your financial
-          transactions without any further requirements
+          {for_whom.description}
         </p>
         <a
           href="#"
           class="flex flex-row items-center justify-center gap-2 text-base font-semibold text-[#ff4f1f] lg:justify-start hover:text-[#ff4f1f]"
-          >Button CTA <svg
+          >{for_whom.p_cta} <svg
             width="20"
             height="20"
             viewBox="0 0 20 20"
@@ -35,15 +39,25 @@
         </a>
       </div>
     </div>
+    
+    
+    
+
+
+
+
     <div
       class="flex justify-center items-center gap-x-5 gap-y-8 lg:gap-y-0 flex-wrap md:flex-wrap lg:flex-nowrap lg:flex-row lg:justify-between lg:gap-x-8"
     >
-      <div
-        class="group relative w-full bg-gray-100 rounded-2xl p-4 transition-all duration-500 max-md:max-w-md max-md:mx-auto md:w-2/5 md:h-64 xl:p-7 xl:w-1/4 hover:bg-[#ff4f1f]"
-      >
+
+      
+      {w_items.map((item) => (
+        <div
+        class="group relative w-full bg-gray-100 rounded-2xl p-4 transition-all duration-500 max-md:max-w-md max-md:mx-auto md:w-2/5 md:h-64 xl:p-7 xl:w-1/4 hover:bg-[#ff4f1f]">
         <div
           class="bg-white rounded-full flex justify-center items-center mb-5 w-14 h-14"
         >
+          {/* {item.isvg} */}
           <svg
             width="30"
             height="30"
@@ -60,16 +74,34 @@
         <h4
           class="text-xl font-semibold text-gray-900 mb-3 capitalize transition-all duration-500 group-hover:text-white"
         >
-          Easy Payment
+          {item.title}
         </h4>
         <p
           class="text-sm font-normal text-gray-500 transition-all duration-500 leading-5 group-hover:text-white"
         >
-          We Provide Various Methods For You To Carry Out All Transactions
-          Related To Your Finances
+        {item.description}
         </p>
-      </div>
-      <div
+        </div> 
+        ))}
+
+   
+
+
+
+
+
+     
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+ <div
         class="group relative w-full bg-gray-100 rounded-2xl p-4 transition-all duration-500 max-md:max-w-md max-md:mx-auto md:w-2/5 md:h-64 xl:p-7 xl:w-1/4 hover:bg-[#ff4f1f]"
       >
         <div
@@ -168,6 +200,50 @@
           arrives and is received faster.
         </p>
       </div>
-    </div>
-  </div>
-</section>
+
+
+
+
+<!-- 
+      Pro Tip: Make SVG dynamic later
+If your item has a key like icon, you can later add something like:
+
+astro
+Copy
+Edit
+{item.icon && <div innerHTML={item.icon} />}
+Or even:
+
+astro
+Copy
+Edit
+{item.icon === 'cloud' && <CloudIcon />}
+{item.icon === 'shield' && <ShieldIcon />}
+This allows scalable and dynamic visuals per card. -->
+
+
+
+
+
+<!-- 
+---
+for_whom:
+  title: "Who This Is For"
+  description: "We help these groups benefit the most"
+  p_cta: "Start Your Journey"
+
+w_items:
+  - title: "Freelancers"
+    description: "Manage your finances easily."
+  - title: "Startups"
+    description: "Get scalable, predictable billing."
+--- 
+-->
+
+<!-- 
+{for_whom.title}
+{for_whom.description}
+{item.isvg}
+{item.title}
+{item.description}
+ -->
