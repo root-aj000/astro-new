@@ -1,0 +1,22 @@
+---
+import Pagination from "../dynamic/pagination.astro";
+import { getCollection } from 'astro:content';
+import UniversalCard from "../dynamic/universal_card.astro";
+
+const posts = await getCollection('blog');
+
+const ITEMS_PER_PAGE = 20;
+const currentPage = Number(Astro.params.page) || 1;
+const start = (currentPage - 1) * ITEMS_PER_PAGE;
+const end = start + ITEMS_PER_PAGE;
+const pagePosts = posts.slice(start, end);
+const totalPages = Math.ceil(posts.length / ITEMS_PER_PAGE);
+---
+
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+  {pagePosts.map(({ slug, data }) => (
+    <UniversalCard blog_data={{ ...data, href: `/blog/${slug}` }} />
+  ))}
+</section>
+
+<Pagination currentPage={currentPage} totalPages={totalPages} />

@@ -1,5 +1,6 @@
 ---
-const { title, subtitle, image, steps } = Astro.props;
+import type { HowItWorksProps } from '../../types/components';
+const { Howitworks } = Astro.props as HowItWorksProps;
 ---
 
 <section class="py-3">
@@ -7,34 +8,36 @@ const { title, subtitle, image, steps } = Astro.props;
     <div class="w-full flex-col justify-start items-center gap-2 inline-flex">
       <div class="w-full flex-col justify-start items-center gap-1 flex">
         <span class="text-center text-gray-500 text-base font-normal">
-          {subtitle}
+          {Howitworks.subtitle}
         </span>
         <h2 class="text-center text-[#f12603] text-4xl font-bold leading-normal">
-          {title}
+          {Howitworks.title}
         </h2>
       </div>
 
       <div class="w-full flex lg:items-start items-center lg:gap-16 gap-8 flex lg:flex-row flex-col">
-        <img class="object-cover" src={image} alt={title} />
+        <img
+          class="object-cover"
+          src={Howitworks.image}
+          alt={Howitworks.title}
+        />
 
         <div class="swiper mySwiper flex flex-col gap-3 w-full">
           <div class="swiper-wrapper">
-            {steps.map((step, index) => (
-              <div class="swiper-slide mb-20" key={index}>
+            {Howitworks.steps.map((step, index) => (
+              <div class="swiper-slide mb-20">
                 <div class="flex-col gap-4 flex">
                   <span class="text-[#f12603] text-base font-medium">
                     {index + 1} Step
                   </span>
                   <div class="flex-col gap-1.5 flex">
-                    <h4 class="text-gray-900 text-xl font-semibold">
-                      {step.title}
-                    </h4>
+                    <h4 class="text-gray-900 text-xl font-semibold">{step.title}</h4>
                     <p class="text-gray-400 text-base">{step.desc}</p>
                     <figure class="max-w-lg mx-auto">
                       <img
+                        class="rounded-lg h-auto max-w-full"
                         src={step.img}
                         alt={step.caption}
-                        class="rounded-lg h-auto max-w-full"
                       />
                       <figcaption class="mt-2 text-sm text-center text-gray-700">
                         {step.caption}
@@ -51,3 +54,42 @@ const { title, subtitle, image, steps } = Astro.props;
     </div>
   </div>
 </section>
+
+
+
+
+<!-- 
+---
+layout: ../../templates/ServiceTemplate.astro
+
+Howitworks:
+  title: "Steps to Open Your Account"
+  subtitle: "How It Works"
+  image: "https://pagedone.io/asset/uploads/1720589731.png"
+  steps:
+    - title: "Create Account"
+      desc: "Use your email or phone."
+      img: "https://images.unsplash.com/photo-1655393001768-d946c97d6fd1?q=80&w=2076"
+      caption: "Quick signup"
+    - title: "Verify Identity"
+      desc: "Submit your KYC"
+      img: "https://images.unsplash.com/photo-1655393001768-d946c97d6fd1?q=80&w=2076"
+      caption: "Safe and fast"
+    - title: "Link Bank"
+      desc: "Connect your preferred bank securely."
+      img: "https://images.unsplash.com/photo-1655393001768-d946c97d6fd1?q=80&w=2076"
+      caption: "Bank integration"
+--- 
+
+---
+import HowItWorks from '../components/HowItWorks.astro';
+import type { HowItWorksProps } from '../../types/components';
+
+const { Howitworks } = Astro.props as HowItWorksProps;
+---
+
+<HowItWorks Howitworks={Howitworks} />
+
+
+
+-->

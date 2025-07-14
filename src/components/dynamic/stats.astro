@@ -1,0 +1,79 @@
+---
+import type { StatsProps } from "../../types/components";
+const { stats } = Astro.props as StatsProps;
+---
+
+<section class="py-9 mb-24 px-4 md:px-8">
+  <div class="bg-white text-black">
+    <div class="grid md:grid-cols-2 items-center gap-16 max-w-screen-2xl mx-auto">
+      <div>
+        <h1 class="text-4xl font-bold text-[#ff4f1f]">{stats.heading}</h1>
+        <p class="mt-6 text-sm">{stats.description}</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 gap-6">
+        {stats.items.map(({ value, label }) => (
+          <div class="bg-gray-100 flex flex-col items-center text-center rounded md:p-8 p-6">
+            <h3 class="lg:text-5xl text-3xl font-extrabold text-[#ff4f1f]">{value}</h3>
+            <div class="mt-4">
+              <p class="text-sm">{label}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+<!-- 
+---
+import StatsBlock from '../components/StatsBlock.astro';
+
+const { stats } = Astro.props;
+---
+
+-- Other components like Hero, CTA, etc. --
+
+<StatsBlock {stats} />
+
+
+
+
+
+
+
+
+
+---
+layout: ../../templates/PageTemplate.astro
+
+stats:
+  heading: "Startup Website Template"
+  description: >
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis accumsan, nunc et tempus blandit...
+  items:
+    - value: "5.4"
+      label: "Total Users"
+    - value: "$80K"
+      label: "Revenue"
+    - value: "100K"
+      label: "Engagement"
+    - value: "99.9%"
+      label: "Server Uptime"
+---
+
+
+
+
+
+
+
+
+
+-->
+

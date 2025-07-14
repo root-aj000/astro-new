@@ -1,17 +1,18 @@
 ---
-const { title, logos = [] } = Astro.props;
+import type { logo_cloudProps } from '../../types/components';
+const { logo_cloud } = Astro.props as logo_cloudProps;
 ---
 
 <section class="bg-white py-6 sm:py-8 lg:py-12">
   <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
     <h2 class="mb-4 text-center text-2xl font-bold text-black md:mb-8 lg:text-3xl">
-      {title}
+      {logo_cloud.title}
     </h2>
 
     <div class="grid grid-cols-2 gap-6 rounded-lg bg-white p-6 sm:h-40 sm:content-evenly md:grid-cols-4">
-      {logos.map((logo, index) => (
-        <div class="flex justify-center" key={index}>
-          <div class="h-6 w-auto sm:h-8 lg:h-10" innerHTML={logo || ''} />
+      {logo_cloud.logos.map((logo) => (
+        <div class="flex justify-center">
+          <div class="h-6 w-auto sm:h-8 lg:h-10" set:html={logo} />
         </div>
       ))}
     </div>
@@ -26,10 +27,13 @@ const { title, logos = [] } = Astro.props;
 
 
 
+
+<!-- 
 ---
+.md
 layout: ../../templates/ServiceTemplate.astro
 
-trusted:
+logo_cloud:
   title: "Trusted by the Best"
   logos:
     - "<svg xmlns='http://www.w3.org/2000/svg' fill='currentColor' viewBox='0 0 154 39'><path d='M24 8V20L12 32H0V20L12 8H24Z'/></svg>"
@@ -41,16 +45,18 @@ trusted:
 
 
 
-
-
-
-
-
-
+template
 ---
 import TrustedSection from '../components/TrustedSection.astro';
 
-const { trusted = {} } = Astro.props;
+const { logo_cloud = {} } = Astro.props;
 ---
 
-<TrustedSection {...trusted} />
+<TrustedSection logo_cloud={logo_cloud} /> 
+
+orrrr
+
+<TrustedSection {...Astro.props} />
+
+
+-->

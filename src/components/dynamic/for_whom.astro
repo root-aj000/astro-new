@@ -1,0 +1,76 @@
+---
+import type { ForWhomBlock } from '../../types/components';
+
+const {forwhom} = Astro.props as ForWhomBlock;
+---
+
+<section class="py-24">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <!-- Header -->
+    <div class="mb-10 lg:mb-16 flex flex-col lg:flex-row justify-between items-center gap-6">
+      <div class="text-center lg:text-left lg:w-1/2">
+        <h2 class="text-4xl font-bold text-gray-900">{forwhom.title}</h2>
+      </div>
+      <div class="text-center lg:text-left lg:w-1/2">
+        <p class="text-lg text-gray-500 mb-5">{forwhom.description}</p>
+        <a href="#" class="flex items-center gap-2 text-[#ff4f1f] font-semibold hover:text-[#ff4f1f]">
+          {forwhom.p_cta}
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M7.5 15L11.0858 11.4142..." stroke="#ff4f1f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Cards -->
+    <div class="flex flex-wrap justify-between gap-6">
+      {forwhom.items.map((item) => (
+        <div class="group bg-gray-100 rounded-2xl p-4 md:w-[45%] xl:w-[23%] transition hover:bg-[#ff4f1f]">
+          <div class="bg-white w-14 h-14 flex justify-center items-center rounded-full mb-4">
+            <div set:html={item.icon} class="w-7 h-7 text-indigo-600"></div>
+          </div>
+          <h4 class="text-xl font-semibold text-gray-900 group-hover:text-white">{item.title}</h4>
+          <p class="text-sm text-gray-500 group-hover:text-white">{item.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+
+
+<!-- 
+template
+---
+import ForWhom from '../components/ForWhom.astro';
+const { forwhom } = Astro.props;
+---
+
+<ForWhom {forwhom} />
+
+
+
+
+.md
+---
+title: "For Whom Section"
+layout: ../../templates/ServiceTemplate.astro
+
+forwhom:
+  title: "Who It's For"
+  description: "All your financial tasks simplified in one place."
+  p_cta: "Get Started"
+  items:
+    - title: "Safe Transaction"
+      description: "Up-to-date security for customer transactions."
+      icon: "<svg>...</svg>"
+    - title: "Fast Customer Service"
+      description: "24/7 support availability."
+      icon: "<svg>...</svg>"
+    - title: "Quick Transaction"
+      description: "Transfer money faster than competitors."
+      icon: "<svg>...</svg>"
+---
+
+
+ -->

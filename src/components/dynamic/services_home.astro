@@ -1,0 +1,97 @@
+---
+// src/components/FeatureGrid.astro
+import type { FeatureGridProps } from "../../types/components";
+const { grid } = Astro.props as FeatureGridProps;
+---
+
+<section class="bg-white py-6 sm:py-8 lg:py-12 mb-24">
+  <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
+    <div class="mb-10 md:mb-16">
+      <h2 class="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl">
+        {grid.title}
+      </h2>
+      <p class="mx-auto max-w-screen-md text-center text-gray-500 md:text-lg">
+        {grid.subtitle}
+      </p>
+    </div>
+
+    <div class="grid gap-12 sm:grid-cols-2 xl:grid-cols-3 xl:gap-16">
+      {grid.features.map((item) => (
+        <div class="flex flex-col items-center">
+          <div class="mb-2 flex h-12 w-12 items-center justify-center sm:mb-4 md:h-14 md:w-14">
+            <div class="h-full w-full" set:html={item.icon} />
+          </div>
+
+          <h3 class="mb-2 text-center text-lg font-semibold md:text-xl">{item.title}</h3>
+          <p class="mb-2 text-center text-gray-500">{item.description}</p>
+          <a href={item.link} class="font-bold text-indigo-500 transition duration-100 hover:text-indigo-600 active:text-indigo-700">
+            {item.cta}
+          </a>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+<!-- 
+
+
+
+---
+// src/templates/ServiceTemplate.astro
+import FeatureGrid from '../components/FeatureGrid.astro';
+
+const { grid } = Astro.props;
+---
+
+<FeatureGrid {grid} />
+
+
+
+---
+layout: ../../templates/ServiceTemplate.astro
+
+featureGrid:
+  title: "SERVICES WE OFFER"
+  subtitle: "This is a section of some simple filler text..."
+  features:
+    - title: "Growth"
+      description: "Filler text is dummy text..."
+      cta: "More"
+      link: "#"
+      icon: |
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#ff4f1f">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+        </svg>
+
+    - title: "Security"
+      description: "Filler text is dummy text..."
+      cta: "More"
+      link: "#"
+      icon: |
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#ff4f1f">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6..." />
+        </svg>
+
+    - title: "Cloud"
+      description: "Filler text is dummy text..."
+      cta: "More"
+      link: "#"
+      icon: |
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#ff4f1f">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10..." />
+        </svg>
+---
+
+
+
+
+-->
