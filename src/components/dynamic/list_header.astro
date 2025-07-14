@@ -1,0 +1,38 @@
+---
+const { list_header } = Astro.props;
+---
+
+<div class="mb-10 md:mb-6">
+  <h2 class="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl">
+    {list_header.title}
+  </h2>
+
+  <p class="mx-auto max-w-screen-md text-center text-gray-500 md:text-lg">
+    {list_header.description}
+  </p>
+</div>
+
+
+
+
+
+
+
+<--
+
+
+template 
+import SectionHeader from '../components/SectionHeader.astro';
+
+<SectionHeader list_header={list_header} />
+
+
+-->
+
+
+
+
+.md
+list_header:
+  title: "Our Services"
+  description: "A collection of tools to boost your workflow."
