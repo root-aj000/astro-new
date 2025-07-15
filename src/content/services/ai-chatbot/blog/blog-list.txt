@@ -1,0 +1,23 @@
+---
+// src/pages/blog/custom-ml.astro
+
+import BlogCard from '../../components/BlogCard.astro';
+
+const res = await fetch('/JSON/custom-ml-blog-posts.json');
+const blogPosts = await res.json();
+---
+
+
+
+
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+  {blogPosts.map(post => (
+    <BlogCard blog_data={post} />
+  ))}
+</section>
+
+
+
+
+
+
