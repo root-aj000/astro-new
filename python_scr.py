@@ -1,13 +1,17 @@
 import os
 import re
 
-# Regex to find path-like patterns (e.g., ./src/file.py or /lib/util.py or just src/file.py)
-PATH_PATTERN = re.compile(r'((?:\.?/)?(?:[a-zA-Z0-9_\-/]+(?:\.[a-zA-Z0-9]+)?)+)')
+# Regex to match path-like strings inside files (Unix/Windows style)
+PATH_PATTERN = re.compile(r'((?:\.?/)?(?:[a-zA-Z0-9_\-/\\]+(?:\.[a-zA-Z0-9]+)?)+)')
 
+# Output filename
 OUTPUT_FILE = "local_paths_and_tree.txt"
 
+# Start directory: current working directory or define your own path
+START_PATH = os.getcwd()  # Or: START_PATH = r"D:\Projects\MyRepo"
+
 def extract_paths_from_file(filepath):
-    """Extracts path-like strings from a file."""
+    """Extracts local path-like strings from a file."""
     try:
         with open(filepath, 'r', encoding='utf-8', errors='ignore') as f:
             content = f.read()
@@ -16,14 +20,14 @@ def extract_paths_from_file(filepath):
         return []
 
 def normalize_path(path, root):
-    """Converts local or relative paths to a consistent root-relative path."""
+    """Normalize to a root-relative path."""
     path = os.path.normpath(path)
     if os.path.isabs(path):
         return os.path.relpath(path, root)
-    return path
+    return os.path.normpath(path)
 
 def get_all_local_paths(start_path):
-    """Scans all files and extracts local paths."""
+    """Walk through all files and extract all path-like strings."""
     all_paths = set()
     for dirpath, _, filenames in os.walk(start_path):
         for filename in filenames:
@@ -31,12 +35,12 @@ def get_all_local_paths(start_path):
             local_paths = extract_paths_from_file(full_path)
             for p in local_paths:
                 normalized = normalize_path(p, start_path)
-                if not normalized.startswith('..'):  # skip external paths
+                if not normalized.startswith('..') and os.sep in normalized:
                     all_paths.add(normalized)
     return sorted(all_paths)
 
 def insert_into_tree(tree, parts):
-    """Recursive insertion of path parts into a nested dictionary."""
+    """Recursively insert path parts into a tree structure."""
     if not parts:
         return
     head, *tail = parts
@@ -45,7 +49,7 @@ def insert_into_tree(tree, parts):
     insert_into_tree(tree[head], tail)
 
 def build_path_tree(paths):
-    """Build a tree structure from all collected paths."""
+    """Builds a tree structure from a list of paths."""
     tree = {}
     for path in paths:
         parts = path.strip(os.sep).split(os.sep)
@@ -53,7 +57,7 @@ def build_path_tree(paths):
     return tree
 
 def print_tree(tree, prefix=""):
-    """Pretty print the path tree."""
+    """Recursively print the path tree."""
     lines = []
     keys = sorted(tree.keys())
     for i, key in enumerate(keys):
@@ -64,12 +68,8 @@ def print_tree(tree, prefix=""):
     return lines
 
 def main():
-    root = input("Enter the root directory path: ").strip()
-    if not os.path.isdir(root):
-        print("Invalid root directory.")
-        return
-
-    paths = get_all_local_paths(root)
+    print(f"🔍 Scanning directory: {START_PATH}")
+    paths = get_all_local_paths(START_PATH)
     tree = build_path_tree(paths)
     tree_lines = print_tree(tree)
 
@@ -79,7 +79,7 @@ def main():
         f.write("\nPath Tree:\n")
         f.writelines('\n'.join(tree_lines))
 
-    print(f"Local paths and path tree saved to {OUTPUT_FILE}")
+    print(f"✅ Output saved to {os.path.abspath(OUTPUT_FILE)}")
 
 if __name__ == "__main__":
     main()
