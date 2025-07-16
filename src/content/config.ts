@@ -1,85 +1,32 @@
-// src/content/config.ts
-import { defineCollection, z } from 'astro:content';
-
-const services = defineCollection({
-  type: 'content',
-  schema: ({ image }) =>
-    z.object({
-      // REQUIRED METADATA
-      title: z.string(),
-      contentType: z.enum([
-        'blog-post',
-        'case-study',
-        'whitepaper',
-        'faq',
-        'deployment-guide',
-        'custom-page',
-        'service-index'
-      ]),
-      serviceName: z.string(), // like 'custom-ml', 'ai-chatbot', etc.
-
-      // OPTIONAL METADATA
-      description: z.string().optional(),
-      author: z.string().optional(),
-      publishDate: z.date().optional(),
-      tags: z.array(z.string()).optional(),
-      category: z.string().optional(),
-
-      // COMPONENT DATA (optional, as per your design system)
-      hero: z.object({
-        mh_line: z.string(),
-        tg_line: z.string(),
-        discription: z.string(),
-        p_cta: z.string(),
-        s_cta: z.string(),
-        image: image().optional(),
-        alt: z.string()
-      }).optional(),
-
-      feature_grid: z.object({
-        title: z.string(),
-        subtitle: z.string(),
-        features: z.array(z.object({
-          title: z.string(),
-          description: z.string(),
-          cta: z.string(),
-          link: z.string(),
-          icon: z.string()
-        }))
-      }).optional(),
-
-      for_whom_block: z.object({
-        title: z.string(),
-        description: z.string(),
-        p_cta: z.string(),
-        items: z.array(z.object({
-          title: z.string(),
-          description: z.string(),
-          icon: z.string()
-        }))
-      }).optional(),
-
-      how_it_works: z.object({
-        title: z.string(),
-        subtitle: z.string(),
-        image: image(),
-        steps: z.array(z.object({
-          title: z.string(),
-          desc: z.string(),
-          img: image(),
-          caption: z.string()
-        }))
-      }).optional(),
-
-      subscribe_form: z.object({
-        title: z.string(),
-        description: z.string(),
-        placeholder: z.string(),
-        buttonText: z.string()
-      }).optional()
-    })
-});
+import { AichatbotBlog } from './schema/ai-chatbot_blogs_schema';
+import { AichatbotCases } from './schema/ai-chatbot_cases_schema';
+import { CloudComputingBlog } from './schema/cloud-computing_blogs_schema';
+import { CloudComputingCases } from './schema/cloud-computing_cases_schema';
+import { CustomMLBlog } from './schema/custom_ml_blogs_schema';
+import { CustomMLCases } from './schema/custom_ml_cases_schema';
+import { DevopsBlog } from './schema/devops_blog_schema';
+import { DevopsCases } from './schema/devops_cases_schema';
+import { servicePage } from './schema/index_service_schema';
+import { listpage } from './schema/list_schema';
 
 export const collections = {
-  services
+  servicePage : servicePage,
+  AichatbotBlog: AichatbotBlog,
+  AichatbotCases: AichatbotCases,
+  CloudComputingBlog: CloudComputingBlog,
+  CloudComputingCases: CloudComputingCases,
+  CustomMLBlog: CustomMLBlog,
+  CustomMLCases: CustomMLCases,
+  DevopsBlog: DevopsBlog,
+  DevopsCases: DevopsCases,
+  listpage: listpage,
 };
+
+
+
+
+
+// how to use it 
+//    import { getCollection } from 'astro:content';
+
+//    const devopsBlogs = await getCollection('DevopsBlog');
