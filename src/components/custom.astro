@@ -1,6 +1,6 @@
 ---
 import UniversalCard from '../../../../components/UniversalCard.astro';
-import blogData from '../../../../../public/JSON/custom-ml-blog-posts.json'; // Adjust if needed
+import blogData from '../../../../../../public/JSON/chatbot-blog-posts.json'; // Adjust if needed
 
 const { page } = Astro.params;
 const currentPage = parseInt(page) || 1;
@@ -33,13 +33,13 @@ const pagesToShow = Array.from({ length: endPage - startPage + 1 }, (_, i) => st
   <ul class="flex items-center space-x-2">
     {currentPage > 1 && (
       <li>
-        <a href={`/services/custom-ml/blog/page/${currentPage - 1}`} class="px-3 py-1 border rounded text-sm hover:bg-gray-100">Prev</a>
+        <a href={`/services/ai-chatbot/blog/page/${currentPage - 1}`} class="px-3 py-1 border rounded text-sm hover:bg-gray-100">Prev</a>
       </li>
     )}
 
     {startPage > 1 && (
       <li>
-        <a href={`/services/custom-ml/blog/page/1`} class="px-3 py-1 border rounded text-sm">1</a>
+        <a href={`/services/ai-chatbot/blog/page/1`} class="px-3 py-1 border rounded text-sm">1</a>
       </li>
     )}
     {startPage > 2 && (
@@ -49,7 +49,7 @@ const pagesToShow = Array.from({ length: endPage - startPage + 1 }, (_, i) => st
     {pagesToShow.map(page => (
       <li>
         <a
-          href={`/services/custom-ml/blog/page/${page}`}
+          href={`/services/ai-chatbot/blog/page/${page}`}
           class={`px-3 py-1 border rounded text-sm ${page === currentPage ? 'bg-orange-500 text-white border-orange-600' : 'hover:bg-gray-100'}`}
         >
           {page}
@@ -62,14 +62,16 @@ const pagesToShow = Array.from({ length: endPage - startPage + 1 }, (_, i) => st
     )}
     {endPage < totalPages && (
       <li>
-        <a href={`/services/custom-ml/blog/page/${totalPages}`} class="px-3 py-1 border rounded text-sm">{totalPages}</a>
+        <a href={`/services/ai-chatbot/blog/page/${totalPages}`} class="px-3 py-1 border rounded text-sm">{totalPages}</a>
       </li>
     )}
 
     {currentPage < totalPages && (
       <li>
-        <a href={`/services/custom-ml/blog/page/${currentPage + 1}`} class="px-3 py-1 border rounded text-sm hover:bg-gray-100">Next</a>
+        <a href={`/services/ai-chatbot/blog/page/${currentPage + 1}`} class="px-3 py-1 border rounded text-sm hover:bg-gray-100">Next</a>
       </li>
     )}
   </ul>
 </nav>
+
+

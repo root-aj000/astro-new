@@ -1,122 +1,77 @@
 ---
-import BlogCard from '../../../../components/BlogCard.astro'; 
+import UniversalCard from '../../../../components/UniversalCard.astro';
+import blogData from '../../../../../../public/JSON/chatbot-blog-posts.json'; // Adjust if needed
 
-const PAGE_SIZE = 20;
 const { page } = Astro.params;
-const currentPage = parseInt(page || '1');
+const currentPage = parseInt(page) || 1;
+const postsPerPage = 20;
+const totalPosts = blogData.length;
+const totalPages = Math.ceil(totalPosts / postsPerPage);
 
-const res = await fetch('/JSON/custom-ml-blog-posts.json');
-const allPosts = await res.json();
+const start = (currentPage - 1) * postsPerPage;
+const end = start + postsPerPage;
+const paginatedPosts = blogData.slice(start, end);
 
-const totalPages = Math.ceil(allPosts.length / PAGE_SIZE);
-const start = (currentPage - 1) * PAGE_SIZE;
-const end = start + PAGE_SIZE;
-const posts = allPosts.slice(start, end);
+// Pagination window logic
+const visibleRange = 5;
+const halfRange = Math.floor(visibleRange / 2);
+let startPage = Math.max(1, currentPage - halfRange);
+let endPage = Math.min(totalPages, startPage + visibleRange - 1);
+if (endPage - startPage + 1 < visibleRange) {
+  startPage = Math.max(1, endPage - visibleRange + 1);
+}
+const pagesToShow = Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i);
 ---
 
-
-
-
-
-
-
-<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-  {posts.map(post => (
-    <BlogCard blog_data={post} />
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-6 py-10">
+  {paginatedPosts.map(post => (
+    <UniversalCard blog_data={post} />
   ))}
 </section>
 
+<nav aria-label="Blog pagination" class="flex justify-center mt-10">
+  <ul class="flex items-center space-x-2">
+    {currentPage > 1 && (
+      <li>
+        <a href={`/services/ai-chatbot/blog/page/${currentPage - 1}`} class="px-3 py-1 border rounded text-sm hover:bg-gray-100">Prev</a>
+      </li>
+    )}
 
+    {startPage > 1 && (
+      <li>
+        <a href={`/services/ai-chatbot/blog/page/1`} class="px-3 py-1 border rounded text-sm">1</a>
+      </li>
+    )}
+    {startPage > 2 && (
+      <li><span class="px-2 text-sm">...</span></li>
+    )}
 
-
-
-
-
-
-<!-- custom pagination -->
-<nav aria-label="Page navigation example">
-  <ul class="flex items-center -space-x-px h-8 text-sm justify-center mb-32 pt-24">
-
-    <!-- Previous -->
-    <li>
-      <a
-        href={`/services/custom-ml/blog/page/${currentPage - 1}`}
-        class={`flex items-center justify-center px-3 h-8 ms-0 leading-tight border border-e-0 rounded-s-lg ${
-          currentPage === 1
-            ? 'text-gray-300 bg-gray-100 cursor-not-allowed'
-            : 'text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700'
-        }`}
-        aria-disabled={currentPage === 1}
-      >
-        <span class="sr-only">Previous</span>
-        <svg
-          class="w-2.5 h-2.5 rtl:rotate-180"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 6 10"
+    {pagesToShow.map(page => (
+      <li>
+        <a
+          href={`/services/ai-chatbot/blog/page/${page}`}
+          class={`px-3 py-1 border rounded text-sm ${page === currentPage ? 'bg-orange-500 text-white border-orange-600' : 'hover:bg-gray-100'}`}
         >
-          <path
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M5 1 1 5l4 4"
-          />
-        </svg>
-      </a>
-    </li>
+          {page}
+        </a>
+      </li>
+    ))}
 
-    <!-- Numbered Pages -->
-    {Array.from({ length: totalPages }).map((_, i) => {
-      const pageNum = i + 1;
-      return (
-        <li>
-          <a
-            href={`/services/custom-ml/blog/page/${pageNum}`}
-            aria-current={pageNum === currentPage ? 'page' : undefined}
-            class={`flex items-center justify-center px-3 h-8 leading-tight border ${
-              pageNum === currentPage
-                ? 'z-10 text-blue-600 border-blue-300 bg-blue-50'
-                : 'text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700'
-            }`}
-          >
-            {pageNum}
-          </a>
-        </li>
-      );
-    })}
+    {endPage < totalPages - 1 && (
+      <li><span class="px-2 text-sm">...</span></li>
+    )}
+    {endPage < totalPages && (
+      <li>
+        <a href={`/services/ai-chatbot/blog/page/${totalPages}`} class="px-3 py-1 border rounded text-sm">{totalPages}</a>
+      </li>
+    )}
 
-    <!-- Next -->
-    <li>
-      <a
-        href={`/services/custom-ml/blog/page/${currentPage + 1}`}
-        class={`flex items-center justify-center px-3 h-8 leading-tight border rounded-e-lg ${
-          currentPage === totalPages
-            ? 'text-gray-300 bg-gray-100 cursor-not-allowed'
-            : 'text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700'
-        }`}
-        aria-disabled={currentPage === totalPages}
-      >
-        <span class="sr-only">Next</span>
-        <svg
-          class="w-2.5 h-2.5 rtl:rotate-180"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 6 10"
-        >
-          <path
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="m1 9 4-4-4-4"
-          />
-        </svg>
-      </a>
-    </li>
-
+    {currentPage < totalPages && (
+      <li>
+        <a href={`/services/ai-chatbot/blog/page/${currentPage + 1}`} class="px-3 py-1 border rounded text-sm hover:bg-gray-100">Next</a>
+      </li>
+    )}
   </ul>
 </nav>
-
 
 
