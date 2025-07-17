@@ -10,7 +10,6 @@ import { servicePage } from './schema/index_service_schema';
 import { listpage } from './schema/list_schema';
 
 export const collections = {
-  servicePage : servicePage,
   AichatbotBlog: AichatbotBlog,
   AichatbotCases: AichatbotCases,
   CloudComputingBlog: CloudComputingBlog,
@@ -19,6 +18,7 @@ export const collections = {
   CustomMLCases: CustomMLCases,
   DevopsBlog: DevopsBlog,
   DevopsCases: DevopsCases,
+  servicePage : servicePage,
   listpage: listpage,
 };
 
