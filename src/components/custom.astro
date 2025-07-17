@@ -1,0 +1,75 @@
+---
+import UniversalCard from '../../../../components/UniversalCard.astro';
+import blogData from '../../../../../public/JSON/custom-ml-blog-posts.json'; // Adjust if needed
+
+const { page } = Astro.params;
+const currentPage = parseInt(page) || 1;
+const postsPerPage = 20;
+const totalPosts = blogData.length;
+const totalPages = Math.ceil(totalPosts / postsPerPage);
+
+const start = (currentPage - 1) * postsPerPage;
+const end = start + postsPerPage;
+const paginatedPosts = blogData.slice(start, end);
+
+// Pagination window logic
+const visibleRange = 5;
+const halfRange = Math.floor(visibleRange / 2);
+let startPage = Math.max(1, currentPage - halfRange);
+let endPage = Math.min(totalPages, startPage + visibleRange - 1);
+if (endPage - startPage + 1 < visibleRange) {
+  startPage = Math.max(1, endPage - visibleRange + 1);
+}
+const pagesToShow = Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i);
+---
+
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-6 py-10">
+  {paginatedPosts.map(post => (
+    <UniversalCard blog_data={post} />
+  ))}
+</section>
+
+<nav aria-label="Blog pagination" class="flex justify-center mt-10">
+  <ul class="flex items-center space-x-2">
+    {currentPage > 1 && (
+      <li>
+        <a href={`/services/custom-ml/blog/page/${currentPage - 1}`} class="px-3 py-1 border rounded text-sm hover:bg-gray-100">Prev</a>
+      </li>
+    )}
+
+    {startPage > 1 && (
+      <li>
+        <a href={`/services/custom-ml/blog/page/1`} class="px-3 py-1 border rounded text-sm">1</a>
+      </li>
+    )}
+    {startPage > 2 && (
+      <li><span class="px-2 text-sm">...</span></li>
+    )}
+
+    {pagesToShow.map(page => (
+      <li>
+        <a
+          href={`/services/custom-ml/blog/page/${page}`}
+          class={`px-3 py-1 border rounded text-sm ${page === currentPage ? 'bg-orange-500 text-white border-orange-600' : 'hover:bg-gray-100'}`}
+        >
+          {page}
+        </a>
+      </li>
+    ))}
+
+    {endPage < totalPages - 1 && (
+      <li><span class="px-2 text-sm">...</span></li>
+    )}
+    {endPage < totalPages && (
+      <li>
+        <a href={`/services/custom-ml/blog/page/${totalPages}`} class="px-3 py-1 border rounded text-sm">{totalPages}</a>
+      </li>
+    )}
+
+    {currentPage < totalPages && (
+      <li>
+        <a href={`/services/custom-ml/blog/page/${currentPage + 1}`} class="px-3 py-1 border rounded text-sm hover:bg-gray-100">Next</a>
+      </li>
+    )}
+  </ul>
+</nav>
