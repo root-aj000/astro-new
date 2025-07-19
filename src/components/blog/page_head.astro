@@ -1,0 +1,32 @@
+---
+import type { BlogCardProps } from "../../types/components";
+
+const {blog_data} = Astro.props as BlogCardProps
+---
+
+
+
+<!-- progress bar -->
+<div class="w-full bg-gray-200 rounded-full h-2.5 mb-4 fixed">
+  <div class="bg-gray-600 h-2.5 rounded-full" style="width: 45%"></div>
+</div>
+<!-- progress bar end -->
+
+<!-- main title -->
+<div class="mx-auto w-full max-w-screen-lg px-6 py-16">
+  <h1 class="lg:text-5xl text-3xl">
+    {blog_data.title}
+  </h1>
+</div>
+<!-- main title end -->
+
+<!-- author section -->
+<section class="bg-white">
+  <div class="py-3 px-4 mx-auto max-w-screen-lg text-center">
+    <div class="flex flex-row justify-between text-gray-700">
+      <span class="flex px-6 text-base font-medium"> Author: {blog_data.author}</span>
+      <span class="px-6 font-medium"> date: {blog_data.date} </span>
+    </div>
+  </div>
+</section>
+<!-- author section end's here -->

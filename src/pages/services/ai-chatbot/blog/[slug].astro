@@ -1,0 +1,40 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import PageText from '../../../../components/blog/page_text.astro';
+import PageImg from '../../../../components/blog/page_img.astro';
+import HrLine from '../../../../components/blog/hr_line.astro';
+import HrEndline from '../../../../components/blog/hr_endline.astro';
+import PageHead from '../../../../components/blog/page_head.astro'; // 🔥 This is your missing piece
+
+export async function getStaticPaths() {
+  const posts = await getCollection('collection-name');
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: post,
+  }));
+}
+
+type Props = CollectionEntry<'collection-name'>;
+
+const post = Astro.props as Props;
+const blog_data = post.data.blog_data;
+
+const { Content } = await render(post);
+---
+
+<!-- Inject frontmatter header -->
+<PageHead blog_data={blog_data} />
+<HrLine />
+
+<!-- The dynamic MDX content with injected components -->
+<article>
+  <Content
+    components={{
+      PageText,
+      PageImg,
+    }}
+  />
+</article>
+
+<HrEndline />
+

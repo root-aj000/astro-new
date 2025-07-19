@@ -6,11 +6,12 @@ import BlogGrid from '../../../../../components/blog/blog-grid.astro';
 import ListHeader from '../../../../../components/dynamic/list_header.astro';
 import Nav from '../../../../../components/shared/Nav.astro';
 import Footer from '../../../../../components/shared/Footer.astro';
+import { BASE_PATH_CONST } from '../../../../../content/const.ts';
 
 const currentPage = parseInt(Astro.params.page) || 1;
 const itemsPerPage = 12;
 const totalItems = blogData.length;
-const basePath = "hello";
+const basePath = BASE_PATH_CONST;
 
 const paginatedPosts = blogData.slice(
   (currentPage - 1) * itemsPerPage,
@@ -37,50 +38,5 @@ const paginatedPosts = blogData.slice(
 
 
 
-
-<!-- <nav aria-label="Blog pagination" class="flex justify-center mt-10">
-  <ul class="flex items-center space-x-2">
-    {currentPage > 1 && (
-      <li>
-        <a href={`/services/ai-chatbot/blog/page/${currentPage - 1}`} class="px-3 py-1 border rounded text-sm hover:bg-gray-100">Prev</a>
-      </li>
-    )}
-
-    {startPage > 1 && (
-      <li>
-        <a href={`/services/ai-chatbot/blog/page/1`} class="px-3 py-1 border rounded text-sm">1</a>
-      </li>
-    )}
-    {startPage > 2 && (
-      <li><span class="px-2 text-sm">...</span></li>
-    )}
-
-    {pagesToShow.map(page => (
-      <li>
-        <a
-          href={`/services/ai-chatbot/blog/page/${page}`}
-          class={`px-3 py-1 border rounded text-sm ${page === currentPage ? 'bg-orange-500 text-white border-orange-600' : 'hover:bg-gray-100'}`}
-        >
-          {page}
-        </a>
-      </li>
-    ))}
-
-    {endPage < totalPages - 1 && (
-      <li><span class="px-2 text-sm">...</span></li>
-    )}
-    {endPage < totalPages && (
-      <li>
-        <a href={`/services/ai-chatbot/blog/page/${totalPages}`} class="px-3 py-1 border rounded text-sm">{totalPages}</a>
-      </li>
-    )}
-
-    {currentPage < totalPages && (
-      <li>
-        <a href={`/services/ai-chatbot/blog/page/${currentPage + 1}`} class="px-3 py-1 border rounded text-sm hover:bg-gray-100">Next</a>
-      </li>
-    )}
-  </ul>
-</nav> -->
 
 
