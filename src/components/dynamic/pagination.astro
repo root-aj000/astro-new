@@ -1,36 +1,73 @@
 ---
-const { currentPage, totalPages, baseUrl = '/blog/page' } = Astro.props;
+export interface Props {
+  currentPage: number;
+  totalItems: number;
+  itemsPerPage: number;
+  basePath: string; // e.g., "/services/ai-chatbot/blog/page"
+}
 
-const createPageLink = (page: number) => `${baseUrl}/${page}`;
-const range = (start: number, end: number) =>
-  Array.from({ length: end - start + 1 }, (_, i) => start + i);
+const { currentPage, totalItems, itemsPerPage, basePath } = Astro.props;
+
+const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+// Pagination window logic
+const visibleRange = 5;
+const halfRange = Math.floor(visibleRange / 2);
+
+let startPage = Math.max(1, currentPage - halfRange);
+let endPage = Math.min(totalPages, startPage + visibleRange - 1);
+
+if (endPage - startPage + 1 < visibleRange) {
+  startPage = Math.max(1, endPage - visibleRange + 1);
+}
+
+const pagesToShow = Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i);
 ---
 
-<nav aria-label="Pagination">
-  <ul class="flex items-center -space-x-px h-8 text-sm justify-center mb-32 pt-24">
+<nav aria-label="Pagination" class="flex justify-center mt-10">
+  <ul class="flex items-center space-x-2 text-sm">
 
     <!-- Prev -->
-    <li>
-      {currentPage > 1 ? (
-        <a href={createPageLink(currentPage - 1)} class="px-3 h-8 flex items-center justify-center leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700">
-          <span class="sr-only">Previous</span>
-          <svg class="w-2.5 h-2.5" fill="none" viewBox="0 0 6 10"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4" /></svg>
-        </a>
-      ) : (
-        <span class="px-3 h-8 flex items-center justify-center text-gray-300 border border-gray-200 rounded-s-lg">←</span>
-      )}
-    </li>
-
-    <!-- Page numbers -->
-    {range(1, totalPages).map((page) => (
+    {currentPage > 1 && (
       <li>
         <a
-          href={createPageLink(page)}
+          href={`${basePath}/${currentPage - 1}`}
+          class="px-3 py-1 border rounded hover:bg-gray-100"
+        >
+          Prev
+        </a>
+      </li>
+    )}
+
+    <!-- First page -->
+    {startPage > 1 && (
+      <li>
+        <a
+          href={`${basePath}/1`}
+          class="px-3 py-1 border rounded hover:bg-gray-100"
+        >
+          1
+        </a>
+      </li>
+    )}
+
+    <!-- Left ellipsis (only if gap between 1 and startPage > 1) -->
+    {startPage > 2 && (
+      <li>
+        <span class="px-2">…</span>
+      </li>
+    )}
+
+    <!-- Page numbers -->
+    {pagesToShow.map(page => (
+      <li>
+        <a
+          href={`${basePath}/${page}`}
           aria-current={page === currentPage ? 'page' : undefined}
-          class={`flex items-center justify-center px-3 h-8 leading-tight border ${
+          class={`px-3 py-1 border rounded ${
             page === currentPage
-              ? 'text-blue-600 border-blue-300 bg-blue-50'
-              : 'text-gray-500 bg-white border-gray-300 hover:bg-gray-100 hover:text-gray-700'
+              ? 'bg-orange-500 text-white border-orange-600'
+              : 'hover:bg-gray-100'
           }`}
         >
           {page}
@@ -38,17 +75,92 @@ const range = (start: number, end: number) =>
       </li>
     ))}
 
-    <!-- Next -->
-    <li>
-      {currentPage < totalPages ? (
-        <a href={createPageLink(currentPage + 1)} class="px-3 h-8 flex items-center justify-center leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700">
-          <span class="sr-only">Next</span>
-          <svg class="w-2.5 h-2.5" fill="none" viewBox="0 0 6 10"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" /></svg>
-        </a>
-      ) : (
-        <span class="px-3 h-8 flex items-center justify-center text-gray-300 border border-gray-200 rounded-e-lg">→</span>
-      )}
-    </li>
+    <!-- Right ellipsis (only if gap between endPage and totalPages > 1) -->
+    {endPage < totalPages - 1 && (
+      <li>
+        <span class="px-2">…</span>
+      </li>
+    )}
 
+    <!-- Last page -->
+    {endPage < totalPages && (
+      <li>
+        <a
+          href={`${basePath}/${totalPages}`}
+          class="px-3 py-1 border rounded hover:bg-gray-100"
+        >
+          {totalPages}
+        </a>
+      </li>
+    )}
+
+    <!-- Next -->
+    {currentPage < totalPages && (
+      <li>
+        <a
+          href={`${basePath}/${currentPage + 1}`}
+          class="px-3 py-1 border rounded hover:bg-gray-100"
+        >
+          Next
+        </a>
+      </li>
+    )}
   </ul>
 </nav>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- how to use   
+ 
+---
+import UniversalCard from '../../../../../components/dynamic/universal_card.astro';
+import blogData from '../../../../../../public/JSON/chatbot-blog-posts.json'; // Adjust if needed\\
+import Pagination from '../../../../../components/dynamic/pagination.astro';
+import BlogGrid from '../../../../../components/blog/blog-grid.astro';
+
+const currentPage = parseInt(Astro.params.page) || 1;
+const itemsPerPage = 12;
+const totalItems = blogData.length;
+
+const paginatedPosts = blogData.slice(
+  (currentPage - 1) * itemsPerPage,
+  currentPage * itemsPerPage
+);
+---
+
+<BlogGrid>
+  {paginatedPosts.map(post => (
+    <UniversalCard blog_data={post} />
+  ))}
+</BlogGrid>
+
+<Pagination 
+  currentPage={currentPage}
+  totalItems={totalItems}
+  itemsPerPage={itemsPerPage}
+  basePath="/products/blog/page"
+/>
+
+
+
+
+
+
+
+-->

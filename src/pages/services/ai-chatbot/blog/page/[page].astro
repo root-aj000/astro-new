@@ -1,35 +1,37 @@
 ---
-import UniversalCard from '../../../../components/UniversalCard.astro';
-import blogData from '../../../../../../public/JSON/chatbot-blog-posts.json'; // Adjust if needed
+import UniversalCard from '../../../../../components/dynamic/universal_card.astro';
+import blogData from '../../../../../../public/JSON/chatbot-blog-posts.json'; // Adjust if needed\\
+import Pagination from '../../../../../components/dynamic/pagination.astro';
+import BlogGrid from '../../../../../components/blog/blog-grid.astro';
 
-const { page } = Astro.params;
-const currentPage = parseInt(page) || 1;
-const postsPerPage = 20;
-const totalPosts = blogData.length;
-const totalPages = Math.ceil(totalPosts / postsPerPage);
+const currentPage = parseInt(Astro.params.page) || 1;
+const itemsPerPage = 12;
+const totalItems = blogData.length;
 
-const start = (currentPage - 1) * postsPerPage;
-const end = start + postsPerPage;
-const paginatedPosts = blogData.slice(start, end);
-
-// Pagination window logic
-const visibleRange = 5;
-const halfRange = Math.floor(visibleRange / 2);
-let startPage = Math.max(1, currentPage - halfRange);
-let endPage = Math.min(totalPages, startPage + visibleRange - 1);
-if (endPage - startPage + 1 < visibleRange) {
-  startPage = Math.max(1, endPage - visibleRange + 1);
-}
-const pagesToShow = Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i);
+const paginatedPosts = blogData.slice(
+  (currentPage - 1) * itemsPerPage,
+  currentPage * itemsPerPage
+);
 ---
 
-<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-6 py-10">
+<BlogGrid>
   {paginatedPosts.map(post => (
     <UniversalCard blog_data={post} />
   ))}
-</section>
+</BlogGrid>
 
-<nav aria-label="Blog pagination" class="flex justify-center mt-10">
+<Pagination 
+  currentPage={currentPage}
+  totalItems={totalItems}
+  itemsPerPage={itemsPerPage}
+  basePath="/products/blog/page"
+/>
+
+
+
+
+
+<!-- <nav aria-label="Blog pagination" class="flex justify-center mt-10">
   <ul class="flex items-center space-x-2">
     {currentPage > 1 && (
       <li>
@@ -72,6 +74,6 @@ const pagesToShow = Array.from({ length: endPage - startPage + 1 }, (_, i) => st
       </li>
     )}
   </ul>
-</nav>
+</nav> -->
 
 
