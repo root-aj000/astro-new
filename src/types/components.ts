@@ -139,6 +139,6 @@ export interface BlogCardProps {
   href?: string;
 }
 
-export interface BlogCardProps {
+export interface BlogCard {
   blog_data: BlogCardProps;
 }

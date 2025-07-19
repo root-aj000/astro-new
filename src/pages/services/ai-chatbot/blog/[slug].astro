@@ -4,17 +4,17 @@ import PageText from '../../../../components/blog/page_text.astro';
 import PageImg from '../../../../components/blog/page_img.astro';
 import HrLine from '../../../../components/blog/hr_line.astro';
 import HrEndline from '../../../../components/blog/hr_endline.astro';
-import PageHead from '../../../../components/blog/page_head.astro'; // 🔥 This is your missing piece
+import PageHead from '../../../../components/blog/page_head.astro'; 
 
 export async function getStaticPaths() {
-  const posts = await getCollection('collection-name');
+  const posts = await getCollection('AichatbotBlog');
   return posts.map((post) => ({
     params: { slug: post.id },
     props: post,
   }));
 }
 
-type Props = CollectionEntry<'collection-name'>;
+type Props = CollectionEntry<'AichatbotBlog'>;
 
 const post = Astro.props as Props;
 const blog_data = post.data.blog_data;
