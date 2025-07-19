@@ -3,17 +3,23 @@ import UniversalCard from '../../../../../components/dynamic/universal_card.astr
 import blogData from '../../../../../../public/JSON/chatbot-blog-posts.json'; // Adjust if needed\\
 import Pagination from '../../../../../components/dynamic/pagination.astro';
 import BlogGrid from '../../../../../components/blog/blog-grid.astro';
+import ListHeader from '../../../../../components/dynamic/list_header.astro';
+import Nav from '../../../../../components/shared/Nav.astro';
+import Footer from '../../../../../components/shared/Footer.astro';
 
 const currentPage = parseInt(Astro.params.page) || 1;
 const itemsPerPage = 12;
 const totalItems = blogData.length;
+const basePath = "hello";
 
 const paginatedPosts = blogData.slice(
   (currentPage - 1) * itemsPerPage,
   currentPage * itemsPerPage
 );
 ---
+<Nav />
 
+<ListHeader />
 <BlogGrid>
   {paginatedPosts.map(post => (
     <UniversalCard blog_data={post} />
@@ -24,9 +30,10 @@ const paginatedPosts = blogData.slice(
   currentPage={currentPage}
   totalItems={totalItems}
   itemsPerPage={itemsPerPage}
-  basePath="/products/blog/page"
+  basePath= {basePath}
 />
 
+<Footer />
 
 
 

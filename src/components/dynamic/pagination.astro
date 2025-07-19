@@ -3,7 +3,7 @@ export interface Props {
   currentPage: number;
   totalItems: number;
   itemsPerPage: number;
-  basePath: string; // e.g., "/services/ai-chatbot/blog/page"
+  basePath: string; // "/services/ai-chatbot/blog/page"
 }
 
 const { currentPage, totalItems, itemsPerPage, basePath } = Astro.props;
@@ -130,13 +130,14 @@ const pagesToShow = Array.from({ length: endPage - startPage + 1 }, (_, i) => st
  
 ---
 import UniversalCard from '../../../../../components/dynamic/universal_card.astro';
-import blogData from '../../../../../../public/JSON/chatbot-blog-posts.json'; // Adjust if needed\\
+import blogData from '../../../../../../public/JSON/chatbot-blog-posts.json'; // Adjust as per pages
 import Pagination from '../../../../../components/dynamic/pagination.astro';
 import BlogGrid from '../../../../../components/blog/blog-grid.astro';
 
 const currentPage = parseInt(Astro.params.page) || 1;
 const itemsPerPage = 12;
 const totalItems = blogData.length;
+const basePath = "/products/blog/page";
 
 const paginatedPosts = blogData.slice(
   (currentPage - 1) * itemsPerPage,
@@ -154,7 +155,7 @@ const paginatedPosts = blogData.slice(
   currentPage={currentPage}
   totalItems={totalItems}
   itemsPerPage={itemsPerPage}
-  basePath="/products/blog/page"
+  basePath={basePath}
 />
 
 
