@@ -3,14 +3,97 @@
 Inside of your Astro project, you'll see the following folders and files:
 
 ```text
-
+📁 src/
+├── 📁 content/                      
+│   └── 📁 services/
+│       ├── 📁 custom-ml/
+│       │   ├── 📄 index.md
+│       │   ├── 📁 blog/
+│       │   │   └── 📄 intro-to-x.md
+│       │   ├── 📁 case-studies/
+│       │   │   └── 📄 case-1.md
+│       │   ├── 📄 blog-list.md
+│       │   ├── 📄 case-list.md
+│       │   └── 📄 custom-page.md
+│       ├── 📁 ai-chatbot/
+│       │   ├── 📄 index.md
+│       │   ├── 📁 blog/
+│       │   │   └── 📄 intro-to-x.md
+│       │   ├── 📁 case-studies/
+│       │   │   └── 📄 case-1.md
+│       │   ├── 📄 blog-list.md
+│       │   ├── 📄 case-list.md
+│       │   └── 📄 faq.md
+│       ├── 📁 devops/
+│       │   ├── 📄 index.md
+│       │   ├── 📁 blog/
+│       │   │   └── 📄 intro-to-x.md
+│       │   ├── 📁 case-studies/
+│       │   │   └── 📄 case-1.md
+│       │   ├── 📄 blog-list.md
+│       │   ├── 📄 case-list.md
+│       │   └── 📄 deployment-guide.md
+│       └── 📁 cloud-computing/
+│           ├── 📄 index.md
+│           ├── 📁 blog/
+│           │   └── 📄 intro-to-x.md
+│           ├── 📁 case-studies/
+│           │   └── 📄 case-1.md
+│           ├── 📄 blog-list.md
+│           ├── 📄 case-list.md
+│           └── 📄 whitepaper.md
+├── 📁 pages/                        
+│   ├── 📄 index.astro
+│   ├── 📄 about.astro
+│   ├── 📄 contact.astro
+│   └── 📁 services/
+│       └── 📁 custom-ml/
+│           └── 📄 index.astro       
+│       └── 📁 ai-chatbot/
+│           └── 📄 index.astro
+│       └── 📁 devops/
+│           └── 📄 index.astro
+│       └── 📁 cloud-computing/
+│           └── 📄 index.astro
+├── 📁 components/
+│   ├── 📁 layout/
+│   │   ├── 📄 Layout.astro          
+│   │   ├── 📄 ServiceLayout.astro  
+│   │   ├── 📄 BlogLayout.astro
+│   │   └── 📄 StaticLayout.astro
+│   ├── 📁 shared/
+│   │   ├── 📄 Nav.astro             
+│   │   ├── 📄 Footer.astro
+│   │   ├── 📄 CTA.astro
+│   ├── 📁 blog/
+│   │   ├── 📄 BlogPost.astro
+│   │   ├── 📄 BlogList.astro
+│   ├── 📁 case/
+│   │   ├── 📄 CaseStudy.astro
+│   │   ├── 📄 CaseList.astro
+│   ├── 📁 service/
+│   │   ├── 📄 ServiceCard.astro
+│   │   └── 📄 CustomContent.astro
+│   └── 📁 ui/
+│       └── 📄 Button.jsx           
+├── 📁 data/                         
+│   ├── 📄 site.json                 
+│   └── 📄 nav.json                  
+📁 public/
+├── 📁 assets/
+│   └── 📁 images/                   
+├── 📁 styles/                         
+│   ├── 📄 tailwind.css                
+│   ├── 📄 base.css                   
+│   ├── 📄 typography.css              
+│   └── 📄 variables.css              
+├── 📁 scripts/                       
+│   ├── 📄 analytics.js               
+│   ├── 📄 scrollToTop.js             
+│   └── 📄 initTabs.js                
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
 
 ## 🧞 Commands
 
@@ -25,6 +108,3 @@ All commands are run from the root of the project, from a terminal:
 | `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `npm run astro -- --help` | Get help using the Astro CLI                     |
 
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
