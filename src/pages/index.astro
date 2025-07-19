@@ -1,7 +1,13 @@
 ---
-
 import '../../src/styles/global.css'
+import Hero from "../components/sections/hero.astro";
+import Features from "../components/sections/features.astro";
+import { getEntryBySlug } from "astro:content";
 
+const { data, body } = await getEntryBySlug("pages", "index");
+
+const { hero, features } = data;
 ---
 
-<h1>hello</h1>
+<Hero data={hero} />
+<Features items={features} />
