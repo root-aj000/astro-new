@@ -1,7 +1,15 @@
 ---
-import HeroSection from '../components/HeroSection.astro';
+import Hero from '../components/hero.astro';
+import Cloud from '../logo-cloud.astro';
+import Hero_2 from '../components/hero_2.astro';
+import Hero_3 from '../hero_3.astro';
 
-const { hero} = Astro.props;
+
+const { hero, hero_2, hero_3 } = Astro.props;
 ---
 
-<HeroSection {hero} />
+<Hero {hero} />
+<Cloud {cloud_data} />
+<Hero_2 {hero_2} />
+
+<Hero_3 {hero_3} />
