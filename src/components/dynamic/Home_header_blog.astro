@@ -1,0 +1,17 @@
+---
+import type { Home_header_blogProps } from '../../types/components';
+const {home_header_blog} = Astro.props as Home_header_blogProps;
+---
+
+
+<div class="mb-10 md:mb-16">
+  <h2
+    class="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl"
+  >
+    {home_header_blog.title}
+  </h2>
+
+  <p class="mx-auto max-w-screen-md text-center text-gray-500 md:text-lg">
+    {home_header_blog.subtitle}
+  </p>
+</div>

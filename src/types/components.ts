@@ -132,13 +132,44 @@ export interface BlogCardProps {
   title: string;
   author: string;
   date: string;
-  image?: string;
-  excerpt?: string;
+  image: string;
+  excerpt: string;
   tags: string[];
-  category?: string;
-  href?: string;
+  category: string;
+  href: string;
 }
 
 export interface BlogCard {
   blog_data: BlogCardProps;
+}
+
+export interface Home_header_blogProps {
+  home_header_blog:{
+    title: string;
+    subtitle: string;
+  };
+}
+
+export interface Home_header_casesProps {
+  home_header_cases:{
+    title: string;
+    subtitle: string;
+  };
+}
+export interface IndexProps{
+  indexpro:{
+    hero: HeroProps['hero'];
+    cloud_data: logo_cloudProps['logo_cloud'];
+    hero_2: Hero_2Props['hero_2'];
+    hero_3: Hero_3Props['hero_3'];
+    howitworks: HowItWorksProps['Howitworks'];
+    forwhom: ForWhomBlock['forwhom'];
+    list_header: list_headerProps['list_header'];
+    grid: FeatureGridProps['grid'];
+    stats: StatsProps['stats'];
+    subscribe: SubscribeFormProps['subscribe'];
+    blog_data: BlogCardProps;
+    Home_header_blog: Home_header_blogProps['home_header_blog'];
+    Home_header_cases: Home_header_casesProps['home_header_cases'];
+  };
 }

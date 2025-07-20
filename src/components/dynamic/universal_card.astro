@@ -1,8 +1,8 @@
 ---
-import type { BlogCardProps } from '../../types/components.ts';
+import type { BlogCard } from '../../types/components.ts';
 
 
-const {blog_data} = Astro.props as BlogCardProps;
+const {blog_data} = Astro.props as BlogCard;
 ---
 
 <a href={blog_data.href} class="group block border rounded-2xl p-5 hover:border-orange-600 hover:bg-gray-50 transition">
