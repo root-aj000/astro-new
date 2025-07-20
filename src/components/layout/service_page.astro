@@ -1,95 +1,79 @@
 ---
-import Base from '../layout/base.astro';
-import Hero from '../dynamic/hero_1.astro';
-import Cloud from '../dynamic/logo_cloud.astro';
-import Hero_2 from '../dynamic/hero_2.astro';
-import Hero_3 from '../dynamic/hero_3.astro';
-import ServicesHome from '../dynamic/services_home.astro';  
-import Stats from '../dynamic/stats.astro';
-import BlogGrid from '../blog/blog-grid.astro';
-import HomeHeaderBlog from '../dynamic/Home_header_blog.astro';
-import CaseGrid from '../case/case-study-grid.astro';
-import HomeHeaderCases from '../dynamic/Home_header_cases.astro';
-import UniversalCard from '../dynamic/universal_card.astro';
+import Base from "../layout/base.astro";
+import Hero from "../dynamic/hero_1.astro";
+import Hero_4 from "../dynamic/hero_4.astro";
+import Cloud from "../dynamic/logo_cloud.astro";
+import HowItWorks from "../dynamic/how_it_works.astro";
+import ForWhom from "../dynamic/for_whom.astro";
+// import Features from '../dynamic/features.astro'; // Uncomment Features section after creating it
+import Stats from "../dynamic/stats.astro";
+import BlogGrid from "../blog/blog-grid.astro";
+import HomeHeaderBlog from "../dynamic/Home_header_blog.astro";
+import CaseGrid from "../case/case-study-grid.astro";
+import HomeHeaderCases from "../dynamic/Home_header_cases.astro";
+import UniversalCard from "../dynamic/universal_card.astro";
+// props
 import type { IndexProps } from "../../types/components";
 const { indexpro } = Astro.props as IndexProps;
 
-
-
-
-
-
 // over && here we are fetching the latest posts and cases from different collections
 // Fetch 1 post from 4 different collections
-import  AichatbotBlog  from '../../../public/JSON/chatbot-blog-posts.json';
-import  Aichatbotcase  from '../../../public/JSON/chatbot-case-studys.json';
-import  DevopsBlog  from '../../../public/JSON/devops-blog-posts.json';
-import  Devopscase  from '../../../public/JSON/devops-case-studys.json';
-import  CustomMLBlog  from '../../../public/JSON/custom-ml-blog-posts.json';
-import  CustomMLcase  from '../../../public/JSON/custom-ml-case-studys.json';
-import  CloudComputingBlog  from '../../../public/JSON/cloud-computing-blog-posts.json';
-import  CloudComputingcase  from '../../../public/JSON/cloud-computing-case-studys.json';
-
-
+import AichatbotBlog from "../../../public/JSON/chatbot-blog-posts.json";
+import Aichatbotcase from "../../../public/JSON/chatbot-case-studys.json";
+import DevopsBlog from "../../../public/JSON/devops-blog-posts.json";
+import Devopscase from "../../../public/JSON/devops-case-studys.json";
+import CustomMLBlog from "../../../public/JSON/custom-ml-blog-posts.json";
+import CustomMLcase from "../../../public/JSON/custom-ml-case-studys.json";
+import CloudComputingBlog from "../../../public/JSON/cloud-computing-blog-posts.json";
+import CloudComputingcase from "../../../public/JSON/cloud-computing-case-studys.json";
 
 // Select one post from each (latest by order)
 const selectedPosts = [
   AichatbotBlog[0],
   DevopsBlog[0],
   CustomMLBlog[0],
-  CloudComputingBlog[0]
+  CloudComputingBlog[0],
 ].filter(Boolean);
 const selectedCases = [
   Aichatbotcase[0],
   Devopscase[0],
   CustomMLcase[0],
-  CloudComputingcase[0]
+  CloudComputingcase[0],
 ].filter(Boolean);
-
-
 ---
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <Base>
-
-<Hero { ...indexpro.hero} />
-<Cloud { ...indexpro.cloud_data} />
-<Hero_2 { ...indexpro.hero_2} />
-<Hero_3 { ...indexpro.hero_3} />
-<ServicesHome { ...indexpro.grid} />
-
-<Stats { ...indexpro.stats} />
+  <Hero {...indexpro.hero} />
+  <Cloud {...indexpro.cloud_data} />
+  <HowItWorks {...indexpro.howitworks} />
+  <ForWhom {...indexpro.forwhom} />
+  <!-- <Features { ...indexpro.features} /> -->
 
 
-<!-- for blogs max 4, 1 of each -->
-<HomeHeaderBlog { ...indexpro.Home_header_blog} />
-<BlogGrid>
-  {selectedPosts.map((post) => (
-    <UniversalCard blog_data={post.data.blog_data} />
-  ))}
-</BlogGrid>
+  <!-- for casestudy max 3, 1 of each -->
+  <HomeHeaderCases {...indexpro.Home_header_cases} />
+  <CaseGrid>
+    {
+      selectedCases.map((caseStudy) => (
+        <UniversalCard blog_data={caseStudy.data.case_data} />
+      ))
+    }
+  </CaseGrid>
 
 
-<!-- for casestudy max 3, 1 of each -->
-<HomeHeaderCases { ...indexpro.Home_header_cases} />
-<CaseGrid>
-  {selectedCases.map((caseStudy) => (
-    <UniversalCard blog_data={caseStudy.data.case_data} />
-  ))}
-</CaseGrid>
+  <Stats {...indexpro.stats} />
 
 
+  <!-- for blogs max 4, 1 of each -->
+  <HomeHeaderBlog {...indexpro.Home_header_blog} />
+  <BlogGrid>
+    {
+      selectedPosts.map((post) => (
+        <UniversalCard blog_data={post.data.blog_data} />
+      ))
+    }
+  </BlogGrid>
+
+  
+  <Hero_4 {...indexpro.hero_4} />
 </Base>

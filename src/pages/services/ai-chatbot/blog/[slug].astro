@@ -5,6 +5,7 @@ import PageImg from '../../../../components/blog/page_img.astro';
 import HrLine from '../../../../components/blog/hr_line.astro';
 import HrEndline from '../../../../components/blog/hr_endline.astro';
 import PageHead from '../../../../components/blog/page_head.astro'; 
+import Base from '../../../../components/layout/base.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('AichatbotBlog');
@@ -23,6 +24,8 @@ const { Content } = await render(post);
 ---
 
 <!-- Inject frontmatter header -->
+
+<Base>
 <PageHead blog_data={blog_data} />
 <HrLine />
 
@@ -37,4 +40,4 @@ const { Content } = await render(post);
 </article>
 
 <HrEndline />
-
+</Base>

@@ -1,0 +1,17 @@
+Hero Section 1
+
+Logo Cloud 
+
+Hero Section 2
+
+Hero Section 3
+
+Services Grid Section
+
+Case Study Cards (3-column)
+
+Stats Section (KPI block)
+
+Blog Section (4-column)
+
+Final Hero Section 4

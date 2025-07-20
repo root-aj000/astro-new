@@ -1,13 +1,16 @@
 ---
-import '../../src/styles/global.css'
-import Hero from "../components/sections/hero.astro";
-import Features from "../components/sections/features.astro";
-import { getEntryBySlug } from "astro:content";
+import IndexLayout from '../components/layout/index_page.astro';
+import Base from '../components/layout/base.astro';
+import { getEntry } from 'astro:content';
 
-const { data, body } = await getEntryBySlug("pages", "index");
+const entry = await getEntry("servicePage", 'content/index');
 
-const { hero, features } = data;
+if (!entry) {
+  throw new Error("index.md not found in 'homepage' collection");
+}
+const indexpro = entry.data;
 ---
 
-<Hero data={hero} />
-<Features items={features} />
+<Base>
+<IndexLayout indexpro={indexpro} /> 
+</Base>

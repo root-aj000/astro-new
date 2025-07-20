@@ -1,18 +1,16 @@
 ---
-import IndexLayout from '../../../components/layout/index_page.astro';
+import ServiceLayout from '../../../components/layout/service_page.astro';
+import Base from '../../../components/layout/base.astro';
 import { getEntry } from 'astro:content';
 
-// 👇 Fetching content from your content collection (e.g., "homepage")
-const entry = await getEntry("servicePage", 'content/services/ai-chatbot/index');
+const entry = await getEntry("servicePage", 'content/index');
 
 if (!entry) {
   throw new Error("index.md not found in 'homepage' collection");
 }
-
-// Destructure the `data` from the content entry
 const indexpro = entry.data;
 ---
 
-<!-- Pass the object as a single prop to the layout  -->
-<IndexLayout indexpro={indexpro} /> 
-
+<Base>
+<ServiceLayout indexpro={indexpro} /> 
+</Base>
