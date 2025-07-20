@@ -1,7 +1,7 @@
 {
   "name": "project_t",
-  "type": "module",               
-  "version": "0.0.1",
+  "type": "module",
+  "version": "0.0.2",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
@@ -16,14 +16,14 @@
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
     "astro": "^5.11.0",
-    "fast-glob": "^3.3.3",        
-    "gray-matter": "^4.0.3",      
+    "fast-glob": "^3.3.3",
+    "gray-matter": "^4.0.3",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "tailwindcss": "^4.1.11"
   },
   "devDependencies": {
-    "tsx": "^4.20.3",             
+    "tsx": "^4.20.3",
     "typescript": "^5.8.3"
   }
 }
