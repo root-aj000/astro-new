@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Responsive Feature Section</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white text-gray-800">
+
+  <!-- Feature Section -->
+  <section class="py-16 px-4 max-w-7xl mx-auto text-center">
+    <!-- Header -->
+    <p class="text-sm text-orange-500 font-semibold tracking-wide uppercase mb-2">Features</p>
+    <h2 class="text-4xl font-bold mb-4">
+      Upgrade to unlock <span class="italic font-medium text-gray-700">all features</span>
+    </h2>
+    <p class="text-gray-500 max-w-2xl mx-auto mb-8">
+      Discover the benefits of our platform. Designed for modern teams, our features help you work smarter, faster, and with confidence.
+    </p>
+
+    <!-- Grid -->
+    <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-12 md:items-center">
+
+      <!-- Image: centered and responsive -->
+      <div class="order-1 md:order-2 flex items-center justify-center">
+        <div class="w-full sm:w-4/5 md:w-full max-w-[500px] px-4">
+          <img
+            class="w-full h-auto rounded-xl shadow-xl"
+            src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=600&q=80"
+            srcset="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80 400w,
+                    https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=600&q=80 600w,
+                    https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=800&q=80 800w"
+            sizes="(max-width: 768px) 100vw, 500px"
+            alt="Phone Mockup"
+            loading="lazy"
+          />
+        </div>
+      </div>
+
+      <!-- Left Features -->
+      <div class="order-2 md:order-1">
+        <ul class="space-y-10 text-left">
+          <li>
+            <div class="flex items-start space-x-4 p-5 rounded-xl shadow-lg hover:scale-105 hover:shadow-2xl transition-transform duration-300 bg-white">
+              <div class="bg-blue-100 text-blue-500 p-3 rounded-full">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                </svg>
+              </div>
+              <div>
+                <h4 class="text-lg font-semibold">Simple & Unique</h4>
+                <p class="text-gray-500 text-sm">Intuitive design crafted by our expert team for effortless use.</p>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="flex items-start space-x-4 p-5 rounded-xl shadow-lg hover:scale-105 hover:shadow-2xl transition-transform duration-300 bg-white">
+              <div class="bg-red-100 text-red-500 p-3 rounded-full">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m2 0a2 2 0 100-4 2 2 0 100 4zm0 0a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+              </div>
+              <div>
+                <h4 class="text-lg font-semibold">Layered & Well Documented</h4>
+                <p class="text-gray-500 text-sm">Organized structure and comprehensive documentation for easy customization.</p>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="flex items-start space-x-4 p-5 rounded-xl shadow-lg hover:scale-105 hover:shadow-2xl transition-transform duration-300 bg-white">
+              <div class="bg-gray-200 text-gray-600 p-3 rounded-full">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.354l8 4.646-8 4.646-8-4.646L12 4.354z" />
+                </svg>
+              </div>
+              <div>
+                <h4 class="text-lg font-semibold">World-Class UI Design</h4>
+                <p class="text-gray-500 text-sm">Modern, visually appealing interfaces that delight users.</p>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Right Features -->
+      <div class="order-3">
+        <ul class="space-y-10 text-left">
+          <li>
+            <div class="flex items-start space-x-4 p-5 rounded-xl shadow-lg hover:scale-105 hover:shadow-2xl transition-transform duration-300 bg-white">
+              <div class="bg-pink-100 text-pink-500 p-3 rounded-full">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 4a2 2 0 012-2h4l2 3h6a2 2 0 012 2v11a2 2 0 01-2 2H5a2 2 0 01-2-2V4z" />
+                </svg>
+              </div>
+              <div>
+                <h4 class="text-lg font-semibold">Mobile Friendly</h4>
+                <p class="text-gray-500 text-sm">Fully responsive layouts for seamless experience on any device.</p>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="flex items-start space-x-4 p-5 rounded-xl shadow-lg hover:scale-105 hover:shadow-2xl transition-transform duration-300 bg-white">
+              <div class="bg-yellow-100 text-yellow-500 p-3 rounded-full">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l4 2" />
+                </svg>
+              </div>
+              <div>
+                <h4 class="text-lg font-semibold">Complete Style Guide</h4>
+                <p class="text-gray-500 text-sm">Consistent design system for cohesive branding and development.</p>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="flex items-start space-x-4 p-5 rounded-xl shadow-lg hover:scale-105 hover:shadow-2xl transition-transform duration-300 bg-white">
+              <div class="bg-green-100 text-green-500 p-3 rounded-full">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2l4-4" />
+                </svg>
+              </div>
+              <div>
+                <h4 class="text-lg font-semibold">Unlimited Support</h4>
+                <p class="text-gray-500 text-sm">Our team is always here to help you succeed, 24/7.</p>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+</body>
+</html>

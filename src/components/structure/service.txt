@@ -3,7 +3,7 @@ Hero Section
 Logo cloud
 How It Works (Process Steps)
 Who This Is For (Audience/Persona Grid)
-Features or Benefits Section
+Features or Benefits Section  //
 Case Studies or Testimonials
 Key Metrics / Stats Section
 Related Blog Posts or Resources (optional)

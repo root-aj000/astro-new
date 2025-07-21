@@ -1,0 +1,114 @@
+---
+import type { FeatureLRProps } from '../../types/components';
+const {featurelr} = Astro.props as FeatureLRProps;
+---
+
+
+<div class="bg-white text-gray-800">
+  <!-- Feature Section -->
+  <section class="py-16 px-4 max-w-7xl mx-auto text-center">
+    <!-- Header -->
+    <p
+      class="text-sm text-orange-500 font-semibold tracking-wide uppercase mb-2"
+    >
+      Features
+    </p>
+    <h2 class="text-4xl font-bold mb-4">
+    {featurelr.title}
+    </h2>
+    <p class="text-gray-500 max-w-2xl mx-auto mb-8">
+      {featurelr.subtitle}
+    </p>
+
+    <!-- Grid -->
+    <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-12 md:items-center">
+      <!-- Image: centered and responsive -->
+      <div class="order-1 md:order-2 flex items-center justify-center">
+        <div class="w-full sm:w-4/5 md:w-full max-w-[600px] px-4">
+          <img
+            class="w-full h-auto rounded-xl shadow-xl"
+            src={featurelr.image}
+            sizes="(max-width: 768px) 100vw, 500px"
+            alt="Feature Image mockup"
+            loading="lazy"
+          />
+        </div>
+      </div>
+
+      <!-- Left Features -->
+      <div class="order-2 md:order-1">
+        <ul class="space-y-10 text-left">
+          <ul>
+            {
+              featurelr.RightItems.map((item) => (
+                <li>
+                  <div class="flex items-start space-x-4 p-5 rounded-xl shadow-lg hover:scale-105 hover:shadow-2xl transition-transform duration-300 bg-white">
+                    <div
+                      class="bg-blue-100 text-blue-500 p-3 rounded-full"
+                      set:html={item.icon}
+                    />
+                    <div>
+                      <h4 class="text-lg font-semibold">{item.title}</h4>
+                      <p class="text-gray-500 text-sm">{item.description}</p>
+                    </div>
+                  </div>
+                </li>
+              ))
+            }
+          </ul>
+        </ul>
+      </div>
+
+      <!-- Right Features -->
+      <div class="order-3">
+        <ul class="space-y-10 text-left">
+          <ul>
+            {
+              featurelr.LeftItems.map((item) => (
+                <li>
+                  <div class="flex items-start space-x-4 p-5 rounded-xl shadow-lg hover:scale-105 hover:shadow-2xl transition-transform duration-300 bg-white">
+                    <div
+                      class="bg-pink-100 text-pink-500 p-3 rounded-full"
+                      set:html={item.icon}
+                    />
+                    <div>
+                      <h4 class="text-lg font-semibold">{item.title}</h4>
+                      <p class="text-gray-500 text-sm">{item.description}</p>
+                    </div>
+                  </div>
+                </li>
+              ))
+            }
+          </ul>
+        </ul>
+      </div>
+    </div>
+  </section>
+</div>
+
+
+
+
+
+<!-- ---
+layout: ../../templates/ServiceTemplate.astro
+
+featurelr:
+  title: "Upgrade to Pro"
+  subtitle: "Left & Right Features"
+  LeftItems:
+    - title: "Lightweight"
+      description: "Fast performance and simple structure."
+      icon: "<svg>...</svg>"
+
+  RightItems:
+    - title: "Responsive"
+      description: "Works on all devices seamlessly."
+      icon: "<svg>...</svg>"
+---
+
+to use this component, import it in your page or layout file and pass the props like so:
+<FeatureLR {...featurelr} />
+
+
+-->
