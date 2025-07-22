@@ -1,42 +1,32 @@
 ---
-import UniversalCard from '../../../../../components/dynamic/universal_card.astro';
-import blogData from '../../../../../../public/JSON/chatbot-blog-posts.json'; // Adjust if needed\\
-import Pagination from '../../../../../components/dynamic/pagination.astro';
-import BlogGrid from '../../../../../components/blog/blog-grid.astro';
-import ListHeader from '../../../../../components/dynamic/list_header.astro';
-import Nav from '../../../../../components/shared/Nav.astro';
-import Footer from '../../../../../components/shared/Footer.astro';
-import { BASE_PATH_CONST } from '../../../../../content/const.ts';
+import UniversalCard from "../../../../../components/dynamic/universal_card.astro";
+import blogData from "../../../../../../public/JSON/chatbot-blog-posts.json"; // Adjust if needed\\
+import Pagination from "../../../../../components/dynamic/pagination.astro";
+import BlogGrid from "../../../../../components/blog/blog-grid.astro";
+import ListHeader from "../../../../../components/dynamic/list_header.astro";
+import Base from "../../../../../components/layout/base.astro";
+import { BASE_PATH_CONST } from "../../../../../content/const.ts";
 
 const currentPage = parseInt(Astro.params.page) || 1;
 const itemsPerPage = 12;
 const totalItems = blogData.length;
-const basePath = BASE_PATH_CONST;
+const basePath = BASE_PATH_CONST.Aichatbot_blog; //changes as per blog path
 
 const paginatedPosts = blogData.slice(
   (currentPage - 1) * itemsPerPage,
   currentPage * itemsPerPage
 );
 ---
-<Nav />
 
-<ListHeader />
-<BlogGrid>
-  {paginatedPosts.map(post => (
-    <UniversalCard blog_data={post} />
-  ))}
-</BlogGrid>
-
-<Pagination 
-  currentPage={currentPage}
-  totalItems={totalItems}
-  itemsPerPage={itemsPerPage}
-  basePath= {basePath}
-/>
-
-<Footer />
-
-
-
-
-
+<Base>
+  <ListHeader />
+  <BlogGrid>
+    {paginatedPosts.map((post) => <UniversalCard blog_data={post} />)}
+  </BlogGrid>
+  <Pagination
+    currentPage={currentPage}
+    totalItems={totalItems}
+    itemsPerPage={itemsPerPage}
+    basePath={basePath}
+  />
+</Base>

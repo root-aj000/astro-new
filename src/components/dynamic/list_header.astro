@@ -1,17 +1,28 @@
 ---
-import type { list_headerProps } from "../../types/components";
-const { list_header } = Astro.props as list_headerProps;
+import type { BlogCard } from "../../types/components";
+const { blog_data } = Astro.props as BlogCard;
+
+const typeDescriptionMap = {
+  "blog-post": "Get insights, tips, and ideas from our expert blog articles.",
+  "case-study": "See how we helped clients achieve success through real examples.",
+  "whitepaper": "In-depth research and reports written by our analysts.",
+  "faq": "Frequently asked questions answered clearly and concisely.",
+  "guide": "Step-by-step instructions to help you succeed.",
+};
+
+const description = typeDescriptionMap[blog_data.contentType] ?? "Explore this content.";
 ---
+
 
 <div class="mb-10 md:mb-6">
   <h2
     class="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl"
   >
-    {list_header.title}
+    {blog_data.contentType}
   </h2>
 
   <p class="mx-auto max-w-screen-md text-center text-gray-500 md:text-lg">
-    {list_header.discription}
+    {description}
   </p>
 </div>
 

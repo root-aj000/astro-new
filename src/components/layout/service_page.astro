@@ -5,7 +5,7 @@ import Hero_4 from "../dynamic/hero_4.astro";
 import Cloud from "../dynamic/logo_cloud.astro";
 import HowItWorks from "../dynamic/how_it_works.astro";
 import ForWhom from "../dynamic/for_whom.astro";
-import Features from '../dynamic/FeatureLR.astro'; 
+import Features from "../dynamic/FeatureLR.astro";
 import Stats from "../dynamic/stats.astro";
 import BlogGrid from "../blog/blog-grid.astro";
 import HomeHeaderBlog from "../dynamic/Home_header_blog.astro";
@@ -47,10 +47,7 @@ const selectedCases = [
   <Cloud {...indexpro.cloud_data} />
   <HowItWorks {...indexpro.howitworks} />
   <ForWhom {...indexpro.forwhom} />
-  <Features { ...indexpro.featurelr} />
-
-
-  <!-- for casestudy max 3, 1 of each -->
+  <Features {...indexpro.featurelr} />
   <HomeHeaderCases {...indexpro.Home_header_cases} />
   <CaseGrid>
     {
@@ -60,11 +57,7 @@ const selectedCases = [
     }
   </CaseGrid>
 
-
   <Stats {...indexpro.stats} />
-
-
-  <!-- for blogs max 4, 1 of each -->
   <HomeHeaderBlog {...indexpro.Home_header_blog} />
   <BlogGrid>
     {
@@ -73,7 +66,5 @@ const selectedCases = [
       ))
     }
   </BlogGrid>
-
-  
   <Hero_4 {...indexpro.hero_4} />
 </Base>

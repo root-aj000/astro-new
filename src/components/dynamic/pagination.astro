@@ -3,7 +3,7 @@ export interface Props {
   currentPage: number;
   totalItems: number;
   itemsPerPage: number;
-  basePath: string; // "/services/ai-chatbot/blog/page"
+  basePath: string;
 }
 
 const { currentPage, totalItems, itemsPerPage, basePath } = Astro.props;
@@ -21,110 +21,108 @@ if (endPage - startPage + 1 < visibleRange) {
   startPage = Math.max(1, endPage - visibleRange + 1);
 }
 
-const pagesToShow = Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i);
+const pagesToShow = Array.from(
+  { length: endPage - startPage + 1 },
+  (_, i) => startPage + i
+);
 ---
 
 <nav aria-label="Pagination" class="flex justify-center mt-10">
   <ul class="flex items-center space-x-2 text-sm">
-
     <!-- Prev -->
-    {currentPage > 1 && (
-      <li>
-        <a
-          href={`${basePath}/${currentPage - 1}`}
-          class="px-3 py-1 border rounded hover:bg-gray-100"
-        >
-          Prev
-        </a>
-      </li>
-    )}
+    {
+      currentPage > 1 && (
+        <li>
+          <a
+            href={`${basePath}/${currentPage - 1}`}
+            class="px-3 py-1 border rounded hover:bg-gray-100"
+          >
+            Prev
+          </a>
+        </li>
+      )
+    }
 
     <!-- First page -->
-    {startPage > 1 && (
-      <li>
-        <a
-          href={`${basePath}/1`}
-          class="px-3 py-1 border rounded hover:bg-gray-100"
-        >
-          1
-        </a>
-      </li>
-    )}
+    {
+      startPage > 1 && (
+        <li>
+          <a
+            href={`${basePath}/1`}
+            class="px-3 py-1 border rounded hover:bg-gray-100"
+          >
+            1
+          </a>
+        </li>
+      )
+    }
 
     <!-- Left ellipsis (only if gap between 1 and startPage > 1) -->
-    {startPage > 2 && (
-      <li>
-        <span class="px-2">…</span>
-      </li>
-    )}
+    {
+      startPage > 2 && (
+        <li>
+          <span class="px-2">…</span>
+        </li>
+      )
+    }
 
     <!-- Page numbers -->
-    {pagesToShow.map(page => (
-      <li>
-        <a
-          href={`${basePath}/${page}`}
-          aria-current={page === currentPage ? 'page' : undefined}
-          class={`px-3 py-1 border rounded ${
-            page === currentPage
-              ? 'bg-orange-500 text-white border-orange-600'
-              : 'hover:bg-gray-100'
-          }`}
-        >
-          {page}
-        </a>
-      </li>
-    ))}
+    {
+      pagesToShow.map((page) => (
+        <li>
+          <a
+            href={`${basePath}/${page}`}
+            aria-current={page === currentPage ? "page" : undefined}
+            class={`px-3 py-1 border rounded ${
+              page === currentPage
+                ? "bg-orange-500 text-white border-orange-600"
+                : "hover:bg-gray-100"
+            }`}
+          >
+            {page}
+          </a>
+        </li>
+      ))
+    }
 
     <!-- Right ellipsis (only if gap between endPage and totalPages > 1) -->
-    {endPage < totalPages - 1 && (
-      <li>
-        <span class="px-2">…</span>
-      </li>
-    )}
+    {
+      endPage < totalPages - 1 && (
+        <li>
+          <span class="px-2">…</span>
+        </li>
+      )
+    }
 
     <!-- Last page -->
-    {endPage < totalPages && (
-      <li>
-        <a
-          href={`${basePath}/${totalPages}`}
-          class="px-3 py-1 border rounded hover:bg-gray-100"
-        >
-          {totalPages}
-        </a>
-      </li>
-    )}
+    {
+      endPage < totalPages && (
+        <li>
+          <a
+            href={`${basePath}/${totalPages}`}
+            class="px-3 py-1 border rounded hover:bg-gray-100"
+          >
+            {totalPages}
+          </a>
+        </li>
+      )
+    }
 
     <!-- Next -->
-    {currentPage < totalPages && (
-      <li>
-        <a
-          href={`${basePath}/${currentPage + 1}`}
-          class="px-3 py-1 border rounded hover:bg-gray-100"
-        >
-          Next
-        </a>
-      </li>
-    )}
+    {
+      currentPage < totalPages && (
+        <li>
+          <a
+            href={`${basePath}/${currentPage + 1}`}
+            class="px-3 py-1 border rounded hover:bg-gray-100"
+          >
+            Next
+          </a>
+        </li>
+      )
+    }
   </ul>
 </nav>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <!-- how to use   
  

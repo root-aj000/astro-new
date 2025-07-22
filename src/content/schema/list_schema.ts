@@ -1,18 +1,12 @@
 import { z, defineCollection } from 'astro:content';
-import { optional } from 'astro:schema';
 
-export const listpage = defineCollection({
-  type: 'content',
-  schema: z.object({
+export const listpage =  z.object({
     title: z.string(),
-
-
     list_header :z.object({
         title : z.string(),
-        discription :z.string(),
+        description :z.string(),
   }).optional(),
-
-
+  
     blog_data: z.object({
         title: z.string(),
         author: z.string(),
@@ -23,12 +17,4 @@ export const listpage = defineCollection({
         category: z.string(),
         href: z.string(),
     }).optional(),
-
-
-
-
-
-
-
-  }),
-});
+  });

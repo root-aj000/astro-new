@@ -62,7 +62,7 @@ export interface HowItWorksProps {
     steps: {
       title: string;
       desc: string;
-      img: string;
+      image: string;
       caption: string;
     }[];
   };
@@ -131,6 +131,8 @@ export interface SubscribeFormProps {
 export interface BlogCardProps {
   title: string;
   author: string;
+  contentType: string;
+  serviceName: string;
   date: string;
   image: string;
   excerpt: string;
@@ -172,7 +174,6 @@ export interface FeatureLRProps {
       description: string;
       icon: string;
     }[];
-      
   };
 }
 export interface IndexProps {
@@ -194,5 +195,3 @@ export interface IndexProps {
     featurelr: FeatureLRProps["featurelr"];
   };
 }
-
-
