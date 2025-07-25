@@ -61,9 +61,8 @@ export interface HowItWorksProps {
     image: string;
     steps: {
       title: string;
-      desc: string;
-      image: string;
-      caption: string;
+      description: string;
+      svg: string;
     }[];
   };
 }
