@@ -4,6 +4,7 @@ import { BlogSchema } from "./schema/blog_schema";
 import { CasesSchema } from "./schema/cases_schema";
 import { servicePage } from "./schema/index_service_schema";
 import { listpage } from "./schema/list_schema";
+import { indexSchema } from "./schema/index_schema";
 
 // export const collections = {
 //   AichatbotBlog: AichatbotBlog,
@@ -86,6 +87,11 @@ export const collections = {
   servicePage: defineCollection({
     loader: glob({ base: "./src/content/services/", pattern: "**/*.md" }),
     schema: servicePage,
+  }),
+
+  indexPage: defineCollection({
+    loader: glob({ base: "./src/content/services/", pattern: "**/*.md" }),
+    schema: indexSchema,
   }),
 
   // listpage: defineCollection({
