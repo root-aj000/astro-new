@@ -1,16 +1,30 @@
 ---
 import ServiceLayout from '../../../components/layout/service_page.astro';
 import Base from '../../../components/layout/base.astro';
-import { getEntry } from 'astro:content';
+import { getEntry, getCollection } from 'astro:content'; // Import getCollection
 
-const entry = await getEntry("servicePage", 'content/index');
+// Fetch the main service page content
+const entry = await getEntry("indexPage", 'services/ai-chatbot/index');
 
 if (!entry) {
-  throw new Error("index.md not found in 'homepage' collection");
+  throw new Error("Entry for ai-chatbot service page not found in 'indexPage' collection");
 }
 const indexpro = entry.data;
+
+// Fetch blog posts and case studies for AI Chatbot
+const allAichatbotBlogPosts = await getCollection('AichatbotBlog');
+const allAichatbotCaseStudies = await getCollection('AichatbotCases');
+
+// Select and limit the posts/cases (example: latest 4 blogs and latest 3 cases)
+// You might want to sort by date or a custom field if needed before slicing
+const limitedPosts = allAichatbotBlogPosts.slice(0, 4);
+const limitedCases = allAichatbotCaseStudies.slice(0, 3);
 ---
 
 <Base>
-<ServiceLayout indexpro={indexpro} /> 
+  <ServiceLayout
+    indexpro={indexpro}
+    limitedPosts={limitedPosts}
+    limitedCases={limitedCases}
+  />
 </Base>

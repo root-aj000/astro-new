@@ -1,9 +1,7 @@
 ---
 import UniversalCard from "../../../../../components/dynamic/universal_card.astro";
-// Removed JSON import
-// import blogData from "../../../../../../public/JSON/chatbot-blog-posts.json";
 import Pagination from "../../../../../components/dynamic/pagination.astro";
-import BlogGrid from "../../../../../components/blog/blog-grid.astro";
+import CaseGrid from "../../../../../components/case/case-study-grid.astro"; // Use CaseGrid for case studies
 import ListHeader from "../../../../../components/dynamic/list_header.astro";
 import Base from "../../../../../components/layout/base.astro";
 import { BASE_PATH_CONST } from "../../../../../content/const.ts";
@@ -12,34 +10,34 @@ import { getCollection } from 'astro:content'; // Import getCollection
 const currentPage = parseInt(Astro.params.page) || 1;
 const itemsPerPage = 12;
 
-// Fetch all blog posts from the AichatbotBlog collection
-const allBlogPosts = await getCollection('AichatbotBlog');
+// Fetch all case studies from the DevopsCases collection
+const allCaseStudies = await getCollection('DevopsCases');
 
 // Calculate total items based on the fetched collection
-const totalItems = allBlogPosts.length;
+const totalItems = allCaseStudies.length;
 
-const basePath = BASE_PATH_CONST.Aichatbot_blog; //changes as per blog path
+const basePath = BASE_PATH_CONST.Devops_case; // Ensure this constant is defined and correct
 
 // Slice the fetched collection for pagination
-const paginatedPosts = allBlogPosts.slice(
+const paginatedCases = allCaseStudies.slice(
   (currentPage - 1) * itemsPerPage,
   currentPage * itemsPerPage
 );
 
 // Define data for the ListHeader (example data - you might want to fetch this from elsewhere)
 const listHeaderData = {
-  title: "AI Chatbot Blog",
-  discription: "Latest articles and insights on AI Chatbots.",
+  title: "DevOps Case Studies",
+  discription: "Real-world examples of our DevOps solutions.",
 };
 ---
 
 <Base>
   {/* Pass data to the ListHeader */}
   <ListHeader list_header={listHeaderData} />
-  <BlogGrid>
+  <CaseGrid>
     {/* Pass fetched collection entries to UniversalCard */}
-    {paginatedPosts.map((post) => <UniversalCard blog_data={post.data.blog_data} />)} {/* Assuming blog_data is nested in post.data */}
-  </BlogGrid>
+    {paginatedCases.map((caseStudy) => <UniversalCard blog_data={caseStudy.data.case_data} />)} {/* Assuming case_data is nested in caseStudy.data */}
+  </CaseGrid>
   <Pagination
     currentPage={currentPage}
     totalItems={totalItems}

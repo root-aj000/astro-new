@@ -144,6 +144,22 @@ export interface BlogCard {
   blog_data: BlogCardProps;
 }
 
+export interface caseCardProps {
+  title: string;
+  author: string;
+  contentType: string;
+  serviceName: string;
+  date: string;
+  image: string;
+  excerpt: string;
+  tags: string[];
+  category: string;
+  href: string;
+}
+
+export interface caseCard {
+  case_data: caseCardProps;
+}
 export interface Home_header_blogProps {
   home_header_blog: {
     title: string;

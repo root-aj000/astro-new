@@ -23,7 +23,7 @@ export const collections = {
   AichatbotBlog: defineCollection({
     loader: glob({
       base: "./src/content/services/ai-chatbot/blog/",
-      pattern: "**/*.md",
+      pattern: "**/*.mdx",
     }),
     schema: BlogSchema("Blog_post", "ai-chatbot"),
   }),
@@ -31,7 +31,7 @@ export const collections = {
   CloudComputingBlog: defineCollection({
     loader: glob({
       base: "./src/content/services/cloud-computing/blog/",
-      pattern: "**/*.md",
+      pattern: "**/*.mdx",
     }),
     schema: BlogSchema("Blog_post", "cloud-computing"),
   }),
@@ -39,7 +39,7 @@ export const collections = {
   CustomMLBlog: defineCollection({
     loader: glob({
       base: "./src/content/services/custom-ml/blog/",
-      pattern: "**/*.md",
+      pattern: "**/*.mdx",
     }),
     schema: BlogSchema("Blog_post", "custom-ml"),
   }),
@@ -47,7 +47,7 @@ export const collections = {
   DevopsBlog: defineCollection({
     loader: glob({
       base: "./src/content/services/devops/blog/",
-      pattern: "**/*.md",
+      pattern: "**/*.mdx",
     }),
     schema: BlogSchema("Blog_post", "devops"),
   }),
@@ -55,7 +55,7 @@ export const collections = {
   AichatbotCases: defineCollection({
     loader: glob({
       base: "./src/content/services/ai-chatbot/case-studies/",
-      pattern: "**/*.md",
+      pattern: "**/*.mdx",
     }),
     schema: CasesSchema("Case_study", "ai-chatbot"),
   }),
@@ -63,7 +63,7 @@ export const collections = {
   CloudComputingCases: defineCollection({
     loader: glob({
       base: "./src/content/services/cloud-computing/case-studies/",
-      pattern: "**/*.md",
+      pattern: "**/*.mdx",
     }),
     schema: CasesSchema("Case_study", "cloud-computing"),
   }),
@@ -71,7 +71,7 @@ export const collections = {
   CustomMLCases: defineCollection({
     loader: glob({
       base: "./src/content/services/custom-ml/case-studies/",
-      pattern: "**/*.md",
+      pattern: "**/*.mdx",
     }),
     schema: CasesSchema("Case_study", "custom-ml"),
   }),
@@ -79,18 +79,18 @@ export const collections = {
   DevopsCases: defineCollection({
     loader: glob({
       base: "./src/content/services/devops/case-studies/",
-      pattern: "**/*.md",
+      pattern: "**/*.mdx",
     }),
     schema: CasesSchema("Case_study", "devops"),
   }),
 
   servicePage: defineCollection({
-    loader: glob({ base: "./src/content/services/", pattern: "**/*.md" }),
+    loader: glob({ base: "./src/content/services/", pattern: "**/*.mdx" }),
     schema: servicePage,
   }),
 
   indexPage: defineCollection({
-    loader: glob({ base: "./src/content/services/", pattern: "**/*.md" }),
+    loader: glob({ base: "./src/content/services/", pattern: "**/*.mdx" }),
     schema: indexSchema,
   }),
 
