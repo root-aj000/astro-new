@@ -1,0 +1,16 @@
+---
+import ServiceLayout from '../../../components/layout/service_page.astro';
+import Base from '../../../components/layout/base.astro';
+import { getEntry } from 'astro:content';
+
+const entry = await getEntry("servicePage", 'content/cloud-computing/index');
+
+if (!entry) {
+  throw new Error("index.md not found for cloud-computing in 'servicePage' collection");
+}
+const indexpro = entry.data;
+---
+
+<Base>
+<ServiceLayout indexpro={indexpro} /> 
+</Base>

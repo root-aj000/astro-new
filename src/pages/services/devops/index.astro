@@ -1,1 +1,16 @@
-<h1>devops</h1>
+---
+import ServiceLayout from '../../../components/layout/service_page.astro';
+import Base from '../../../components/layout/base.astro';
+import { getEntry } from 'astro:content';
+
+const entry = await getEntry("servicePage", 'content/devops/index');
+
+if (!entry) {
+  throw new Error("index.md not found for devops in 'servicePage' collection");
+}
+const indexpro = entry.data;
+---
+
+<Base>
+<ServiceLayout indexpro={indexpro} /> 
+</Base>
