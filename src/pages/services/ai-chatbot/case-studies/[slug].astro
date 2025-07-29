@@ -11,7 +11,7 @@ export async function getStaticPaths() {
   // Fetch all case studies from the AichatbotCases collection
   const caseStudies = await getCollection('AichatbotCases');
   return caseStudies.map((caseStudy) => ({
-    params: { slug: caseStudy.slug }, // Using caseStudy.slug as the slug for the URL
+    params: { slug: caseStudy.id }, // Using caseStudy.slug as the slug for the URL
     props: caseStudy,
   }));
 }

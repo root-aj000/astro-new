@@ -10,7 +10,7 @@ export async function getStaticPaths() {
   // Fetch all blog posts from the CustomMLBlog collection
   const posts = await getCollection('CustomMLBlog');
   return posts.map((post) => ({
-    params: { slug: post.slug }, // Using post.slug as the slug for the URL
+    params: { slug: post.id }, // Using post.slug as the slug for the URL
     props: post,
   }));
 }

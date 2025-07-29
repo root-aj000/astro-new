@@ -11,7 +11,7 @@ export async function getStaticPaths() {
   // Fetch all blog posts from the DevopsBlog collection
   const posts = await getCollection('DevopsBlog');
   return posts.map((post) => ({
-    params: { slug: post.slug }, // Using post.slug as the slug for the URL
+    params: { slug: post.id }, // Using post.slug as the slug for the URL
     props: post,
   }));
 }
