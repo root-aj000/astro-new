@@ -3,8 +3,8 @@ export function CasesSchema(contentType, serviceName) {
   return z.object({
     case_data: z.object({
       title: z.string(),
-      contentType: z.literal(contentType).default(contentType),
-      serviceName: z.literal(serviceName).default(serviceName),
+      contentType: z.literal(contentType).default(contentType).optional(),
+      serviceName: z.literal(serviceName).default(serviceName).optional(),
       date: z.date(),
       author: z.string(),
       tags: z.array(z.string()).optional(),
