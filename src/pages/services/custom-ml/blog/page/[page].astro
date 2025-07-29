@@ -7,6 +7,22 @@ import Base from "../../../../../components/layout/base.astro";
 import { BASE_PATH_CONST } from "../../../../../content/const.ts";
 import { getCollection } from 'astro:content'; // Import getCollection
 
+export async function getStaticPaths() {
+  const allBlogPosts = await getCollection('CustomMLBlog');
+  const totalItems = allBlogPosts.length;
+  const itemsPerPage = 12; // Make sure this matches the value used in the component
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+  const paths = [];
+  for (let i = 1; i <= totalPages; i++) {
+    paths.push({
+      params: { page: i.toString() },
+    });
+  }
+
+  return paths;
+}
+
 const currentPage = parseInt(Astro.params.page) || 1;
 const itemsPerPage = 12;
 
