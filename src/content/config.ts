@@ -2,7 +2,7 @@ import { defineCollection, z } from "astro:content";
 import { glob } from "astro/loaders";
 import { BlogSchema } from "./schema/blog_schema";
 import { CasesSchema } from "./schema/cases_schema";
-import { servicePage } from "./schema/index_service_schema";
+// import { servicePage } from "./schema/index_service_schema";
 // import { listpage } from "./schema/list_schema";
 import { indexSchema } from "./schema/index_schema";
 
@@ -90,7 +90,7 @@ export const collections = {
   // }),
 
   indexPage: defineCollection({
-    loader: glob({ base: "./src/content/services/", pattern: "**/*.mdx" }),
+    loader: glob({ base: "./src/content/Static_Index_Pages", pattern: "**/*.mdx" }),
     schema: indexSchema,
   }),
 

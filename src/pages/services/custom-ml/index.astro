@@ -4,7 +4,7 @@ import Base from '../../../components/layout/base.astro';
 import { getEntry, getCollection } from 'astro:content'; // Import getCollection
 
 // Fetch the main service page content
-const entry = await getEntry("indexPage", 'services/custom-ml/index');
+const entry = await getEntry("indexPage", './src/content/Static_Index_Pages/Custom_ML');
 
 if (!entry) {
   throw new Error("Entry for custom-ml service page not found in 'indexPage' collection");

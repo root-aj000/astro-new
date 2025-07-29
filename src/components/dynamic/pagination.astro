@@ -4,9 +4,11 @@ export interface Props {
   totalItems: number;
   itemsPerPage: number;
   basePath: string;
+
+
 }
 
-const { currentPage, totalItems, itemsPerPage, basePath } = Astro.props;
+const { currentPage, totalItems, itemsPerPage, basePath} = Astro.props;
 
 const totalPages = Math.ceil(totalItems / itemsPerPage);
 

@@ -4,7 +4,7 @@ import Base from '../../../components/layout/base.astro';
 import { getEntry, getCollection } from 'astro:content'; // Import getCollection
 
 // Fetch the main service page content
-const entry = await getEntry("indexPage", 'services/cloud-computing/index');
+const entry = await getEntry("indexPage", './src/content/Static_Index_Pages/Cloud_Computing');
 
 if (!entry) {
   throw new Error("Entry for cloud-computing service page not found in 'indexPage' collection");

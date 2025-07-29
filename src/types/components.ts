@@ -142,6 +142,8 @@ export interface BlogCardProps {
 
 export interface BlogCard {
   blog_data: BlogCardProps;
+  contentType: string;
+  serviceName: string;
 }
 
 export interface caseCardProps {

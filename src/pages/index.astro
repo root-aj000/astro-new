@@ -4,7 +4,7 @@ import Base from '../components/layout/base.astro';
 import { getEntry, getCollection } from 'astro:content'; // Import getCollection
 
 // Corrected getEntry call to fetch from the 'indexPage' collection with slug 'index'
-const entry = await getEntry("indexPage", 'index');
+const entry = await getEntry("indexPage", './src/content/Static_Index_Pages/index');
 
 if (!entry) {
   throw new Error("index.md not found in 'indexPage' collection");
