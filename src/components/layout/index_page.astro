@@ -12,34 +12,30 @@ import HomeHeaderBlog from "../dynamic/Home_header_blog.astro";
 import CaseGrid from "../case/case-study-grid.astro";
 import HomeHeaderCases from "../dynamic/Home_header_cases.astro";
 import UniversalCard from "../dynamic/universal_card.astro";
-// Removed getCollection import as fetching is done in the page
-// import { getCollection } from 'astro:content';
 import type { IndexProps } from "../../types/components";
-import type { CollectionEntry } from 'astro:content'; // Import CollectionEntry type
-
+import type { CollectionEntry } from 'astro:content'; 
 interface IndexPageProps {
   indexpro: IndexProps['indexpro'];
   selectedPosts: CollectionEntry<'AichatbotBlog' | 'CloudComputingBlog' | 'CustomMLBlog' | 'DevopsBlog'>[]; // Adjust collection names as needed
   selectedCases: CollectionEntry<'AichatbotCases' | 'CloudComputingCases' | 'CustomMLCases' | 'DevopsCases'>[]; // Adjust collection names as needed
 }
 
-// Destructure the new props
 const { indexpro, selectedPosts, selectedCases } = Astro.props as IndexPageProps;
 
-// Removed data fetching logic as it is now in src/pages/index.astro
+
 ---
 
 <Base>
-  <Hero {...indexpro.hero} />
-  <Cloud {...indexpro.cloud_data} />
-  <Hero_2 {...indexpro.hero_2} />
-  <Hero_3 {...indexpro.hero_3} />
-  <ServicesHome {...indexpro.grid} />
+  <Hero {indexpro.hero} />
+  <Cloud {indexpro.cloud_data} />
+  <Hero_2 {indexpro.hero_2} />
+  <Hero_3 {indexpro.hero_3} />
+  <ServicesHome {indexpro.grid} />
 
 
 
-  <!-- for casestudy max 3, 1 of each -->
-  <HomeHeaderCases {...indexpro.Home_header_cases} />
+ 
+  <HomeHeaderCases {indexpro.Home_header_cases} />
 
   <CaseGrid>
     {
@@ -51,12 +47,12 @@ const { indexpro, selectedPosts, selectedCases } = Astro.props as IndexPageProps
 
 
 
-  <Stats {...indexpro.stats} />
+  <Stats {indexpro.stats} />
 
 
 
-  <!-- for blogs max 4, 1 of each -->
-  <HomeHeaderBlog {...indexpro.Home_header_blog} />
+
+  <HomeHeaderBlog {indexpro.Home_header_blog} />
 
   <BlogGrid>
     {
@@ -67,5 +63,5 @@ const { indexpro, selectedPosts, selectedCases } = Astro.props as IndexPageProps
   </BlogGrid>
 
 
-  <Hero4 {...indexpro.hero_4} />
+  <Hero4  {indexpro.hero_4} />
 </Base>

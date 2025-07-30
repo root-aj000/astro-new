@@ -90,7 +90,10 @@ export const collections = {
   // }),
 
   indexPage: defineCollection({
-    loader: glob({ base: "./src/content/Static_Index_Pages", pattern: "**/*.mdx" }),
+    loader: glob({
+      base: "./src/content/Static_Index_Pages/",
+      pattern: "**/*.mdx",
+    }),
     schema: indexSchema,
   }),
 
