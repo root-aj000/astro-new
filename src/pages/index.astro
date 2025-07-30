@@ -10,6 +10,7 @@ if (!entry) {
   throw new Error("index.md not found in 'indexPage' collection");
 }
 const indexpro = entry.data;
+console.log("INDEXPRO", indexpro);
 
 // Fetch blog posts and case studies from all relevant collections
 const aichatbotBlogPosts = await getCollection('AichatbotBlog');
@@ -34,7 +35,7 @@ const selectedCases = [
   aichatbotCaseStudies[0],
   devopsCaseStudies[0],
   customMLCaseStudies[0],
-  cloudComputingCaseStudies[0],
+  // cloudComputingCaseStudies[0],
 ].filter(Boolean);
 
 // Limit the number of selected posts and cases for the homepage display
@@ -43,10 +44,10 @@ const limitedCases = selectedCases.slice(0, 3); // Limit to 3 case studies
 
 ---
 
-<Base>
+
   <IndexLayout
     indexpro={indexpro}
     selectedPosts={selectedPosts}
     selectedCases={selectedCases}
   />
-</Base>
+

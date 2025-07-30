@@ -26,16 +26,16 @@ const { indexpro, selectedPosts, selectedCases } = Astro.props as IndexPageProps
 ---
 
 <Base>
-  <Hero {indexpro.hero} />
-  <Cloud {indexpro.cloud_data} />
-  <Hero_2 {indexpro.hero_2} />
-  <Hero_3 {indexpro.hero_3} />
-  <ServicesHome {indexpro.grid} />
+  <Hero hero= {indexpro.hero} />
+  <Cloud logo_cloud= {indexpro.logo_cloud} />
+  <Hero_2 hero_2= {indexpro.hero_2} />
+  <Hero_3 hero_3= {indexpro.hero_3} />
+  <ServicesHome grid= {indexpro.grid} />
 
 
 
  
-  <HomeHeaderCases {indexpro.Home_header_cases} />
+  <HomeHeaderCases Home_header_cases={indexpro.Home_header_cases} />
 
   <CaseGrid>
     {
@@ -47,12 +47,11 @@ const { indexpro, selectedPosts, selectedCases } = Astro.props as IndexPageProps
 
 
 
-  <Stats {indexpro.stats} />
+  <Stats stats={indexpro.stats} />
 
 
 
-
-  <HomeHeaderBlog {indexpro.Home_header_blog} />
+  <HomeHeaderBlog Home_header_blog={indexpro.Home_header_blog} />
 
   <BlogGrid>
     {
@@ -63,5 +62,5 @@ const { indexpro, selectedPosts, selectedCases } = Astro.props as IndexPageProps
   </BlogGrid>
 
 
-  <Hero4  {indexpro.hero_4} />
+  <Hero4  hero_4={indexpro.hero_4} />
 </Base>

@@ -163,14 +163,14 @@ export interface caseCard {
   case_data: caseCardProps;
 }
 export interface Home_header_blogProps {
-  home_header_blog: {
+  Home_header_blog: {
     title: string;
     subtitle: string;
   };
 }
 
 export interface Home_header_casesProps {
-  home_header_cases: {
+  Home_header_cases: {
     title: string;
     subtitle: string;
   };
@@ -207,8 +207,8 @@ export interface IndexProps {
     stats: StatsProps["stats"];
     subscribe: SubscribeFormProps["subscribe"];
     blog_data: BlogCardProps;
-    Home_header_blog: Home_header_blogProps["home_header_blog"];
-    Home_header_cases: Home_header_casesProps["home_header_cases"];
+    Home_header_blog: Home_header_blogProps["Home_header_blog"];
+    Home_header_cases: Home_header_casesProps["Home_header_cases"];
     featurelr: FeatureLRProps["featurelr"];
   };
 }
