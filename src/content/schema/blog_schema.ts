@@ -1,22 +1,22 @@
 import { z } from "astro:content";
-export function BlogSchema(contentType, serviceName) {
+
+export function BlogSchema(defaultContentType: string, defaultServiceName: string) {
   return z.object({
     blog_data: z
       .object({
         title: z.string().optional(),
-        date: z.date(),
+        date: z.coerce.date(), // Supports string dates
         author: z.string(),
-        contentType: z.string().optional(),
-        serviceName: z.string().optional(),
         tags: z.array(z.string()).optional(),
         description: z.string().optional(),
         draft: z.boolean().default(false).optional(),
-      }).optional(),
-      // .transform((data) => ({
-      //   ...data,
-      //   contentType,
-      //   serviceName,
-      // })),
+        contentType: z.string().optional(), // still optional
+        serviceName: z.string().optional(),
+      })
+      .transform((data) => ({
+        ...data,
+        contentType: data.contentType ?? defaultContentType,
+        serviceName: data.serviceName ?? defaultServiceName,
+      })),
   });
 }
-
