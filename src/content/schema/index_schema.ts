@@ -51,7 +51,7 @@ export const indexSchema = z.object({
       alt: z.string(),
     })
     .optional(),
-  howitworks: z
+  Howitworks: z
     .object({
       title: z.string(),
       subtitle: z.string(),

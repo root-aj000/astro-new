@@ -196,11 +196,11 @@ export interface FeatureLRProps {
 export interface IndexProps {
   indexpro: {
     hero: HeroProps["hero"];
-    cloud_data: logo_cloudProps["logo_cloud"];
+    logo_cloud: logo_cloudProps["logo_cloud"];
     hero_2: Hero_2Props["hero_2"];
     hero_3: Hero_3Props["hero_3"];
     hero_4: Hero_4Props["hero_4"];
-    howitworks: HowItWorksProps["Howitworks"];
+    Howitworks: HowItWorksProps["Howitworks"];
     forwhom: ForWhomBlock["forwhom"];
     list_header: list_headerProps["list_header"];
     grid: FeatureGridProps["grid"];

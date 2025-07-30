@@ -11,7 +11,7 @@ if (!entry) {
   throw new Error("Entry for ai-chatbot service page not found in 'indexPage' collection");
 }
 const indexpro = entry.data;
-
+console.log("INDEXPRO", indexpro);
 const allAichatbotBlogPosts = await getCollection('AichatbotBlog');
 const allAichatbotCaseStudies = await getCollection('AichatbotCases');
 
@@ -20,10 +20,10 @@ const limitedPosts = allAichatbotBlogPosts.slice(0, 4);
 const limitedCases = allAichatbotCaseStudies.slice(0, 3);
 ---
 
-<Base>
+
   <ServiceLayout
     indexpro={indexpro}
     limitedPosts={limitedPosts}
     limitedCases={limitedCases}
   />
-</Base>
+

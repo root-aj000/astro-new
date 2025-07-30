@@ -27,12 +27,12 @@ const { indexpro, limitedPosts, limitedCases } = Astro.props as ServicePageProps
 ---
 
 <Base>
-  <Hero {...indexpro.hero} />
-  <Cloud {...indexpro.cloud_data} />
-  <HowItWorks {...indexpro.howitworks} />
-  <ForWhom {...indexpro.forwhom} />
-  <Features {...indexpro.featurelr} />
-  <HomeHeaderCases {...indexpro.Home_header_cases} />
+  <Hero hero ={indexpro.hero} />
+  <Cloud logo_cloud ={indexpro.logo_cloud} />
+  <HowItWorks Howitworks ={indexpro.Howitworks} />
+  <ForWhom forwhom ={indexpro.forwhom} />
+  <Features featurelr ={indexpro.featurelr} />
+  <HomeHeaderCases Home_header_cases ={indexpro.Home_header_cases} />
   <CaseGrid>
     {
       limitedCases.map((caseStudy) => (
@@ -41,8 +41,8 @@ const { indexpro, limitedPosts, limitedCases } = Astro.props as ServicePageProps
     }
   </CaseGrid>
 
-  <Stats {...indexpro.stats} />
-  <HomeHeaderBlog {...indexpro.Home_header_blog} />
+  <Stats stats ={indexpro.stats} />
+  <HomeHeaderBlog Home_header_blog={indexpro.Home_header_blog} />
   <BlogGrid>
     {
       limitedPosts.map((post) => (
@@ -50,5 +50,5 @@ const { indexpro, limitedPosts, limitedCases } = Astro.props as ServicePageProps
       ))
     }
   </BlogGrid>
-  <Hero_4 {...indexpro.hero_4} />
+  <Hero_4 hero_4={indexpro.hero_4} />
 </Base>
