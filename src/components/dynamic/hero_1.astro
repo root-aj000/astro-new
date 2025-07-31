@@ -6,7 +6,7 @@ const {hero} = Astro.props as HeroProps;
 <div class="bg-white pb-6 sm:pb-8 lg:pb-12">
   <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
     <section class="mb-8 flex flex-col justify-between gap-6 sm:gap-10 md:mb-16 md:gap-16 md:flex-row">
-      <!-- content - start -->
+      
       <div class="flex flex-col justify-center sm:text-center lg:py-12 lg:text-left xl:w-1/2">
         <p class="mb-4 font-semibold text-[#ff4f1f] md:mb-6 md:text-lg xl:text-xl">
           {hero.tg_line}
@@ -31,9 +31,9 @@ const {hero} = Astro.props as HeroProps;
           </a>
         </div>
       </div>
-      <!-- content - end -->
+     
 
-      <!-- image - start -->
+
       <div class="flex flex-col justify-center sm:text-center lg:py-12 lg:text-left xl:w-1/2">
         <div>
           <img
@@ -44,47 +44,11 @@ const {hero} = Astro.props as HeroProps;
           />
         </div>
       </div>
-      <!-- image - end -->
+      
     </section>
   </div>
 </div>
 
-
-
-
-
-
-<!-- 
-
----
-layout: ../../templates/PageTemplate.astro
-
-hero:
-  tg_line: "Subheading Here"
-  mh_line: "Main Hero Headline"
-  p_cta: "Start Free Trial"
-  s_cta: "Take a Tour"
-  image: "https://example.com/hero-image.jpg"
-  alt: "Hero image"
----
-
-
-
-
-
-
----
-import HeroSection from '../components/HeroSection.astro';
-
-const { hero} = Astro.props;
----
-
-<HeroSection {hero} />
-
-
-
-
- -->
 
 
 

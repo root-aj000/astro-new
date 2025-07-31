@@ -1,1 +1,30 @@
-<h1>devops</h1>
+---
+import ServiceLayout from '../../../components/layout/service_page.astro';
+import Base from '../../../components/layout/base.astro';
+import { getEntry, getCollection } from 'astro:content'; // Import getCollection
+
+// Fetch the main service page content
+const entry = await getEntry("indexPage", "devop-s");
+
+if (!entry) {
+  throw new Error("Entry for devops service page not found in 'indexPage' collection");
+}
+const indexpro = entry.data;
+console.log("INDEXPRO", indexpro);
+// Fetch blog posts and case studies for DevOps
+const allDevopsBlogPosts = await getCollection('DevopsBlog');
+const allDevopsCaseStudies = await getCollection('DevopsCases');
+
+// Select and limit the posts/cases (example: latest 4 blogs and latest 3 cases)
+// You might want to sort by date or a custom field if needed before slicing
+const limitedPosts = allDevopsBlogPosts.slice(0, 4);
+const limitedCases = allDevopsCaseStudies.slice(0, 3);
+---
+
+
+  <ServiceLayout
+    indexpro={indexpro}
+    limitedPosts={limitedPosts}
+    limitedCases={limitedCases}
+  />
+

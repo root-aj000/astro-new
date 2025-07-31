@@ -13,72 +13,66 @@ import CaseGrid from "../case/case-study-grid.astro";
 import HomeHeaderCases from "../dynamic/Home_header_cases.astro";
 import UniversalCard from "../dynamic/universal_card.astro";
 import type { IndexProps } from "../../types/components";
-const { indexpro } = Astro.props as IndexProps;
+import type { CollectionEntry } from 'astro:content'; 
+interface IndexPageProps {
+  indexpro: IndexProps['indexpro'];
+  selectedPosts: CollectionEntry<'AichatbotBlog' | 'CloudComputingBlog' | 'CustomMLBlog' | 'DevopsBlog'>[]; // Adjust collection names as needed
+  selectedCases: CollectionEntry<'AichatbotCases' | 'CloudComputingCases' | 'CustomMLCases' | 'DevopsCases'>[]; // Adjust collection names as needed
+}
 
-// over && here we are fetching the latest posts and cases from different collections
-// Fetch 1 post from 4 different collections
-import AichatbotBlog from "../../../public/JSON/chatbot-blog-posts.json";
-import Aichatbotcase from "../../../public/JSON/chatbot-case-studys.json";
-import DevopsBlog from "../../../public/JSON/devops-blog-posts.json";
-import Devopscase from "../../../public/JSON/devops-case-studys.json";
-import CustomMLBlog from "../../../public/JSON/custom-ml-blog-posts.json";
-import CustomMLcase from "../../../public/JSON/custom-ml-case-studys.json";
-import CloudComputingBlog from "../../../public/JSON/cloud-computing-blog-posts.json";
-import CloudComputingcase from "../../../public/JSON/cloud-computing-case-studys.json";
+const { indexpro, selectedPosts, selectedCases } = Astro.props as IndexPageProps;
+const collectionRouteMap = {
+  AichatbotBlog: 'ai-chatbot/blog',
+  CloudComputingBlog: 'cloud-computing/blog',
+  CustomMLBlog: 'custom-ml/blog',
+  DevopsBlog: 'devops/blog',
+};
+const caseCollectionRouteMap = {
+  AichatbotCases: 'ai-chatbot/case-studies',
+  CloudComputingCases: 'cloud-computing/case-studies',
+  CustomMLCases: 'custom-ml/case-studies',
+  DevopsCases: 'devops/case-studies',
+};
 
-// Select one post from each (latest by order)
-const selectedPosts = [
-  AichatbotBlog[0],
-  DevopsBlog[0],
-  CustomMLBlog[0],
-  CloudComputingBlog[0],
-].filter(Boolean);
-const selectedCases = [
-  Aichatbotcase[0],
-  Devopscase[0],
-  CustomMLcase[0],
-  CloudComputingcase[0],
-].filter(Boolean);
+
 ---
 
 <Base>
-  <Hero {...indexpro.hero} />
-  <Cloud {...indexpro.cloud_data} />
-  <Hero_2 {...indexpro.hero_2} />
-  <Hero_3 {...indexpro.hero_3} />
-  <ServicesHome {...indexpro.grid} />
+  <Hero hero= {indexpro.hero} />
+  <Cloud logo_cloud= {indexpro.logo_cloud} />
+  <Hero_2 hero_2= {indexpro.hero_2} />
+  <Hero_3 hero_3= {indexpro.hero_3} />
+  <ServicesHome grid= {indexpro.grid} />
 
 
 
-  <!-- for casestudy max 3, 1 of each -->
-  <HomeHeaderCases {...indexpro.Home_header_cases} />
+ 
+  <HomeHeaderCases Home_header_cases={indexpro.Home_header_cases} />
 
   <CaseGrid>
     {
       selectedCases.map((caseStudy) => (
-        <UniversalCard blog_data={caseStudy.data.case_data} />
+        <UniversalCard blog_data={{ ...caseStudy.data.case_data, href: `/${caseCollectionRouteMap[caseStudy.collection]}${caseStudy.id}` }} />
       ))
     }
   </CaseGrid>
 
 
 
-  <Stats {...indexpro.stats} />
+  <Stats stats={indexpro.stats} />
 
 
 
-  <!-- for blogs max 4, 1 of each -->
-  <HomeHeaderBlog {...indexpro.Home_header_blog} />
+  <HomeHeaderBlog Home_header_blog={indexpro.Home_header_blog} />
 
   <BlogGrid>
     {
       selectedPosts.map((post) => (
-        <UniversalCard blog_data={post.data.blog_data} />
+        <UniversalCard blog_data={{ ...post.data.blog_data, href: `${collectionRouteMap[post.collection]}${post.id}` }} />
       ))
     }
   </BlogGrid>
 
 
-  
-  <Hero4 {...indexpro.hero_4} />
+  <Hero4  hero_4={indexpro.hero_4} />
 </Base>

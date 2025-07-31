@@ -1,28 +1,64 @@
 ---
+// Astro frontmatter
 import UniversalCard from "../../../../../components/dynamic/universal_card.astro";
-import blogData from "../../../../../../public/JSON/chatbot-blog-posts.json"; // Adjust if needed\\
 import Pagination from "../../../../../components/dynamic/pagination.astro";
 import BlogGrid from "../../../../../components/blog/blog-grid.astro";
-import ListHeader from "../../../../../components/dynamic/list_header.astro";
 import Base from "../../../../../components/layout/base.astro";
-import { BASE_PATH_CONST } from "../../../../../content/const.ts";
+import ListHeader from "../../../../../components/dynamic/list_header.astro";
+import { BASE_PATH_CONST, BASE_PATH_BLOG } from "../../../../../content/const.ts";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const allBlogPosts = await getCollection("AichatbotBlog");
+  const itemsPerPage = 12;
+  const totalPages = Math.ceil(allBlogPosts.length / itemsPerPage);
+
+  return Array.from({ length: totalPages }, (_, i) => ({
+    params: { page: (i + 1).toString() },
+  }));
+}
 
 const currentPage = parseInt(Astro.params.page) || 1;
 const itemsPerPage = 12;
-const totalItems = blogData.length;
-const basePath = BASE_PATH_CONST.Aichatbot_blog; //changes as per blog path
+const allBlogPosts = await getCollection("AichatbotBlog");
+const totalItems = allBlogPosts.length;
 
-const paginatedPosts = blogData.slice(
-  (currentPage - 1) * itemsPerPage,
-  currentPage * itemsPerPage
-);
+// Use this for page URLs like /services/ai-chatbot/blog/page/2
+const basePath = BASE_PATH_CONST.Aichatbot_blog;
+
+// This is used for card hrefs like /services/ai-chatbot/blog/post-id
+const basePathBlog = BASE_PATH_BLOG.Aichatbot_blog;
+
+const paginatedPosts = allBlogPosts
+  .filter((post) => post.data && post.data.blog_data)
+  .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+
+
+  // console.log("DEBUG: paginatedPosts", paginatedPosts);
+//   paginatedPosts.forEach(post => {
+//   console.log("DEBUG each post", post.data.blog_data);
+// });
+
+// console.log("DEBUG: post.data", paginatedPosts[0]?.data);
+
+
 ---
 
 <Base>
-  <ListHeader />
+  <!-- <ListHeader {...(allBlogPosts[0]?.data.blog_data )} /> -->
+    <ListHeader blog_data={paginatedPosts[0].data.blog_data} />
+
+
+
+    
   <BlogGrid>
-    {paginatedPosts.map((post) => <UniversalCard blog_data={post} />)}
+    {
+      paginatedPosts.map((post) => (
+        <UniversalCard blog_data={{ ...post.data.blog_data, date: new Date(post.data.blog_data.date),  href: `${basePathBlog}/${post.id}` }} />
+      ))
+    }
   </BlogGrid>
+
   <Pagination
     currentPage={currentPage}
     totalItems={totalItems}

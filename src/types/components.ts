@@ -142,17 +142,35 @@ export interface BlogCardProps {
 
 export interface BlogCard {
   blog_data: BlogCardProps;
+  contentType: string;
+  serviceName: string;
 }
 
+export interface caseCardProps {
+  title: string;
+  author: string;
+  contentType: string;
+  serviceName: string;
+  date: string;
+  image: string;
+  excerpt: string;
+  tags: string[];
+  category: string;
+  href: string;
+}
+
+export interface caseCard {
+  case_data: caseCardProps;
+}
 export interface Home_header_blogProps {
-  home_header_blog: {
+  Home_header_blog: {
     title: string;
     subtitle: string;
   };
 }
 
 export interface Home_header_casesProps {
-  home_header_cases: {
+  Home_header_cases: {
     title: string;
     subtitle: string;
   };
@@ -178,19 +196,19 @@ export interface FeatureLRProps {
 export interface IndexProps {
   indexpro: {
     hero: HeroProps["hero"];
-    cloud_data: logo_cloudProps["logo_cloud"];
+    logo_cloud: logo_cloudProps["logo_cloud"];
     hero_2: Hero_2Props["hero_2"];
     hero_3: Hero_3Props["hero_3"];
     hero_4: Hero_4Props["hero_4"];
-    howitworks: HowItWorksProps["Howitworks"];
+    Howitworks: HowItWorksProps["Howitworks"];
     forwhom: ForWhomBlock["forwhom"];
     list_header: list_headerProps["list_header"];
     grid: FeatureGridProps["grid"];
     stats: StatsProps["stats"];
     subscribe: SubscribeFormProps["subscribe"];
     blog_data: BlogCardProps;
-    Home_header_blog: Home_header_blogProps["home_header_blog"];
-    Home_header_cases: Home_header_casesProps["home_header_cases"];
+    Home_header_blog: Home_header_blogProps["Home_header_blog"];
+    Home_header_cases: Home_header_casesProps["Home_header_cases"];
     featurelr: FeatureLRProps["featurelr"];
   };
 }

@@ -8,7 +8,7 @@ const {blog_data} = Astro.props as BlogCard
 
 <!-- progress bar -->
 <div class="w-full bg-gray-200 rounded-full h-2.5 mb-4 fixed">
-  <div class="bg-gray-600 h-2.5 rounded-full" style="width: 45%"></div>
+  <div class="bg-gray-600 h-2.5 rounded-full" style="width: 0%"></div>
 </div>
 <!-- progress bar end -->
 
@@ -25,7 +25,11 @@ const {blog_data} = Astro.props as BlogCard
   <div class="py-3 px-4 mx-auto max-w-screen-lg text-center">
     <div class="flex flex-row justify-between text-gray-700">
       <span class="flex px-6 text-base font-medium"> Author: {blog_data.author}</span>
-      <span class="px-6 font-medium"> date: {blog_data.date} </span>
+      <span class="px-6 font-medium"> date: {new Date(blog_data.date).toLocaleDateString(undefined, {
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric',
+        })} </span>
     </div>
   </div>
 </section>
