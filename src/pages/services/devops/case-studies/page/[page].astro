@@ -40,16 +40,11 @@ const paginatedCases = allCaseStudies.slice(
   currentPage * itemsPerPage
 );
 
-// Define data for the ListHeader (example data - you might want to fetch this from elsewhere)
-const listHeaderData = {
-  title: "DevOps Case Studies",
-  discription: "Real-world examples of our DevOps solutions.",
-};
 ---
 
 <Base>
   {/* Pass data to the ListHeader */}
-  <ListHeader list_header={listHeaderData} />
+   <ListHeader blog_data={paginatedCases[0].data.case_data} />
   <CaseGrid>
     {/* Pass fetched collection entries to UniversalCard */}
     {paginatedCases.map((caseStudy) => <UniversalCard blog_data={caseStudy.data.case_data} />)} {/* Assuming case_data is nested in caseStudy.data */}

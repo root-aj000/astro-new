@@ -25,7 +25,7 @@ export const collections = {
       base: "./src/content/services/ai-chatbot/blog/",
       pattern: "**/*.mdx",
     }),
-    schema: BlogSchema("Blog_post", "ai-chatbot"),   
+    schema: BlogSchema("Blog-post", "ai-chatbot"),   
   }),
 
   CloudComputingBlog: defineCollection({
@@ -33,7 +33,7 @@ export const collections = {
       base: "./src/content/services/cloud-computing/blog/",
       pattern: "**/*.mdx",
     }),
-    schema: BlogSchema("Blog_post", "cloud-computing"),
+    schema: BlogSchema("Blog-post", "cloud-computing"),
   }),
 
   CustomMLBlog: defineCollection({
@@ -41,7 +41,7 @@ export const collections = {
       base: "./src/content/services/custom-ml/blog/",
       pattern: "**/*.mdx",
     }),
-    schema: BlogSchema("Blog_post", "custom-ml"),
+    schema: BlogSchema("Blog-post", "custom-ml"),
   }),
 
   DevopsBlog: defineCollection({
@@ -49,7 +49,7 @@ export const collections = {
       base: "./src/content/services/devops/blog/",
       pattern: "**/*.mdx",
     }),
-    schema: BlogSchema("Blog_post", "devops"),
+    schema: BlogSchema("Blog-post", "devops"),
   }),
 
   AichatbotCases: defineCollection({
@@ -57,7 +57,7 @@ export const collections = {
       base: "./src/content/services/ai-chatbot/case-studies/",
       pattern: "**/*.mdx",
     }),
-    schema: CasesSchema("Case_study", "ai-chatbot"),
+    schema: CasesSchema("Case-study", "ai-chatbot"),
   }),
 
   CloudComputingCases: defineCollection({
@@ -65,7 +65,7 @@ export const collections = {
       base: "./src/content/services/cloud-computing/case-studies/",
       pattern: "**/*.mdx",
     }),
-    schema: CasesSchema("Case_study", "cloud-computing"),
+    schema: CasesSchema("Case-study", "cloud-computing"),
   }),
 
   CustomMLCases: defineCollection({
@@ -73,7 +73,7 @@ export const collections = {
       base: "./src/content/services/custom-ml/case-studies/",
       pattern: "**/*.mdx",
     }),
-    schema: CasesSchema("Case_study", "custom-ml"),
+    schema: CasesSchema("Case-study", "custom-ml"),
   }),
 
   DevopsCases: defineCollection({
@@ -81,7 +81,7 @@ export const collections = {
       base: "./src/content/services/devops/case-studies/",
       pattern: "**/*.mdx",
     }),
-    schema: CasesSchema("Case_study", "devops"),
+    schema: CasesSchema("Case-study", "devops"),
   }),
 
   // indexSchema: defineCollection({

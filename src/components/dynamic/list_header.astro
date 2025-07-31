@@ -3,8 +3,8 @@ import type { BlogCard } from "../../types/components";
 const { blog_data } = Astro.props as BlogCard;
 
 const typeDescriptionMap = {
-  "blog-post": "Get insights, tips, and ideas from our expert blog articles.",
-  "case-study": "See how we helped clients achieve success through real examples.",
+  "Blog-post": "Get insights, tips, and ideas from our expert blog articles.",
+  "Case-study": "See how we helped clients achieve success through real examples.",
   "whitepaper": "In-depth research and reports written by our analysts.",
   "faq": "Frequently asked questions answered clearly and concisely.",
   "guide": "Step-by-step instructions to help you succeed.",
@@ -18,7 +18,7 @@ const description = typeDescriptionMap[blog_data.contentType] ?? "Explore this c
   <h2
     class="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl"
   >
-    {blog_data.contentType}
+    {blog_data.contentType} of {blog_data.serviceName}
   </h2>
 
   <p class="mx-auto max-w-screen-md text-center text-gray-500 md:text-lg">
@@ -26,17 +26,3 @@ const description = typeDescriptionMap[blog_data.contentType] ?? "Explore this c
   </p>
 </div>
 
-<!-- 
-template 
-import SectionHeader from '../components/SectionHeader.astro';
-
-<SectionHeader list_header={list_header} />
-
-
-
-.md
-list_header:
-  title: "Blogs"
-  description: "A collection of tools to boost your workflow." 
-  
-  -->

@@ -40,16 +40,11 @@ const paginatedPosts = allBlogPosts.slice(
   currentPage * itemsPerPage
 );
 
-// Define data for the ListHeader (example data - you might want to fetch this from elsewhere)
-const listHeaderData = {
-  title: "Custom ML Blog",
-  discription: "Latest articles and insights on Custom Machine Learning.",
-};
 ---
 
 <Base>
   {/* Pass data to the ListHeader */}
-  <ListHeader list_header={listHeaderData} />
+<ListHeader blog_data={paginatedPosts[0].data.blog_data} />
   <BlogGrid>
     {/* Pass fetched collection entries to UniversalCard */}
     {paginatedPosts.map((post) => <UniversalCard blog_data={post.data.blog_data} />)} {/* Assuming blog_data is nested in post.data */}

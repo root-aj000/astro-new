@@ -4,6 +4,7 @@ import UniversalCard from "../../../../../components/dynamic/universal_card.astr
 import Pagination from "../../../../../components/dynamic/pagination.astro";
 import BlogGrid from "../../../../../components/blog/blog-grid.astro";
 import Base from "../../../../../components/layout/base.astro";
+import ListHeader from "../../../../../components/dynamic/list_header.astro";
 import { BASE_PATH_CONST, BASE_PATH_BLOG } from "../../../../../content/const.ts";
 import { getCollection } from "astro:content";
 
@@ -31,9 +32,25 @@ const basePathBlog = BASE_PATH_BLOG.Aichatbot_blog;
 const paginatedPosts = allBlogPosts
   .filter((post) => post.data && post.data.blog_data)
   .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+
+
+  // console.log("DEBUG: paginatedPosts", paginatedPosts);
+//   paginatedPosts.forEach(post => {
+//   console.log("DEBUG each post", post.data.blog_data);
+// });
+
+// console.log("DEBUG: post.data", paginatedPosts[0]?.data);
+
+
 ---
 
 <Base>
+  <!-- <ListHeader {...(allBlogPosts[0]?.data.blog_data )} /> -->
+    <ListHeader blog_data={paginatedPosts[0].data.blog_data} />
+
+
+
+    
   <BlogGrid>
     {
       paginatedPosts.map((post) => (

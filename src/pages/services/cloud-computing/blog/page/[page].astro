@@ -43,16 +43,14 @@ const paginatedPosts = allBlogPosts.slice(
   currentPage * itemsPerPage
 );
 
-// Define data for the ListHeader (example data - you might want to fetch this from elsewhere)
-const listHeaderData = {
-  title: "Cloud Computing Blog",
-  discription: "Latest articles and insights on Cloud Computing.",
-};
 ---
-
 <Base>
   {/* Pass data to the ListHeader */}
-  <!-- <ListHeader list_header={listHeaderData} /> -->
+<ListHeader blog_data={paginatedPosts[0].data.blog_data} />
+
+
+
+
   <BlogGrid>
     {/* Pass fetched collection entries to UniversalCard */}
     {
@@ -75,3 +73,4 @@ const listHeaderData = {
     basePath={basePath}
   />
 </Base>
+
