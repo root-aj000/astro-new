@@ -1,67 +1,47 @@
 ---
+// Astro frontmatter
 import UniversalCard from "../../../../../components/dynamic/universal_card.astro";
-// Removed JSON import
-// import blogData from "../../../../../../public/JSON/chatbot-blog-posts.json";
 import Pagination from "../../../../../components/dynamic/pagination.astro";
 import BlogGrid from "../../../../../components/blog/blog-grid.astro";
-import ListHeader from "../../../../../components/dynamic/list_header.astro";
 import Base from "../../../../../components/layout/base.astro";
-import { BASE_PATH_CONST } from "../../../../../content/const.ts";
-import { getCollection } from "astro:content"; // Import getCollection
+import { BASE_PATH_CONST, BASE_PATH_BLOG } from "../../../../../content/const.ts";
+import { getCollection } from "astro:content";
 
-// Add the getStaticPaths function here
 export async function getStaticPaths() {
   const allBlogPosts = await getCollection("AichatbotBlog");
-  const totalItems = allBlogPosts.length;
-  const itemsPerPage = 12; // Make sure this matches the value in the frontmatter
-  const totalPages = Math.ceil(totalItems / itemsPerPage);
+  const itemsPerPage = 12;
+  const totalPages = Math.ceil(allBlogPosts.length / itemsPerPage);
 
-  const paths = [];
-  for (let i = 1; i <= totalPages; i++) {
-    paths.push({
-      params: { page: i.toString() },
-    });
-  }
-
-  return paths;
+  return Array.from({ length: totalPages }, (_, i) => ({
+    params: { page: (i + 1).toString() },
+  }));
 }
 
 const currentPage = parseInt(Astro.params.page) || 1;
 const itemsPerPage = 12;
-
-// Fetch all blog posts from the AichatbotBlog collection
 const allBlogPosts = await getCollection("AichatbotBlog");
-
-// Calculate total items based on the fetched collection
 const totalItems = allBlogPosts.length;
 
-const basePath = BASE_PATH_CONST.Aichatbot_blog; //changes as per blog path
+// Use this for page URLs like /services/ai-chatbot/blog/page/2
+const basePath = "/services/ai-chatbot/blog";
 
-// Slice the fetched collection for pagination
-// Filter out posts with missing blog_data
+// This is used for card hrefs like /services/ai-chatbot/blog/post-id
+const basePathBlog = BASE_PATH_BLOG.Aichatbot_blog;
+
 const paginatedPosts = allBlogPosts
   .filter((post) => post.data && post.data.blog_data)
   .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
-
-// Define data for the ListHeader (example data - you might want to fetch this from elsewhere)
-const listHeaderData = {
-  title: "AI Chatbot Blog",
-  discription: "Latest articles and insights on AI Chatbots.",
-};
 ---
 
 <Base>
-  {/* Pass data to the ListHeader */}
-  <ListHeader list_header={listHeaderData} />
   <BlogGrid>
-    {/* Pass fetched collection entries to UniversalCard */}
     {
       paginatedPosts.map((post) => (
-        <UniversalCard blog_data={post.data.blog_data} />
+        <UniversalCard blog_data={{ ...post.data.blog_data, date: new Date(post.data.blog_data.date),  href: `${basePathBlog}/${post.id}` }} />
       ))
     }
-    {/* Assuming blog_data is nested in post.data */}
   </BlogGrid>
+
   <Pagination
     currentPage={currentPage}
     totalItems={totalItems}

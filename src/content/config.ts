@@ -25,7 +25,7 @@ export const collections = {
       base: "./src/content/services/ai-chatbot/blog/",
       pattern: "**/*.mdx",
     }),
-    schema: BlogSchema("Blog_post", "ai-chatbot"),
+    schema: BlogSchema("Blog_post", "ai-chatbot"),   
   }),
 
   CloudComputingBlog: defineCollection({

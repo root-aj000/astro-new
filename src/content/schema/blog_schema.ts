@@ -12,11 +12,14 @@ export function BlogSchema(defaultContentType: string, defaultServiceName: strin
         draft: z.boolean().default(false).optional(),
         contentType: z.string().optional(), // still optional
         serviceName: z.string().optional(),
+        
       })
+      
       .transform((data) => ({
         ...data,
         contentType: data.contentType ?? defaultContentType,
         serviceName: data.serviceName ?? defaultServiceName,
       })),
+      
   });
 }

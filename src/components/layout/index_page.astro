@@ -21,6 +21,18 @@ interface IndexPageProps {
 }
 
 const { indexpro, selectedPosts, selectedCases } = Astro.props as IndexPageProps;
+const collectionRouteMap = {
+  AichatbotBlog: 'ai-chatbot/blog',
+  CloudComputingBlog: 'cloud-computing/blog',
+  CustomMLBlog: 'custom-ml/blog',
+  DevopsBlog: 'devops/blog',
+};
+const caseCollectionRouteMap = {
+  AichatbotCases: 'ai-chatbot/case-studies',
+  CloudComputingCases: 'cloud-computing/case-studies',
+  CustomMLCases: 'custom-ml/case-studies',
+  DevopsCases: 'devops/case-studies',
+};
 
 
 ---
@@ -40,7 +52,7 @@ const { indexpro, selectedPosts, selectedCases } = Astro.props as IndexPageProps
   <CaseGrid>
     {
       selectedCases.map((caseStudy) => (
-        <UniversalCard blog_data={caseStudy.data.case_data} />
+        <UniversalCard blog_data={{ ...caseStudy.data.case_data, href: `/${caseCollectionRouteMap[caseStudy.collection]}${caseStudy.id}` }} />
       ))
     }
   </CaseGrid>
@@ -56,7 +68,7 @@ const { indexpro, selectedPosts, selectedCases } = Astro.props as IndexPageProps
   <BlogGrid>
     {
       selectedPosts.map((post) => (
-        <UniversalCard blog_data={post.data.blog_data} />
+        <UniversalCard blog_data={{ ...post.data.blog_data, href: `${collectionRouteMap[post.collection]}${post.id}` }} />
       ))
     }
   </BlogGrid>

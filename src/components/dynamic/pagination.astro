@@ -3,16 +3,13 @@ export interface Props {
   currentPage: number;
   totalItems: number;
   itemsPerPage: number;
-  basePath: string;
-
-
+  basePath: string; // e.g., "/services/ai-chatbot/blog"
 }
 
-const { currentPage, totalItems, itemsPerPage, basePath} = Astro.props;
+const { currentPage, totalItems, itemsPerPage, basePath } = Astro.props;
 
 const totalPages = Math.ceil(totalItems / itemsPerPage);
 
-// Pagination window logic
 const visibleRange = 5;
 const halfRange = Math.floor(visibleRange / 2);
 
@@ -27,6 +24,10 @@ const pagesToShow = Array.from(
   { length: endPage - startPage + 1 },
   (_, i) => startPage + i
 );
+
+function getPageUrl(page: number) {
+  return `${basePath}/page/${page}`;
+}
 ---
 
 <nav aria-label="Pagination" class="flex justify-center mt-10">
@@ -35,50 +36,36 @@ const pagesToShow = Array.from(
     {
       currentPage > 1 && (
         <li>
-          <a
-            href={`${basePath}/${currentPage - 1}`}
-            class="px-3 py-1 border rounded hover:bg-gray-100"
-          >
-            Prev
-          </a>
+          <a href={getPageUrl(currentPage - 1)} class="px-3 py-1 border rounded hover:bg-gray-100">Prev</a>
         </li>
       )
     }
 
-    <!-- First page -->
+    <!-- First -->
     {
       startPage > 1 && (
         <li>
-          <a
-            href={`${basePath}/1`}
-            class="px-3 py-1 border rounded hover:bg-gray-100"
-          >
-            1
-          </a>
+          <a href={getPageUrl(1)} class="px-3 py-1 border rounded hover:bg-gray-100">1</a>
         </li>
       )
     }
 
-    <!-- Left ellipsis (only if gap between 1 and startPage > 1) -->
+    <!-- Left Ellipsis -->
     {
       startPage > 2 && (
-        <li>
-          <span class="px-2">…</span>
-        </li>
+        <li><span class="px-2">…</span></li>
       )
     }
 
-    <!-- Page numbers -->
+    <!-- Pages -->
     {
-      pagesToShow.map((page) => (
+      pagesToShow.map(page => (
         <li>
           <a
-            href={`${basePath}/${page}`}
+            href={getPageUrl(page)}
             aria-current={page === currentPage ? "page" : undefined}
             class={`px-3 py-1 border rounded ${
-              page === currentPage
-                ? "bg-orange-500 text-white border-orange-600"
-                : "hover:bg-gray-100"
+              page === currentPage ? "bg-orange-500 text-white border-orange-600" : "hover:bg-gray-100"
             }`}
           >
             {page}
@@ -87,23 +74,18 @@ const pagesToShow = Array.from(
       ))
     }
 
-    <!-- Right ellipsis (only if gap between endPage and totalPages > 1) -->
+    <!-- Right Ellipsis -->
     {
       endPage < totalPages - 1 && (
-        <li>
-          <span class="px-2">…</span>
-        </li>
+        <li><span class="px-2">…</span></li>
       )
     }
 
-    <!-- Last page -->
+    <!-- Last -->
     {
       endPage < totalPages && (
         <li>
-          <a
-            href={`${basePath}/${totalPages}`}
-            class="px-3 py-1 border rounded hover:bg-gray-100"
-          >
+          <a href={getPageUrl(totalPages)} class="px-3 py-1 border rounded hover:bg-gray-100">
             {totalPages}
           </a>
         </li>
@@ -114,10 +96,7 @@ const pagesToShow = Array.from(
     {
       currentPage < totalPages && (
         <li>
-          <a
-            href={`${basePath}/${currentPage + 1}`}
-            class="px-3 py-1 border rounded hover:bg-gray-100"
-          >
+          <a href={getPageUrl(currentPage + 1)} class="px-3 py-1 border rounded hover:bg-gray-100">
             Next
           </a>
         </li>
@@ -125,43 +104,3 @@ const pagesToShow = Array.from(
     }
   </ul>
 </nav>
-
-<!-- how to use   
- 
----
-import UniversalCard from '../../../../../components/dynamic/universal_card.astro';
-import blogData from '../../../../../../public/JSON/chatbot-blog-posts.json'; // Adjust as per pages
-import Pagination from '../../../../../components/dynamic/pagination.astro';
-import BlogGrid from '../../../../../components/blog/blog-grid.astro';
-
-const currentPage = parseInt(Astro.params.page) || 1;
-const itemsPerPage = 12;
-const totalItems = blogData.length;
-const basePath = "/products/blog/page";
-
-const paginatedPosts = blogData.slice(
-  (currentPage - 1) * itemsPerPage,
-  currentPage * itemsPerPage
-);
----
-
-<BlogGrid>
-  {paginatedPosts.map(post => (
-    <UniversalCard blog_data={post} />
-  ))}
-</BlogGrid>
-
-<Pagination 
-  currentPage={currentPage}
-  totalItems={totalItems}
-  itemsPerPage={itemsPerPage}
-  basePath={basePath}
-/>
-
-
-
-
-
-
-
--->
