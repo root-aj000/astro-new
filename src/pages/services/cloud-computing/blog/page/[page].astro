@@ -35,7 +35,7 @@ const allBlogPosts = await getCollection("CloudComputingBlog");
 // Calculate total items based on the fetched collection
 const totalItems = allBlogPosts.length;
 
-const basePath = "/services/cloud-computing/blog";
+const basePath = BASE_PATH_BLOG.CloudComputing_blog;
 const basePathBlog = BASE_PATH_BLOG.CloudComputing_blog;
 // Slice the fetched collection for pagination
 const paginatedPosts = allBlogPosts.slice(
