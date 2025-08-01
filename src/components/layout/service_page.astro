@@ -12,7 +12,7 @@ import HomeHeaderBlog from "../dynamic/Home_header_blog.astro";
 import CaseGrid from "../case/case-study-grid.astro";
 import HomeHeaderCases from "../dynamic/Home_header_cases.astro";
 import UniversalCard from "../dynamic/universal_card.astro";
-// props
+import { enrichEntry } from "../../utils/enrich";// props
 import type { IndexProps } from "../../types/components";
 import type { CollectionEntry } from 'astro:content'; // Import CollectionEntry type
 
@@ -36,7 +36,7 @@ const { indexpro, limitedPosts, limitedCases } = Astro.props as ServicePageProps
   <CaseGrid>
     {
       limitedCases.map((caseStudy) => (
-        <UniversalCard blog_data={caseStudy.data.case_data} />
+        <UniversalCard blog_data={enrichEntry(caseStudy)} />
       ))
     }
   </CaseGrid>
@@ -46,7 +46,7 @@ const { indexpro, limitedPosts, limitedCases } = Astro.props as ServicePageProps
   <BlogGrid>
     {
       limitedPosts.map((post) => (
-        <UniversalCard blog_data={post.data.blog_data} />
+        <UniversalCard blog_data={enrichEntry(post)} />
       ))
     }
   </BlogGrid>

@@ -12,6 +12,7 @@ import HomeHeaderBlog from "../dynamic/Home_header_blog.astro";
 import CaseGrid from "../case/case-study-grid.astro";
 import HomeHeaderCases from "../dynamic/Home_header_cases.astro";
 import UniversalCard from "../dynamic/universal_card.astro";
+import { enrichEntry } from "../../utils/enrich";
 import type { IndexProps } from "../../types/components";
 import type { CollectionEntry } from 'astro:content'; 
 interface IndexPageProps {
@@ -21,18 +22,7 @@ interface IndexPageProps {
 }
 
 const { indexpro, selectedPosts, selectedCases } = Astro.props as IndexPageProps;
-const collectionRouteMap = {
-  AichatbotBlog: 'ai-chatbot/blog',
-  CloudComputingBlog: 'cloud-computing/blog',
-  CustomMLBlog: 'custom-ml/blog',
-  DevopsBlog: 'devops/blog',
-};
-const caseCollectionRouteMap = {
-  AichatbotCases: 'ai-chatbot/case-studies',
-  CloudComputingCases: 'cloud-computing/case-studies',
-  CustomMLCases: 'custom-ml/case-studies',
-  DevopsCases: 'devops/case-studies',
-};
+
 
 
 ---
@@ -52,8 +42,8 @@ const caseCollectionRouteMap = {
   <CaseGrid>
     {
       selectedCases.map((caseStudy) => (
-        <UniversalCard blog_data={{ ...caseStudy.data.case_data, href: `/${caseCollectionRouteMap[caseStudy.collection]}${caseStudy.id}` }} />
-      ))
+        <UniversalCard blog_data={enrichEntry(caseStudy)} />
+      )) 
     }
   </CaseGrid>
 
@@ -68,7 +58,7 @@ const caseCollectionRouteMap = {
   <BlogGrid>
     {
       selectedPosts.map((post) => (
-        <UniversalCard blog_data={{ ...post.data.blog_data, href: `${collectionRouteMap[post.collection]}${post.id}` }} />
+        <UniversalCard blog_data={enrichEntry(post)} />
       ))
     }
   </BlogGrid>

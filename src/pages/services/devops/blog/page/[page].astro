@@ -4,11 +4,12 @@ import Pagination from "../../../../../components/dynamic/pagination.astro";
 import BlogGrid from "../../../../../components/blog/blog-grid.astro";
 import ListHeader from "../../../../../components/dynamic/list_header.astro";
 import Base from "../../../../../components/layout/base.astro";
-import { BASE_PATH_CONST } from "../../../../../content/const.ts";
-import { getCollection } from 'astro:content'; // Import getCollection
+import { enrichEntry } from "../../../../../utils/enrich";
+import { BASE_PATH_BLOG } from "../../../../../content/const.ts";
+import { getCollection } from "astro:content"; // Import getCollection
 
 export async function getStaticPaths() {
-  const allBlogPosts = await getCollection('DevopsBlog');
+  const allBlogPosts = await getCollection("DevopsBlog");
   const totalItems = allBlogPosts.length;
   const itemsPerPage = 12; // Make sure this matches the value used in the component
   const totalPages = Math.ceil(totalItems / itemsPerPage);
@@ -27,26 +28,30 @@ const currentPage = parseInt(Astro.params.page) || 1;
 const itemsPerPage = 12;
 
 // Fetch all blog posts from the DevopsBlog collection
-const allBlogPosts = await getCollection('DevopsBlog');
+const allBlogPosts = await getCollection("DevopsBlog");
 
 // Calculate total items based on the fetched collection
 const totalItems = allBlogPosts.length;
 
-const basePath = BASE_PATH_CONST.Devops_blog; // Ensure this constant is defined and correct
+const basePath = BASE_PATH_BLOG.DevopsBlog; // Ensure this constant is defined and correct
 
 // Slice the fetched collection for pagination
 const paginatedPosts = allBlogPosts.slice(
   (currentPage - 1) * itemsPerPage,
   currentPage * itemsPerPage
 );
-
 ---
 
 <Base>
-<ListHeader blog_data={paginatedPosts[0].data.blog_data} />
+  <ListHeader blog_data={paginatedPosts[0].data.blog_data} />
   <BlogGrid>
     {/* Pass fetched collection entries to UniversalCard */}
-    {paginatedPosts.map((post) => <UniversalCard blog_data={post.data.blog_data} />)} {/* Assuming blog_data is nested in post.data */}
+    {
+      paginatedPosts.map((post) => (
+        <UniversalCard blog_data={enrichEntry(post)} />
+      ))
+    }
+    {/* Assuming blog_data is nested in post.data */}
   </BlogGrid>
   <Pagination
     currentPage={currentPage}

@@ -5,7 +5,8 @@ import Pagination from "../../../../../components/dynamic/pagination.astro";
 import BlogGrid from "../../../../../components/blog/blog-grid.astro";
 import Base from "../../../../../components/layout/base.astro";
 import ListHeader from "../../../../../components/dynamic/list_header.astro";
-import { BASE_PATH_CONST, BASE_PATH_BLOG } from "../../../../../content/const.ts";
+import { enrichEntry } from "../../../../../utils/enrich";
+import { BASE_PATH_BLOG } from "../../../../../content/const.ts";
 import { getCollection } from "astro:content";
 
 export async function getStaticPaths() {
@@ -24,10 +25,10 @@ const allBlogPosts = await getCollection("AichatbotBlog");
 const totalItems = allBlogPosts.length;
 
 // Use this for page URLs like /services/ai-chatbot/blog/page/2
-const basePath = BASE_PATH_CONST.Aichatbot_blog;
+const basePath = BASE_PATH_BLOG.AichatbotBlog;
 
 // This is used for card hrefs like /services/ai-chatbot/blog/post-id
-const basePathBlog = BASE_PATH_BLOG.Aichatbot_blog;
+const basePathBlog = BASE_PATH_BLOG.AichatbotBlog;
 
 const paginatedPosts = allBlogPosts
   .filter((post) => post.data && post.data.blog_data)
@@ -54,7 +55,7 @@ const paginatedPosts = allBlogPosts
   <BlogGrid>
     {
       paginatedPosts.map((post) => (
-        <UniversalCard blog_data={{ ...post.data.blog_data, date: new Date(post.data.blog_data.date),  href: `${basePathBlog}/${post.id}` }} />
+        <UniversalCard blog_data={enrichEntry(post)} />
       ))
     }
   </BlogGrid>

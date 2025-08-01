@@ -1,6 +1,6 @@
 import { z } from "astro:content";
 
-export function BlogSchema(defaultContentType: string, defaultServiceName: string) {
+export function BlogSchema() {
   return z
     .object({
       blog_data: z.object({
@@ -12,13 +12,7 @@ export function BlogSchema(defaultContentType: string, defaultServiceName: strin
         draft: z.boolean().default(false).optional(),
         contentType: z.string().optional(),
         serviceName: z.string().optional(),
+        
       }),
     })
-    .transform((entry) => ({
-      blog_data: {
-        ...entry.blog_data,
-        contentType: entry.blog_data.contentType ?? defaultContentType,
-        serviceName: entry.blog_data.serviceName ?? defaultServiceName,
-      },
-    }));
 }

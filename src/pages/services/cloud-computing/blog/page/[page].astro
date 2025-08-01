@@ -4,10 +4,8 @@ import Pagination from "../../../../../components/dynamic/pagination.astro";
 import BlogGrid from "../../../../../components/blog/blog-grid.astro";
 import ListHeader from "../../../../../components/dynamic/list_header.astro";
 import Base from "../../../../../components/layout/base.astro";
-import {
-  BASE_PATH_CONST,
-  BASE_PATH_BLOG,
-} from "../../../../../content/const.ts";
+import {  BASE_PATH_BLOG} from "../../../../../content/const.ts";
+import { enrichEntry } from "../../../../../utils/enrich";
 import { getCollection } from "astro:content"; // Import getCollection
 
 export async function getStaticPaths() {
@@ -35,8 +33,8 @@ const allBlogPosts = await getCollection("CloudComputingBlog");
 // Calculate total items based on the fetched collection
 const totalItems = allBlogPosts.length;
 
-const basePath = BASE_PATH_BLOG.CloudComputing_blog;
-const basePathBlog = BASE_PATH_BLOG.CloudComputing_blog;
+const basePath = BASE_PATH_BLOG.CloudComputingBlog;
+
 // Slice the fetched collection for pagination
 const paginatedPosts = allBlogPosts.slice(
   (currentPage - 1) * itemsPerPage,
@@ -55,13 +53,8 @@ const paginatedPosts = allBlogPosts.slice(
     {/* Pass fetched collection entries to UniversalCard */}
     {
       paginatedPosts.map((post) => (
-        <UniversalCard
-          blog_data={{
-            ...post.data.blog_data,
-            date: new Date(post.data.blog_data.date),
-            href: `${basePathBlog}/${post.id}`,
-          }}
-        />
+                <UniversalCard blog_data={enrichEntry(post)} />
+
       ))
     }
     {/* Assuming blog_data is nested in post.data */}
