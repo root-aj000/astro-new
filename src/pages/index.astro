@@ -1,16 +1,52 @@
 ---
 import IndexLayout from '../components/layout/index_page.astro';
-import Base from '../components/layout/base.astro';
-import { getEntry } from 'astro:content';
+import { getEntry, getCollection } from 'astro:content'; // Import getCollection
 
-const entry = await getEntry("servicePage", 'content/index');
+// Corrected getEntry call to fetch from the 'indexPage' collection with slug 'index'
+const entry = await getEntry("indexPage", 'index');
 
 if (!entry) {
-  throw new Error("index.md not found in 'homepage' collection");
+  throw new Error("index.md not found in 'indexPage' collection");
 }
 const indexpro = entry.data;
+console.log("INDEXPRO", indexpro);
+
+// Fetch blog posts and case studies from all relevant collections
+const aichatbotBlogPosts = await getCollection('AichatbotBlog');
+const devopsBlogPosts = await getCollection('DevopsBlog');
+const customMLBlogPosts = await getCollection('CustomMLBlog');
+const cloudComputingBlogPosts = await getCollection('CloudComputingBlog');
+
+const aichatbotCaseStudies = await getCollection('AichatbotCases');
+const devopsCaseStudies = await getCollection('DevopsCases'); // Assuming collection name is DevopsCases
+const customMLCaseStudies = await getCollection('CustomMLCases');
+const cloudComputingCaseStudies = await getCollection('CloudComputingCases');
+
+// Select one post from each (latest by order)
+const selectedPosts = [
+  aichatbotBlogPosts[0],
+  devopsBlogPosts[0],
+  customMLBlogPosts[0],
+  cloudComputingBlogPosts[0],
+].filter(Boolean);
+
+const selectedCases = [
+  aichatbotCaseStudies[0],
+  devopsCaseStudies[0],
+  customMLCaseStudies[0],
+  // cloudComputingCaseStudies[0],
+].filter(Boolean);
+
+// Limit the number of selected posts and cases for the homepage display
+const limitedPosts = selectedPosts.slice(0, 4); // Limit to 4 blog posts
+const limitedCases = selectedCases.slice(0, 3); // Limit to 3 case studies
+
 ---
 
-<Base>
-<IndexLayout indexpro={indexpro} /> 
-</Base>
+
+  <IndexLayout
+    indexpro={indexpro}
+    selectedPosts={selectedPosts}
+    selectedCases={selectedCases}
+  />
+

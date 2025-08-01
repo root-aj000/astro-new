@@ -1,0 +1,63 @@
+---
+import UniversalCard from "../../../../../components/dynamic/universal_card.astro";
+import Pagination from "../../../../../components/dynamic/pagination.astro";
+import CaseGrid from "../../../../../components/case/case-study-grid.astro"; // Use CaseGrid for case studies
+import ListHeader from "../../../../../components/dynamic/list_header.astro";
+import Base from "../../../../../components/layout/base.astro";
+import { enrichEntry } from "../../../../../utils/enrich";
+import { BASE_PATH_CASES } from "../../../../../content/const.ts";
+import { getCollection } from "astro:content"; // Import getCollection
+
+export async function getStaticPaths() {
+  const allCaseStudies = await getCollection("CustomMLCases");
+  const totalItems = allCaseStudies.length;
+  const itemsPerPage = 12; // Make sure this matches the value used in the component
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+  const paths = [];
+  for (let i = 1; i <= totalPages; i++) {
+    paths.push({
+      params: { page: i.toString() },
+    });
+  }
+
+  return paths;
+}
+
+const currentPage = parseInt(Astro.params.page) || 1;
+const itemsPerPage = 12;
+
+// Fetch all case studies from the CustomMLCases collection
+const allCaseStudies = await getCollection("CustomMLCases");
+
+// Calculate total items based on the fetched collection
+const totalItems = allCaseStudies.length;
+
+const basePath = BASE_PATH_CASES.CustomMLCases; // Ensure this constant is defined and correct
+
+// Slice the fetched collection for pagination
+const paginatedCases = allCaseStudies.slice(
+  (currentPage - 1) * itemsPerPage,
+  currentPage * itemsPerPage
+);
+---
+
+<Base>
+  {/* Pass data to the ListHeader */}
+  <ListHeader blog_data={paginatedCases[0].data.case_data} />
+  <CaseGrid>
+    {/* Pass fetched collection entries to UniversalCard */}
+    {
+      paginatedCases.map((caseStudy) => (
+          <UniversalCard blog_data={caseStudy.data.case_data} />
+      ))
+    }
+    {/* Assuming case_data is nested in caseStudy.data */}
+  </CaseGrid>
+  <Pagination
+    currentPage={currentPage}
+    totalItems={totalItems}
+    itemsPerPage={itemsPerPage}
+    basePath={basePath}
+  />
+</Base>
