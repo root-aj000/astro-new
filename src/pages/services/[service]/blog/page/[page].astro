@@ -1,62 +1,52 @@
 ---
-// Astro frontmatter imports
 import UniversalCard from "../../../../../components/dynamic/universal_card.astro";
 import Pagination from "../../../../../components/dynamic/pagination.astro";
 import BlogGrid from "../../../../../components/blog/blog-grid.astro";
 import Base from "../../../../../components/layout/base.astro";
 import ListHeader from "../../../../../components/dynamic/list_header.astro";
 import { enrichEntry } from "../../../../../utils/enrich";
+import { BASE_PATH_BLOG } from "../../../../../content/const";
 import { getCollection } from "astro:content";
-import { serviceToCollectionMap } from "../../../../../utils/serviceCollections";
+import { BLOG_COLLECTION_MAP, type BlogCollectionName } from "../../../../../utils/collectionMap.ts";
 
 export async function getStaticPaths() {
   const paths = [];
 
-  for (const [service, collection] of Object.entries(serviceToCollectionMap)) {
-    const allPosts = await getCollection(collection);
+  for (const serviceKey in BLOG_COLLECTION_MAP) {
+    const collectionName = BLOG_COLLECTION_MAP[serviceKey as keyof typeof BLOG_COLLECTION_MAP];
+    const allPosts = await getCollection(collectionName);
     const itemsPerPage = 12;
     const totalPages = Math.ceil(allPosts.length / itemsPerPage);
 
     for (let i = 1; i <= totalPages; i++) {
       paths.push({
-        params: {
-          service,
-          page: i.toString(),
-        },
+        params: { service: serviceKey, page: i.toString() },
       });
     }
   }
-
   return paths;
 }
 
-const { service, page } = Astro.params;
-const collectionName = serviceToCollectionMap[service];
+const serviceParam = Astro.params.service as keyof typeof BLOG_COLLECTION_MAP;
+const collectionName: BlogCollectionName = BLOG_COLLECTION_MAP[serviceParam];
 
-if (!collectionName) {
-  throw new Error(`Unknown service '${service}'`);
-}
-
-const allPosts = await getCollection(collectionName);
-const currentPage = parseInt(page) || 1;
+const currentPage = parseInt(Astro.params.page) || 1;
 const itemsPerPage = 12;
-const totalItems = allPosts.length;
-const basePath = `/page/${service}/blog`;
+const allBlogPosts = await getCollection(collectionName);
+const totalItems = allBlogPosts.length;
 
-const paginatedPosts = allPosts
-  .filter(post => post.data && post.data.blog_data)
+const basePath = BASE_PATH_BLOG[collectionName];
+const paginatedPosts = allBlogPosts
+  .filter((post) => post.data && post.data.blog_data)
   .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 ---
 
 <Base>
-  <ListHeader blog_data={paginatedPosts[0]?.data.blog_data ?? { title: `${service} Blog` }} />
-
-  <BlogGrid>
-    {paginatedPosts.map(post => (
+  <ListHeader blog_data={enrichEntry(paginatedPosts[0])} />  <BlogGrid>
+    {paginatedPosts.map((post) => (
       <UniversalCard blog_data={enrichEntry(post)} />
     ))}
   </BlogGrid>
-
   <Pagination
     currentPage={currentPage}
     totalItems={totalItems}

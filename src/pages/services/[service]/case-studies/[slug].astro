@@ -1,0 +1,46 @@
+---
+import { getCollection, render, type CollectionEntry } from "astro:content";
+import PageText from "../../../../components/blog/page_text.astro";
+import PageImg from "../../../../components/blog/page_img.astro";
+import HrLine from "../../../../components/blog/hr_line.astro";
+import HrEndline from "../../../../components/blog/hr_endline.astro";
+import PageHead from "../../../../components/blog/page_head.astro";
+import Base from "../../../../components/layout/base.astro";
+import { CASE_COLLECTION_MAP, type CaseCollectionName } from "../../../../utils/collectionMap.ts";
+
+export async function getStaticPaths() {
+  const paths = [];
+
+  for (const serviceKey in CASE_COLLECTION_MAP) {
+    const collectionName = CASE_COLLECTION_MAP[serviceKey as keyof typeof CASE_COLLECTION_MAP];
+    const posts = await getCollection(collectionName);
+
+    posts.forEach((post) => {
+      paths.push({
+        params: { service: serviceKey, slug: post.id },
+        props: { post },
+      });
+    });
+  }
+  return paths;
+}
+
+type Props = { post: CollectionEntry<CaseCollectionName> };
+const { post } = Astro.props;
+const case_data = post.data.case_data;
+
+const { Content } = await render(post);
+
+
+
+
+---
+
+<Base>
+  <PageHead blog_data={case_data} />
+  <HrLine />
+  <article>
+    <Content components={{ PageText, PageImg }} />
+  </article>
+  <HrEndline />
+</Base>

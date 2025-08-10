@@ -1,0 +1,56 @@
+---
+import UniversalCard from "../../../../../components/dynamic/universal_card.astro";
+import Pagination from "../../../../../components/dynamic/pagination.astro";
+import BlogGrid from "../../../../../components/blog/blog-grid.astro";
+import Base from "../../../../../components/layout/base.astro";
+import ListHeader from "../../../../../components/dynamic/list_header.astro";
+import { enrichEntry } from "../../../../../utils/enrich";
+import { BASE_PATH_BLOG } from "../../../../../content/const";
+import { getCollection } from "astro:content";
+import { CASE_COLLECTION_MAP, type CaseCollectionName } from "../../../../../utils/collectionMap.ts";
+
+export async function getStaticPaths() {
+  const paths = [];
+
+  for (const serviceKey in CASE_COLLECTION_MAP) {
+    const collectionName = CASE_COLLECTION_MAP[serviceKey as keyof typeof CASE_COLLECTION_MAP];
+    const allPosts = await getCollection(collectionName);
+    const itemsPerPage = 12;
+    const totalPages = Math.ceil(allPosts.length / itemsPerPage);
+
+    for (let i = 1; i <= totalPages; i++) {
+      paths.push({
+        params: { service: serviceKey, page: i.toString() },
+      });
+    }
+  }
+  return paths;
+}
+
+const serviceParam = Astro.params.service as keyof typeof CASE_COLLECTION_MAP;
+const collectionName: CaseCollectionName = CASE_COLLECTION_MAP[serviceParam];
+
+const currentPage = parseInt(Astro.params.page) || 1;
+const itemsPerPage = 12;
+const allCasePosts = await getCollection(collectionName);
+const totalItems = allCasePosts.length;
+
+const basePath = BASE_PATH_BLOG[collectionName];
+const paginatedPosts = allCasePosts
+  .filter((post) => post.data && post.data.case_data)
+  .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+---
+
+<Base>
+  <ListHeader blog_data={enrichEntry(paginatedPosts[0])} />  <BlogGrid>
+    {paginatedPosts.map((post) => (
+      <UniversalCard blog_data={enrichEntry(post)} />
+    ))}
+  </BlogGrid>
+  <Pagination
+    currentPage={currentPage}
+    totalItems={totalItems}
+    itemsPerPage={itemsPerPage}
+    basePath={basePath}
+  />
+</Base>

@@ -1,0 +1,48 @@
+---
+import ServiceLayout from "../../../components/layout/service_page.astro";
+import { getEntry, getCollection } from "astro:content";
+import {
+  SLUG_MAP,
+  BLOG_COLLECTION_MAP,
+  CASE_COLLECTION_MAP,
+  type BlogCollectionName,
+  type CaseCollectionName,
+} from "../../../utils/collectionMap";
+
+// Build all possible service routes dynamically
+export async function getStaticPaths() {
+  return Object.keys(BLOG_COLLECTION_MAP).map((service) => ({
+    params: { service },
+  }));
+}
+
+// Service from route params
+const serviceParam = Astro.params.service as keyof typeof BLOG_COLLECTION_MAP;
+
+// Resolve collection names
+const blogCollection = BLOG_COLLECTION_MAP[serviceParam]; // e.g. "AichatbotBlog"
+const caseCollection = CASE_COLLECTION_MAP[serviceParam]; // e.g. "AichatbotCases"
+
+
+
+// Fetch landing page content from "indexPage"
+const entry = await getEntry("indexPage", SLUG_MAP[serviceParam]);
+if (!entry) {
+  throw new Error(`Entry for ${serviceParam} not found in 'indexPage' collection`);
+}
+const indexpro = entry.data;
+
+// Fetch posts & cases
+const allBlogPosts = await getCollection(blogCollection);
+const allCaseStudies = await getCollection(caseCollection);
+
+// Limit for display
+const limitedPosts = allBlogPosts.slice(0, 4);
+const limitedCases = allCaseStudies.slice(0, 3);
+---
+
+<ServiceLayout
+  indexpro={indexpro}
+  limitedPosts={limitedPosts}
+  limitedCases={limitedCases}
+/>

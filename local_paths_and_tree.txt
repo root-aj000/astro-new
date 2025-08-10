@@ -16,6 +16,26 @@ public/assets/images/405494336_5c009976-fa00-4b1e-8935-ebb766b32d6f.jpg
 public/scripts/analytics.js
 public/scripts/initTabs.js
 public/scripts/scrollToTop.js
+public/services/ai-chatbot/blog/[...slug].astro
+public/services/ai-chatbot/blog/page/[page].astro
+public/services/ai-chatbot/case-studies/[slug].astro
+public/services/ai-chatbot/case-studies/page/[page].astro
+public/services/ai-chatbot/index.astro
+public/services/cloud-computing/blog/[slug].astro
+public/services/cloud-computing/blog/page/[page].astro
+public/services/cloud-computing/case-studies/[slug].astro
+public/services/cloud-computing/case-studies/page/[page].astro
+public/services/cloud-computing/index.astro
+public/services/custom-ml/blog/[slug].astro
+public/services/custom-ml/blog/page/[page].astro
+public/services/custom-ml/case-studies/[slug].astro
+public/services/custom-ml/case-studies/page/[page].astro
+public/services/custom-ml/index.astro
+public/services/devops/blog/[slug].astro
+public/services/devops/blog/page/[page].astro
+public/services/devops/case-studies/[slug].astro
+public/services/devops/case-studies/page/[page].astro
+public/services/devops/index.astro
 public/styles/base.css
 public/styles/tailwind.css
 public/styles/typography.css
@@ -109,29 +129,15 @@ src/data/site.json
 src/pages/about.astro
 src/pages/contact.astro
 src/pages/index.astro
-src/pages/services/ai-chatbot/blog/[...slug].astro
-src/pages/services/ai-chatbot/blog/page/[page].astro
-src/pages/services/ai-chatbot/case-studies/[slug].astro
-src/pages/services/ai-chatbot/case-studies/page/[page].astro
-src/pages/services/ai-chatbot/index.astro
-src/pages/services/cloud-computing/blog/[slug].astro
-src/pages/services/cloud-computing/blog/page/[page].astro
-src/pages/services/cloud-computing/case-studies/[slug].astro
-src/pages/services/cloud-computing/case-studies/page/[page].astro
-src/pages/services/cloud-computing/index.astro
-src/pages/services/custom-ml/blog/[slug].astro
-src/pages/services/custom-ml/blog/page/[page].astro
-src/pages/services/custom-ml/case-studies/[slug].astro
-src/pages/services/custom-ml/case-studies/page/[page].astro
-src/pages/services/custom-ml/index.astro
-src/pages/services/devops/blog/[slug].astro
-src/pages/services/devops/blog/page/[page].astro
-src/pages/services/devops/case-studies/[slug].astro
-src/pages/services/devops/case-studies/page/[page].astro
-src/pages/services/devops/index.astro
+src/pages/services/[service]/blog/[slug].astro
+src/pages/services/[service]/blog/page/[page].astro
+src/pages/services/[service]/case-studies/[slug].astro
+src/pages/services/[service]/case-studies/page/[page].astro
+src/pages/services/[service]/index.astro
 src/styles/global.css
 src/types/build-blog-index.ts
 src/types/components.ts
+src/utils/collectionMap.ts
 src/utils/enrich.ts
 src/utils/service-queries.ts
 structure.txt
@@ -162,6 +168,47 @@ Path Tree:
 │   │   ├── analytics.js
 │   │   ├── initTabs.js
 │   │   └── scrollToTop.js
+│   ├── services
+│   │   ├── ai-chatbot
+│   │   │   ├── blog
+│   │   │   │   ├── [...slug].astro
+│   │   │   │   └── page
+│   │   │   │       └── [page].astro
+│   │   │   ├── case-studies
+│   │   │   │   ├── [slug].astro
+│   │   │   │   └── page
+│   │   │   │       └── [page].astro
+│   │   │   └── index.astro
+│   │   ├── cloud-computing
+│   │   │   ├── blog
+│   │   │   │   ├── [slug].astro
+│   │   │   │   └── page
+│   │   │   │       └── [page].astro
+│   │   │   ├── case-studies
+│   │   │   │   ├── [slug].astro
+│   │   │   │   └── page
+│   │   │   │       └── [page].astro
+│   │   │   └── index.astro
+│   │   ├── custom-ml
+│   │   │   ├── blog
+│   │   │   │   ├── [slug].astro
+│   │   │   │   └── page
+│   │   │   │       └── [page].astro
+│   │   │   ├── case-studies
+│   │   │   │   ├── [slug].astro
+│   │   │   │   └── page
+│   │   │   │       └── [page].astro
+│   │   │   └── index.astro
+│   │   └── devops
+│   │       ├── blog
+│   │       │   ├── [slug].astro
+│   │       │   └── page
+│   │       │       └── [page].astro
+│   │       ├── case-studies
+│   │       │   ├── [slug].astro
+│   │       │   └── page
+│   │       │       └── [page].astro
+│   │       └── index.astro
 │   └── styles
 │       ├── base.css
 │       ├── tailwind.css
@@ -286,37 +333,7 @@ Path Tree:
 │   │   ├── contact.astro
 │   │   ├── index.astro
 │   │   └── services
-│   │       ├── ai-chatbot
-│   │       │   ├── blog
-│   │       │   │   ├── [...slug].astro
-│   │       │   │   └── page
-│   │       │   │       └── [page].astro
-│   │       │   ├── case-studies
-│   │       │   │   ├── [slug].astro
-│   │       │   │   └── page
-│   │       │   │       └── [page].astro
-│   │       │   └── index.astro
-│   │       ├── cloud-computing
-│   │       │   ├── blog
-│   │       │   │   ├── [slug].astro
-│   │       │   │   └── page
-│   │       │   │       └── [page].astro
-│   │       │   ├── case-studies
-│   │       │   │   ├── [slug].astro
-│   │       │   │   └── page
-│   │       │   │       └── [page].astro
-│   │       │   └── index.astro
-│   │       ├── custom-ml
-│   │       │   ├── blog
-│   │       │   │   ├── [slug].astro
-│   │       │   │   └── page
-│   │       │   │       └── [page].astro
-│   │       │   ├── case-studies
-│   │       │   │   ├── [slug].astro
-│   │       │   │   └── page
-│   │       │   │       └── [page].astro
-│   │       │   └── index.astro
-│   │       └── devops
+│   │       └── [service]
 │   │           ├── blog
 │   │           │   ├── [slug].astro
 │   │           │   └── page
@@ -332,6 +349,7 @@ Path Tree:
 │   │   ├── build-blog-index.ts
 │   │   └── components.ts
 │   └── utils
+│       ├── collectionMap.ts
 │       ├── enrich.ts
 │       └── service-queries.ts
 ├── structure.txt
