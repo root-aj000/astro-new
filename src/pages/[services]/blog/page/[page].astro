@@ -1,0 +1,66 @@
+---
+// Astro frontmatter imports
+import UniversalCard from "../../../../../components/dynamic/universal_card.astro";
+import Pagination from "../../../../../components/dynamic/pagination.astro";
+import BlogGrid from "../../../../../components/blog/blog-grid.astro";
+import Base from "../../../../../components/layout/base.astro";
+import ListHeader from "../../../../../components/dynamic/list_header.astro";
+import { enrichEntry } from "../../../../../utils/enrich";
+import { getCollection } from "astro:content";
+import { serviceToCollectionMap } from "../../../../../utils/serviceCollections";
+
+export async function getStaticPaths() {
+  const paths = [];
+
+  for (const [service, collection] of Object.entries(serviceToCollectionMap)) {
+    const allPosts = await getCollection(collection);
+    const itemsPerPage = 12;
+    const totalPages = Math.ceil(allPosts.length / itemsPerPage);
+
+    for (let i = 1; i <= totalPages; i++) {
+      paths.push({
+        params: {
+          service,
+          page: i.toString(),
+        },
+      });
+    }
+  }
+
+  return paths;
+}
+
+const { service, page } = Astro.params;
+const collectionName = serviceToCollectionMap[service];
+
+if (!collectionName) {
+  throw new Error(`Unknown service '${service}'`);
+}
+
+const allPosts = await getCollection(collectionName);
+const currentPage = parseInt(page) || 1;
+const itemsPerPage = 12;
+const totalItems = allPosts.length;
+const basePath = `/page/${service}/blog`;
+
+const paginatedPosts = allPosts
+  .filter(post => post.data && post.data.blog_data)
+  .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+---
+
+<Base>
+  <ListHeader blog_data={paginatedPosts[0]?.data.blog_data ?? { title: `${service} Blog` }} />
+
+  <BlogGrid>
+    {paginatedPosts.map(post => (
+      <UniversalCard blog_data={enrichEntry(post)} />
+    ))}
+  </BlogGrid>
+
+  <Pagination
+    currentPage={currentPage}
+    totalItems={totalItems}
+    itemsPerPage={itemsPerPage}
+    basePath={basePath}
+  />
+</Base>
