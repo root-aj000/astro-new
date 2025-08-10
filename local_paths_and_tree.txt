@@ -1,7 +1,5 @@
 .gitignore
 README.md
-Z_STRUCTURE && PY/python_script.py
-Z_STRUCTURE && PY/structure.txt
 astro.config.mjs
 local_paths_and_tree.txt
 package-lock.json
@@ -14,7 +12,7 @@ public/JSON/custom-ml-blog-posts.json
 public/JSON/custom-ml-case-studys.json
 public/JSON/devops-blog-posts.json
 public/JSON/devops-case-studys.json
-public/assets/images/fav.png
+public/assets/images/405494336_5c009976-fa00-4b1e-8935-ebb766b32d6f.jpg
 public/scripts/analytics.js
 public/scripts/initTabs.js
 public/scripts/scrollToTop.js
@@ -23,11 +21,20 @@ public/styles/tailwind.css
 public/styles/typography.css
 public/styles/variables.css
 python_scr.py
-src/components/Hero.jsx
-src/components/blog/BlogList.astro
-src/components/blog/BlogPost.astro
-src/components/case/CaseList.astro
-src/components/case/CaseStudy.astro
+src/components/blog/blog-grid.astro
+src/components/blog/hr_endline.astro
+src/components/blog/hr_line.astro
+src/components/blog/page_head.astro
+src/components/blog/page_img.astro
+src/components/blog/page_text.astro
+src/components/case/case-study-grid.astro
+src/components/check/feature1.html
+src/components/check/feature2.html
+src/components/check/step.html
+src/components/custom.astro
+src/components/dynamic/FeatureLR.astro
+src/components/dynamic/Home_header_blog.astro
+src/components/dynamic/Home_header_cases.astro
 src/components/dynamic/blog_list.astro
 src/components/dynamic/for_whom.astro
 src/components/dynamic/hero_1.astro
@@ -40,98 +47,100 @@ src/components/dynamic/logo_cloud.astro
 src/components/dynamic/pagination.astro
 src/components/dynamic/services_home.astro
 src/components/dynamic/stats.astro
+src/components/dynamic/steps.astro
 src/components/dynamic/subscribe.astro
 src/components/dynamic/universal_card.astro
-src/components/layout/ServiceLayout.astro
-src/components/layout/StaticLayout.astro
-src/components/layout/blog-grid.astro
-src/components/layout/case-study-grid.astro
-src/components/layout/padding.astro
+src/components/layout/base.astro
+src/components/layout/index_page.astro
+src/components/layout/service_page.astro
 src/components/service/CustomContent.astro
 src/components/service/ServiceCard.astro
 src/components/shared/Footer.astro
 src/components/shared/Nav.astro
+src/components/structure/index.txt
+src/components/structure/service.txt
 src/components/ui/blog-header.astro
+src/components/ui/featureLR.astro
 src/components/ui/for-whom.astro
 src/components/ui/hero-2.astro
 src/components/ui/hero-3.astro
 src/components/ui/hero-4.astro
 src/components/ui/hero_section.astro
+src/components/ui/home_header.astro
 src/components/ui/how-it-works.astro
 src/components/ui/logo-cloud.astro
 src/components/ui/pagination.astro
 src/components/ui/services-home.astro
 src/components/ui/stats.astro
+src/components/ui/step.astro
 src/components/ui/subscribe.astro
 src/components/ui/universal-card.astro
+src/content/Static_Index_Pages/ai_chatbot.mdx
+src/content/Static_Index_Pages/cloud-computing.mdx
+src/content/Static_Index_Pages/custom-ml.mdx
+src/content/Static_Index_Pages/devop-s.mdx
+src/content/Static_Index_Pages/index.mdx
 src/content/config.ts
-src/content/services/ai-chatbot/blog-list.md
-src/content/services/ai-chatbot/blog/blog-list.txt
-src/content/services/ai-chatbot/blog/intro-to-x.md
-src/content/services/ai-chatbot/case-list.md
+src/content/const.ts
+src/content/schema/blog_schema.ts
+src/content/schema/cases_schema.ts
+src/content/schema/index_schema.ts
+src/content/schema/index_service_schema.ts
+src/content/schema/list_schema.ts
+src/content/schema/main_schema.ts
+src/content/services/ai-chatbot/blog/intro-to-x.mdx
+src/content/services/ai-chatbot/blog/new-blog-post.mdx
 src/content/services/ai-chatbot/case-studies/case-1.md
-src/content/services/ai-chatbot/faq.md
-src/content/services/ai-chatbot/index.md
-src/content/services/cloud-computing/blog-list.md
+src/content/services/ai-chatbot/case-studies/new-case-study.mdx
 src/content/services/cloud-computing/blog/intro-to-x.md
-src/content/services/cloud-computing/case-list.md
+src/content/services/cloud-computing/blog/new-blog-post.mdx
 src/content/services/cloud-computing/case-studies/case-1.md
-src/content/services/cloud-computing/index.md
-src/content/services/cloud-computing/whitepaper.md
-src/content/services/custom-ml/blog-list.md
+src/content/services/cloud-computing/case-studies/new-case-study.mdx
 src/content/services/custom-ml/blog/intro-to-x.md
-src/content/services/custom-ml/case-list.md
+src/content/services/custom-ml/blog/new-blog-post.mdx
 src/content/services/custom-ml/case-studies/case-1.md
-src/content/services/custom-ml/custom-page.md
-src/content/services/custom-ml/index.md
-src/content/services/devops/blog-list.md
+src/content/services/custom-ml/case-studies/new-case-study.mdx
 src/content/services/devops/blog/intro-to-x.md
-src/content/services/devops/case-list.md
+src/content/services/devops/blog/new-blog-post.mdx
 src/content/services/devops/case-studies/case-1.md
-src/content/services/devops/deployment-guide.md
-src/content/services/devops/index.md
+src/content/services/devops/case-studies/new-case-study.mdx
 src/data/nav.json
 src/data/site.json
 src/pages/about.astro
 src/pages/contact.astro
 src/pages/index.astro
-src/pages/nav.astro
-src/pages/services/ai-chatbot/blog-list.astro
-src/pages/services/ai-chatbot/blog/intro-to-x.astro
-src/pages/services/ai-chatbot/case-list.astro
-src/pages/services/ai-chatbot/case-studies/case-1.astro
-src/pages/services/ai-chatbot/faq.astro
+src/pages/services/ai-chatbot/blog/[...slug].astro
+src/pages/services/ai-chatbot/blog/page/[page].astro
+src/pages/services/ai-chatbot/case-studies/[slug].astro
+src/pages/services/ai-chatbot/case-studies/page/[page].astro
 src/pages/services/ai-chatbot/index.astro
-src/pages/services/cloud-computing/blog-list.astro
-src/pages/services/cloud-computing/blog/intro-to-x.astro
-src/pages/services/cloud-computing/case-list.astro
-src/pages/services/cloud-computing/case-studies/case-1.astro
+src/pages/services/cloud-computing/blog/[slug].astro
+src/pages/services/cloud-computing/blog/page/[page].astro
+src/pages/services/cloud-computing/case-studies/[slug].astro
+src/pages/services/cloud-computing/case-studies/page/[page].astro
 src/pages/services/cloud-computing/index.astro
-src/pages/services/cloud-computing/whitepaper.md
-src/pages/services/custom-ml/blog-list.astro
-src/pages/services/custom-ml/blog/intro-to-x.astro
-src/pages/services/custom-ml/case-list.astro
-src/pages/services/custom-ml/case-studies/case-1.astro
-src/pages/services/custom-ml/custom-page.astro
+src/pages/services/custom-ml/blog/[slug].astro
+src/pages/services/custom-ml/blog/page/[page].astro
+src/pages/services/custom-ml/case-studies/[slug].astro
+src/pages/services/custom-ml/case-studies/page/[page].astro
 src/pages/services/custom-ml/index.astro
-src/pages/services/devops/blog-list.astro
-src/pages/services/devops/blog/intro-to-x.astro
-src/pages/services/devops/case-list.astro
-src/pages/services/devops/case-studies/case-1.astro
-src/pages/services/devops/deployment-guide.astro
+src/pages/services/devops/blog/[slug].astro
+src/pages/services/devops/blog/page/[page].astro
+src/pages/services/devops/case-studies/[slug].astro
+src/pages/services/devops/case-studies/page/[page].astro
 src/pages/services/devops/index.astro
 src/styles/global.css
 src/types/build-blog-index.ts
 src/types/components.ts
+src/utils/enrich.ts
+src/utils/service-queries.ts
 structure.txt
 tsconfig.json
+version.txt
 
 Path Tree:
 ├── .gitignore
 ├── README.md
-├── Z_STRUCTURE && PY
-│   ├── python_script.py
-│   └── structure.txt
 ├── astro.config.mjs
 ├── local_paths_and_tree.txt
 ├── package-lock.json
@@ -148,7 +157,7 @@ Path Tree:
 │   │   └── devops-case-studys.json
 │   ├── assets
 │   │   └── images
-│   │       └── fav.png
+│   │       └── 405494336_5c009976-fa00-4b1e-8935-ebb766b32d6f.jpg
 │   ├── scripts
 │   │   ├── analytics.js
 │   │   ├── initTabs.js
@@ -161,14 +170,24 @@ Path Tree:
 ├── python_scr.py
 ├── src
 │   ├── components
-│   │   ├── Hero.jsx
 │   │   ├── blog
-│   │   │   ├── BlogList.astro
-│   │   │   └── BlogPost.astro
+│   │   │   ├── blog-grid.astro
+│   │   │   ├── hr_endline.astro
+│   │   │   ├── hr_line.astro
+│   │   │   ├── page_head.astro
+│   │   │   ├── page_img.astro
+│   │   │   └── page_text.astro
 │   │   ├── case
-│   │   │   ├── CaseList.astro
-│   │   │   └── CaseStudy.astro
+│   │   │   └── case-study-grid.astro
+│   │   ├── check
+│   │   │   ├── feature1.html
+│   │   │   ├── feature2.html
+│   │   │   └── step.html
+│   │   ├── custom.astro
 │   │   ├── dynamic
+│   │   │   ├── FeatureLR.astro
+│   │   │   ├── Home_header_blog.astro
+│   │   │   ├── Home_header_cases.astro
 │   │   │   ├── blog_list.astro
 │   │   │   ├── for_whom.astro
 │   │   │   ├── hero_1.astro
@@ -181,74 +200,84 @@ Path Tree:
 │   │   │   ├── pagination.astro
 │   │   │   ├── services_home.astro
 │   │   │   ├── stats.astro
+│   │   │   ├── steps.astro
 │   │   │   ├── subscribe.astro
 │   │   │   └── universal_card.astro
 │   │   ├── layout
-│   │   │   ├── ServiceLayout.astro
-│   │   │   ├── StaticLayout.astro
-│   │   │   ├── blog-grid.astro
-│   │   │   ├── case-study-grid.astro
-│   │   │   └── padding.astro
+│   │   │   ├── base.astro
+│   │   │   ├── index_page.astro
+│   │   │   └── service_page.astro
 │   │   ├── service
 │   │   │   ├── CustomContent.astro
 │   │   │   └── ServiceCard.astro
 │   │   ├── shared
 │   │   │   ├── Footer.astro
 │   │   │   └── Nav.astro
+│   │   ├── structure
+│   │   │   ├── index.txt
+│   │   │   └── service.txt
 │   │   └── ui
 │   │       ├── blog-header.astro
+│   │       ├── featureLR.astro
 │   │       ├── for-whom.astro
 │   │       ├── hero-2.astro
 │   │       ├── hero-3.astro
 │   │       ├── hero-4.astro
 │   │       ├── hero_section.astro
+│   │       ├── home_header.astro
 │   │       ├── how-it-works.astro
 │   │       ├── logo-cloud.astro
 │   │       ├── pagination.astro
 │   │       ├── services-home.astro
 │   │       ├── stats.astro
+│   │       ├── step.astro
 │   │       ├── subscribe.astro
 │   │       └── universal-card.astro
 │   ├── content
+│   │   ├── Static_Index_Pages
+│   │   │   ├── ai_chatbot.mdx
+│   │   │   ├── cloud-computing.mdx
+│   │   │   ├── custom-ml.mdx
+│   │   │   ├── devop-s.mdx
+│   │   │   └── index.mdx
 │   │   ├── config.ts
+│   │   ├── const.ts
+│   │   ├── schema
+│   │   │   ├── blog_schema.ts
+│   │   │   ├── cases_schema.ts
+│   │   │   ├── index_schema.ts
+│   │   │   ├── index_service_schema.ts
+│   │   │   ├── list_schema.ts
+│   │   │   └── main_schema.ts
 │   │   └── services
 │   │       ├── ai-chatbot
 │   │       │   ├── blog
-│   │       │   │   ├── blog-list.txt
-│   │       │   │   └── intro-to-x.md
-│   │       │   ├── blog-list.md
-│   │       │   ├── case-list.md
-│   │       │   ├── case-studies
-│   │       │   │   └── case-1.md
-│   │       │   ├── faq.md
-│   │       │   └── index.md
+│   │       │   │   ├── intro-to-x.mdx
+│   │       │   │   └── new-blog-post.mdx
+│   │       │   └── case-studies
+│   │       │       ├── case-1.md
+│   │       │       └── new-case-study.mdx
 │   │       ├── cloud-computing
 │   │       │   ├── blog
-│   │       │   │   └── intro-to-x.md
-│   │       │   ├── blog-list.md
-│   │       │   ├── case-list.md
-│   │       │   ├── case-studies
-│   │       │   │   └── case-1.md
-│   │       │   ├── index.md
-│   │       │   └── whitepaper.md
+│   │       │   │   ├── intro-to-x.md
+│   │       │   │   └── new-blog-post.mdx
+│   │       │   └── case-studies
+│   │       │       ├── case-1.md
+│   │       │       └── new-case-study.mdx
 │   │       ├── custom-ml
 │   │       │   ├── blog
-│   │       │   │   └── intro-to-x.md
-│   │       │   ├── blog-list.md
-│   │       │   ├── case-list.md
-│   │       │   ├── case-studies
-│   │       │   │   └── case-1.md
-│   │       │   ├── custom-page.md
-│   │       │   └── index.md
+│   │       │   │   ├── intro-to-x.md
+│   │       │   │   └── new-blog-post.mdx
+│   │       │   └── case-studies
+│   │       │       ├── case-1.md
+│   │       │       └── new-case-study.mdx
 │   │       └── devops
 │   │           ├── blog
-│   │           │   └── intro-to-x.md
-│   │           ├── blog-list.md
-│   │           ├── case-list.md
-│   │           ├── case-studies
-│   │           │   └── case-1.md
-│   │           ├── deployment-guide.md
-│   │           └── index.md
+│   │           │   ├── intro-to-x.md
+│   │           │   └── new-blog-post.mdx
+│   │           └── case-studies
+│   │               ├── case-1.md
+│   │               └── new-case-study.mdx
 │   ├── data
 │   │   ├── nav.json
 │   │   └── site.json
@@ -256,48 +285,55 @@ Path Tree:
 │   │   ├── about.astro
 │   │   ├── contact.astro
 │   │   ├── index.astro
-│   │   ├── nav.astro
 │   │   └── services
 │   │       ├── ai-chatbot
 │   │       │   ├── blog
-│   │       │   │   └── intro-to-x.astro
-│   │       │   ├── blog-list.astro
-│   │       │   ├── case-list.astro
+│   │       │   │   ├── [...slug].astro
+│   │       │   │   └── page
+│   │       │   │       └── [page].astro
 │   │       │   ├── case-studies
-│   │       │   │   └── case-1.astro
-│   │       │   ├── faq.astro
+│   │       │   │   ├── [slug].astro
+│   │       │   │   └── page
+│   │       │   │       └── [page].astro
 │   │       │   └── index.astro
 │   │       ├── cloud-computing
 │   │       │   ├── blog
-│   │       │   │   └── intro-to-x.astro
-│   │       │   ├── blog-list.astro
-│   │       │   ├── case-list.astro
+│   │       │   │   ├── [slug].astro
+│   │       │   │   └── page
+│   │       │   │       └── [page].astro
 │   │       │   ├── case-studies
-│   │       │   │   └── case-1.astro
-│   │       │   ├── index.astro
-│   │       │   └── whitepaper.md
+│   │       │   │   ├── [slug].astro
+│   │       │   │   └── page
+│   │       │   │       └── [page].astro
+│   │       │   └── index.astro
 │   │       ├── custom-ml
 │   │       │   ├── blog
-│   │       │   │   └── intro-to-x.astro
-│   │       │   ├── blog-list.astro
-│   │       │   ├── case-list.astro
+│   │       │   │   ├── [slug].astro
+│   │       │   │   └── page
+│   │       │   │       └── [page].astro
 │   │       │   ├── case-studies
-│   │       │   │   └── case-1.astro
-│   │       │   ├── custom-page.astro
+│   │       │   │   ├── [slug].astro
+│   │       │   │   └── page
+│   │       │   │       └── [page].astro
 │   │       │   └── index.astro
 │   │       └── devops
 │   │           ├── blog
-│   │           │   └── intro-to-x.astro
-│   │           ├── blog-list.astro
-│   │           ├── case-list.astro
+│   │           │   ├── [slug].astro
+│   │           │   └── page
+│   │           │       └── [page].astro
 │   │           ├── case-studies
-│   │           │   └── case-1.astro
-│   │           ├── deployment-guide.astro
+│   │           │   ├── [slug].astro
+│   │           │   └── page
+│   │           │       └── [page].astro
 │   │           └── index.astro
 │   ├── styles
 │   │   └── global.css
-│   └── types
-│       ├── build-blog-index.ts
-│       └── components.ts
+│   ├── types
+│   │   ├── build-blog-index.ts
+│   │   └── components.ts
+│   └── utils
+│       ├── enrich.ts
+│       └── service-queries.ts
 ├── structure.txt
-└── tsconfig.json
+├── tsconfig.json
+└── version.txt

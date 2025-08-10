@@ -1,9 +1,9 @@
 import os
 
 # === CONFIGURATION ===
-INPUT_DIRECTORY = r"L:\ASTRO"  # 👈 Set your root directory here
-OUTPUT_FILE = "local_paths_and_tree.txt"  # 👈 Set your output file name
-EXCLUDED_DIRS = {"node_modules", ".git", "__pycache__", "dist", "build"}
+INPUT_DIRECTORY = r"L:\ASTRO"  
+OUTPUT_FILE = "local_paths_and_tree.txt"  
+EXCLUDED_DIRS = {"node_modules", ".git", "__pycache__", "dist", "build", ".astro",".qodo", ".vscode", "Z_STRUCTURE && PY"} 
 
 def get_all_file_paths(root):
     file_paths = []
@@ -57,7 +57,7 @@ def main():
         f.write("\nPath Tree:\n")
         f.write('\n'.join(tree_lines))
 
-    print(f"✅ Done. Output saved to: {abs_output}")
+    print(f"            Output saved to: {abs_output}")
 
 if __name__ == "__main__":
     main()
