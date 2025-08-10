@@ -1,0 +1,53 @@
+---
+import { getCollection, render, type CollectionEntry } from "astro:content";
+import PageText from "../../../../../components/blog/page_text.astro";
+import PageImg from "../../../../../components/blog/page_img.astro";
+import HrLine from "../../../../../components/blog/hr_line.astro";
+import HrEndline from "../../../../../components/blog/hr_endline.astro";
+import PageHead from "../../../../../components/blog/page_head.astro";
+import Base from "../../../../../components/layout/base.astro";
+import { serviceToCollectionMap } from "../../../../../utils/serviceCollections";
+
+export async function getStaticPaths() {
+  let paths = [];
+  for (const [service, collection] of Object.entries(serviceToCollectionMap)) {
+    const posts = await getCollection(collection);
+    const servicePaths = posts.map(post => ({
+      params: {
+        service,
+        id: post.id,
+      }
+    }));
+    paths = [...paths, ...servicePaths];
+  }
+  return paths;
+}
+
+const { service, id } = Astro.params;
+const collectionName = serviceToCollectionMap[service];
+
+if (!collectionName) {
+  throw new Error(`Unknown service '${service}'`);
+}
+
+const posts = await getCollection(collectionName);
+const post = posts.find(p => p.id === id);
+
+if (!post) {
+  throw new Error(`Post with id '${id}' not found in service '${service}'`);
+}
+
+const blog_data = post.data.blog_data;
+const { Content } = await render(post);
+---
+
+<Base>
+  <PageHead blog_data={blog_data} />
+  <HrLine />
+
+  <article>
+    <Content components={{ PageText, PageImg }} />
+  </article>
+
+  <HrEndline />
+</Base>
