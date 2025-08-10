@@ -1,0 +1,39 @@
+---
+import ServiceLayout from '../../../components/layout/service_page.astro';
+import Base from '../../../components/layout/base.astro';
+import { getEntry, getCollection } from 'astro:content';
+import { serviceToCollectionMap, serviceToCasesCollectionMap } from '../../../utils/serviceCollections';
+
+const { service } = Astro.params;
+
+// Validate service
+if (!serviceToCollectionMap[service]) {
+  throw new Error(`Unknown service '${service}'`);
+}
+
+// Load index page content for the service (assuming indexPage collection has service keys)
+const entry = await getEntry('indexPage', service);
+
+if (!entry) {
+  throw new Error(`Entry for ${service} service page not found in 'indexPage' collection`);
+}
+
+const indexpro = entry.data;
+
+// Fetch blog posts & case studies collections dynamically based on service
+const blogCollectionName = serviceToCollectionMap[service];
+const casesCollectionName = serviceToCasesCollectionMap[service];
+
+const allBlogPosts = await getCollection(blogCollectionName);
+const allCaseStudies = casesCollectionName ? await getCollection(casesCollectionName) : [];
+
+// Slice for limited posts and cases to display on landing page
+const limitedPosts = allBlogPosts.slice(0, 4);
+const limitedCases = allCaseStudies.slice(0, 3);
+---
+
+<ServiceLayout
+  indexpro={indexpro}
+  limitedPosts={limitedPosts}
+  limitedCases={limitedCases}
+/>
