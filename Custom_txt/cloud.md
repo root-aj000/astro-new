@@ -1,10 +1,8 @@
-# cloud consulting include
+# cloud consulting services
 ---
 
-### Cloud Strategy
-### Cloud Migration
-### Cloud Optimization
-### Cloud Security and Compliance
-### Cloud Management
-
----
+#### Cloud Strategy
+#### Cloud Migration
+#### Cloud Optimization
+#### Cloud Security and Compliance
+#### Cloud Management
