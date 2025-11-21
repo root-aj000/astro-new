@@ -14,9 +14,11 @@ Before writing anything, remember:
 5. **Emotional resonance matters.** Human imagery, relatable language, storytelling.
 6. **CTAs should be clear and singular per section.** Primary CTA is the goal; secondary is optional.
 7. **Sections should follow a psychological journey**: Problem → Solution → Trust → Proof → CTA.
-primary cta - chat now,
-secondary cta - check use cases
 
+8. primary cta - chat now,
+9. secondary cta - check use cases
+
+10. homepage for Automation 
 ---
 
 # **Homepage Structure + Section Details**
